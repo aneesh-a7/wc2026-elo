@@ -1,0 +1,7 @@
+# Normalize line endings: store text as LF in the repo so the Linux CI runner
+# and Windows checkouts stay consistent (avoids CRLF noise in diffs).
+* text=auto eol=lf
+
+# Treat the large raw data as text but never diff it inline.
+data/intl_results.csv -diff
+data/shootouts.csv -diff

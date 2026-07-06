@@ -1,0 +1,5 @@
+# Core pipeline uses only the Python standard library (urllib, csv, json, math).
+# No third-party packages are required to run pipeline.py.
+
+# Optional — only for the headless render/smoke test in tests/:
+playwright>=1.40

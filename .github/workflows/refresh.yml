@@ -1,0 +1,49 @@
+name: Refresh model & site
+
+# Rebuilds the model from live data and commits the refreshed site.
+# Runs on a schedule through the final (July 19, 2026), and on demand.
+on:
+  schedule:
+    # 13:00 UTC daily = 09:00 America/New_York (EDT). GitHub cron is always UTC.
+    - cron: "0 13 * * *"
+  workflow_dispatch: {}   # lets you trigger a run manually from the Actions tab
+
+# Allow the job to push the auto-commit back to the repo.
+permissions:
+  contents: write
+
+# If a run is already in progress, cancel it so we don't double-commit.
+concurrency:
+  group: refresh-model
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # The pipeline uses only the standard library, so there's nothing to install.
+      - name: Rebuild from live data
+        run: python pipeline.py
+
+      - name: Sanity check
+        run: python tests/test_smoke.py
+
+      - name: Commit refreshed data & site
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ site/
+          if git diff --cached --quiet; then
+            echo "No changes — nothing to commit."
+          else
+            git commit -m "chore: auto-refresh model & site ($(date -u +%Y-%m-%d))"
+            git push
+          fi
