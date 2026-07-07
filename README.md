@@ -5,7 +5,7 @@ and the vibes, who is actually likely to win the 2026 World Cup? So it's an Elo
 rating model and a Monte Carlo simulation of the knockout bracket, wrapped in a
 single interactive page you can poke at. Fill in your own bracket and see where
 you disagree with the model, throw two teams into a "Match Lab" and change the
-weather or bench a star, and — the part I care about most — check the calibration
+weather or bench a star, and (the part I care about most) check the calibration
 that tells you whether the numbers are worth trusting in the first place.
 
 The ratings come from about 49,500 real international matches going back to 1872,
