@@ -1,1 +1,3 @@
-
+theme: jekyll-theme-minimal
+title: World Cup ELO Predictor
+description: Fills out the rest of the bracket for you!
