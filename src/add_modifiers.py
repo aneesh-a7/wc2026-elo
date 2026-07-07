@@ -55,8 +55,8 @@ payload["modifiers"]=modifiers
 payload["host_nations"]=host_nations
 json.dump(payload, open(str(PAYLOAD_JSON),'w'), ensure_ascii=False, indent=1)
 
-# quick sanity print
+# quick sanity print (first few alive teams; robust to eliminations)
 print("Player-out penalties (Elo):")
-for t in ["Argentina","Norway","France","Belgium","Egypt"]:
+for t in list(players_cfg)[:5]:
     print(f"  {t}: " + ", ".join(f"{p['name'].split()[-1]} -{p['elo']}" for p in players_cfg[t]))
 print("\nModifiers loaded:", list(modifiers['gap_shrink'])+list(modifiers['elo_bonus']))

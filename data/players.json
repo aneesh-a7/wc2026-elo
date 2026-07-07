@@ -173,33 +173,6 @@
    "share": 0.091
   }
  ],
- "Egypt": [
-  {
-   "name": "Emam Ashour",
-   "goals": 2,
-   "share": 0.333
-  },
-  {
-   "name": "Mostafa Zico",
-   "goals": 1,
-   "share": 0.167
-  },
-  {
-   "name": "Mohamed Salah",
-   "goals": 1,
-   "share": 0.167
-  },
-  {
-   "name": "Trézéguet",
-   "goals": 1,
-   "share": 0.167
-  },
-  {
-   "name": "Mahmoud Saber",
-   "goals": 1,
-   "share": 0.167
-  }
- ],
  "Switzerland": [
   {
    "name": "Johan Manzambi",

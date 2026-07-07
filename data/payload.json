@@ -35,11 +35,6 @@
    "career": 2192.5,
    "flag": "🇦🇷"
   },
-  "Egypt": {
-   "elo": 1824.8,
-   "career": 1802.5,
-   "flag": "🇪🇬"
-  },
   "Switzerland": {
    "elo": 1980.1,
    "career": 1958.4,
@@ -117,7 +112,9 @@
     "id": "R16_7",
     "a": "Argentina",
     "b": "Egypt",
-    "played": false,
+    "sa": 3,
+    "sb": 2,
+    "played": true,
     "date": "Jul 7",
     "venue": "Atlanta"
    },
@@ -199,16 +196,15 @@
   }
  },
  "champ": {
-  "France": 19.5,
-  "Morocco": 3.8,
-  "Belgium": 1.6,
-  "Norway": 3.2,
-  "England": 13.2,
-  "Switzerland": 0.8,
-  "Argentina": 22.1,
-  "Spain": 31.7,
-  "Colombia": 4.0,
-  "Egypt": 0.1
+  "Morocco": 3.5,
+  "Colombia": 3.2,
+  "Belgium": 1.5,
+  "England": 12.8,
+  "Argentina": 24.7,
+  "Spain": 31.3,
+  "France": 19.2,
+  "Norway": 3.0,
+  "Switzerland": 0.6
  },
  "r16_ratings": {
   "Argentina": 2192.5,
@@ -485,38 +481,6 @@
     "goals": 1,
     "share": 0.091,
     "elo": 21
-   }
-  ],
-  "Egypt": [
-   {
-    "name": "Emam Ashour",
-    "goals": 2,
-    "share": 0.333,
-    "elo": 44
-   },
-   {
-    "name": "Mostafa Zico",
-    "goals": 1,
-    "share": 0.167,
-    "elo": 28
-   },
-   {
-    "name": "Mohamed Salah",
-    "goals": 1,
-    "share": 0.167,
-    "elo": 28
-   },
-   {
-    "name": "Trézéguet",
-    "goals": 1,
-    "share": 0.167,
-    "elo": 28
-   },
-   {
-    "name": "Mahmoud Saber",
-    "goals": 1,
-    "share": 0.167,
-    "elo": 28
    }
   ],
   "Switzerland": [
