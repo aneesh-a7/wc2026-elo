@@ -1,0 +1,48 @@
+name: Deploy site to Pages
+
+# Publishes the self-contained site/ folder to GitHub Pages.
+# Deploys on every push to main, on demand, and again after each daily
+# "Refresh model & site" run (the bot's auto-commit doesn't fire the push
+# event, so we listen for that workflow finishing instead).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+  workflow_run:
+    workflows: ["Refresh model & site"]
+    types: [completed]
+
+# Permissions the Pages deploy needs.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; never cancel a deploy already in flight.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Always deploy on push / manual runs; after a refresh, only if it succeeded.
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site/ as the Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
