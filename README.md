@@ -1,15 +1,19 @@
 # World Cup 2026 — Elo Knockout Predictor
 
-An Elo rating model and Monte Carlo simulation for the 2026 FIFA World Cup
-knockout stage, with a self-contained interactive front end: fill in your own
-bracket, compare against the model, stress-test matchups in a "Match Lab," and
-inspect the calibration that shows *why* the probabilities can be trusted.
+I built this to settle an argument I keep having: once you strip out the flags
+and the vibes, who is actually likely to win the 2026 World Cup? So it's an Elo
+rating model and a Monte Carlo simulation of the knockout bracket, wrapped in a
+single interactive page you can poke at. Fill in your own bracket and see where
+you disagree with the model, throw two teams into a "Match Lab" and change the
+weather or bench a star, and — the part I care about most — check the calibration
+that tells you whether the numbers are worth trusting in the first place.
 
-Ratings are computed from ~49,500 real international matches (1872–2026) using
-the [World Football Elo Ratings](https://www.eloratings.net/about) methodology.
-The model is validated with a leak-free backtest across the last five World Cups.
+The ratings come from about 49,500 real international matches going back to 1872,
+using the [World Football Elo Ratings](https://www.eloratings.net/about) method.
+I validated the whole thing against the last five World Cups with a backtest
+that's careful not to cheat, which turns out to be the interesting part.
 
-**Not affiliated with FIFA. Built as a portfolio project.**
+Not affiliated with FIFA. This is a portfolio project.
 
 ## Quick start
 
@@ -18,51 +22,54 @@ python pipeline.py        # fetch live data, rebuild the model, rebuild the site
 open site/index.html      # or just double-click it
 ```
 
-No dependencies are required for the pipeline — it runs on the Python standard
-library. (`playwright` is optional, only for the render smoke test.)
+The pipeline is pure standard-library Python, so there's nothing to
+`pip install`. (There's one optional dependency, `playwright`, and only if you
+want to run the headless render test.)
 
-## What it does
+## What you can do with it
 
-- **Interactive bracket.** Pick winners in unplayed games; picks flow forward.
-  Played games lock to the real result. Toggle the model's picks on top.
-- **Title odds.** Championship probability for each team from 50,000 simulations
-  of the remaining bracket, using Elo blended with in-tournament form.
-- **Match Lab.** Pick any two live teams and change the conditions — sit players
-  (valued by their real share of the team's tournament goals), add heat, a wet
-  pitch, a host-nation crowd, or a rest edge — and watch the Elo and win
-  probability update live.
-- **Calibration.** A reliability curve from the backtest, showing the model takes
-  underdogs about as often as they actually win.
+**Fill in the bracket.** Pick winners in the games that haven't happened yet and
+your picks flow forward through the rounds. Games that have already been played
+lock to the real result. Want to know where you and the model part ways? Flip its
+picks on top of yours.
 
-## Methodology in one paragraph
+**Read the title odds.** Each team's championship probability, straight out of
+50,000 simulations of the games that are left. The ratings behind those sims
+blend a team's career Elo with how it's actually looked in this tournament.
 
-Elo is computed chronologically over the full international match history, with
-K weighted by match importance (World Cup = 60), a goal-difference multiplier,
-and neutral venues for the World Cup. For the knockout simulation, each team's
-career Elo is blended with an in-tournament form rating that updates as 2026
-games are played. The remaining bracket is then simulated 50,000 times.
+**Break things in the Match Lab.** Drop any two live teams into a hypothetical and
+start turning knobs: sit a player (weighted by how much of their team's scoring
+they actually account for), crank up the heat, soak the pitch, hand one side a
+host crowd or an extra day of rest. The Elo and the win probability move as you go.
 
-**On accuracy vs. calibration.** Across the last five World Cups (2006–2022, 320
-matches), the model's three-way accuracy is ~56% — essentially tied with the
-naive "always pick the higher-rated team" baseline (~56%). That's expected: on
-most games everyone can tell who's better. The model earns its keep in
-*calibration* — when it gives a favorite a 35% chance, the underdog really does
-win about 65% of the time. See [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) for
-the full write-up, including the leak-free backtest design.
+**See the calibration.** A reliability curve pulled straight from the backtest,
+showing that when the model calls something close to a coin flip, it lands like one.
 
-## Automated refresh
+## The one honest paragraph about accuracy
 
-A GitHub Actions workflow (`.github/workflows/refresh.yml`) re-runs the pipeline
-on a daily schedule (09:00 America/New_York) and auto-commits the refreshed
-`data/` and `site/` if anything changed — so the bracket stays live through the
-final without manual intervention. You can also trigger it on demand from the
-repo's **Actions** tab ("Run workflow"). It needs no secrets; the default
-`GITHUB_TOKEN` with `contents: write` handles the commit.
+Here's the thing most prediction projects won't say out loud. Across the last
+five World Cups (2006–2022, 320 matches), this model gets about 56% of results
+right three ways — which is basically a tie with the dumbest baseline there is,
+"always pick the higher-rated team," also around 56%. That's not a failure; it's
+the whole point. On most World Cup games everyone already knows who's better, so
+raw accuracy can't tell a real model apart from a shrug. What actually matters is
+calibration: when the model gives a favorite a 35% chance, does the underdog
+really win about 65% of the time? It does. The full write-up, including how I kept
+the backtest from cheating, is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
 
-To stop the automation after the final, delete the workflow file or disable it
-in the Actions tab.
+## Keeping it live
 
-## Repo layout
+There's a GitHub Actions workflow (`.github/workflows/refresh.yml`) that re-runs
+the pipeline every morning at 09:00 New York time, and if anything changed it
+commits the fresh `data/` and `site/` on its own. So the bracket keeps up with
+real results through the final without me touching it. You can also kick it off by
+hand from the repo's **Actions** tab. It needs no secrets — the built-in
+`GITHUB_TOKEN` with `contents: write` is enough to make the commit.
+
+Once the tournament's over and you want the automation to stop, delete the
+workflow file or switch it off in the Actions tab.
+
+## How the repo is laid out
 
 ```
 pipeline.py            # one command to rebuild everything
@@ -81,20 +88,24 @@ site/index.html        # the self-contained interactive tool
 docs/METHODOLOGY.md    # model + backtest write-up
 ```
 
-## Data sources
+## Where the data comes from
 
 - [martj42/international_results](https://github.com/martj42/international_results)
-  — international match history + shootouts, live-updated.
+  — international match history and shootouts, kept up to date.
 - [openfootball/worldcup.json](https://github.com/openfootball/worldcup.json)
   — 2026 fixtures, scores, and goalscorers.
 
-## Limitations
+## What it doesn't do well
 
-- Player values are proxied by share of tournament goals, which captures
-  attackers well but under-weights defenders and goalkeepers.
-- Draw probabilities use an empirical draw-width, not a full scoreline model.
-- Environmental modifiers are transparent estimates, in Elo points, documented
-  in `src/add_modifiers.py` — reasonable magnitudes, not fitted coefficients.
+I'd rather say this here than have you find it on your own:
+
+- Player value is proxied by share of tournament goals. That's fair to strikers
+  and wingers and pretty unfair to defenders and keepers, who barely register.
+- Draw probabilities come from an empirical draw-width, not a real scoreline model.
+- The Match Lab's environmental knobs are honest estimates in Elo points,
+  documented in `src/add_modifiers.py`. They're reasonable magnitudes, not
+  regression-fitted coefficients — the goal is to show which way a match moves,
+  not to fake precision.
 
 ## License
 
