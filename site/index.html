@@ -6,225 +6,285 @@
 <title>World Cup 2026 · Bracket & Elo Model</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --pitch:#0b1310; --pitch-2:#101d18; --line:#1d322a; --line-2:#26443a;
-  --chalk:#ecebe1; --dim:#7f958b; --dimmer:#556259;
-  --gold:#f4c430; --cyan:#38cde2; --win:#57d268; --loss:#e2573c;
-  --shadow:0 2px 0 rgba(0,0,0,.35);
+  /* ---- Pitch & Sun palette ---- */
+  --bg:#eef3e6; --bg-2:#e6ecdb; --panel:#ffffff; --panel-2:#f6f8f0;
+  --ink:#12261a; --muted:#5f6f62; --faint:#93a293; --line:#dde5d2; --line-2:#cad6ba;
+  --grass:#0f8a4f; --grass-d:#0a6b3d; --grass-soft:#e3f3e8;
+  --coral:#ff5a4d; --coral-d:#e33f31; --coral-soft:#ffe6e2;
+  --sun:#f5a623; --sun-d:#d8890c;
+  --blue:#2f6fed; --blue-soft:#e4ecfd;
+  --shadow:0 6px 20px rgba(18,38,26,.08);
+  --shadow-lg:0 14px 40px rgba(18,38,26,.14);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  background:var(--pitch); color:var(--chalk);
+  background:var(--bg); color:var(--ink);
   font-family:'Inter',system-ui,sans-serif; line-height:1.5;
   -webkit-font-smoothing:antialiased;
-  background-image:
-    linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
-  background-size:44px 44px;
+  /* mowed-pitch vertical stripes, very subtle */
+  background-image:repeating-linear-gradient(90deg,
+    rgba(15,138,79,.035) 0 60px, rgba(15,138,79,0) 60px 120px);
 }
-.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 22px}
+::selection{background:var(--coral);color:#fff}
+
+/* ---- reveal-on-scroll ---- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
 /* ---- header ---- */
-header{padding:46px 0 30px;border-bottom:1px solid var(--line)}
-.eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(38px,7vw,74px);
-  line-height:.94;letter-spacing:.01em;text-transform:uppercase}
-h1 .thin{display:block;color:var(--dim);font-size:.34em;letter-spacing:.04em;margin-top:12px;font-family:'Inter';font-weight:600;text-transform:none}
-.trust{display:flex;flex-wrap:wrap;gap:26px;margin-top:26px}
-.trust .stat{font-family:'Space Mono',monospace}
-.trust .num{font-size:26px;font-weight:700;color:var(--chalk)}
-.trust .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+header{padding:54px 0 34px;position:relative;overflow:hidden}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:12px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--grass-d);font-weight:700;
+  background:var(--grass-soft);border:1px solid #bfe3cc;padding:6px 13px;border-radius:100px;margin-bottom:20px}
+.eyebrow .ball{width:15px;height:15px;animation:spin 9s linear infinite}
+h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(40px,7.4vw,82px);
+  line-height:.92;letter-spacing:.005em;text-transform:uppercase}
+h1 .pop{color:var(--coral);position:relative;display:inline-block}
+h1 .thin{display:block;color:var(--muted);font-size:.30em;letter-spacing:.01em;margin-top:16px;
+  font-family:'Inter';font-weight:600;text-transform:none;line-height:1.35;max-width:34ch}
+.trust{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.trust .stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;
+  padding:14px 20px 12px;box-shadow:var(--shadow);min-width:132px;transition:transform .2s,box-shadow .2s}
+.trust .stat:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.trust .num{font-family:'Anton';font-size:30px;letter-spacing:.01em;line-height:1;display:flex;align-items:center;gap:7px}
+.trust .num .flag{width:26px;height:18px}
+.trust .lbl{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+.hero-ball{position:absolute;right:-40px;top:20px;width:230px;height:230px;opacity:.10;pointer-events:none;animation:float 7s ease-in-out infinite}
+@media(max-width:720px){.hero-ball{display:none}}
 
 /* ---- section shell ---- */
-section{padding:44px 0;border-bottom:1px solid var(--line)}
-.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
-.sec-num{font-family:'Space Mono',monospace;color:var(--dimmer);font-size:13px}
-.sec-head h2{font-family:'Anton',sans-serif;font-weight:400;font-size:26px;
-  text-transform:uppercase;letter-spacing:.02em}
-.sec-sub{color:var(--dim);font-size:15px;max-width:70ch;margin-bottom:26px}
+section{padding:50px 0;border-top:2px solid var(--line)}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.sec-num{font-family:'Space Mono',monospace;color:#fff;background:var(--grass);font-size:12px;font-weight:700;
+  width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sec-head h2{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(23px,3.4vw,32px);
+  text-transform:uppercase;letter-spacing:.01em}
+.sec-sub{color:var(--muted);font-size:15px;max-width:76ch;margin-bottom:26px;line-height:1.6}
 
 /* ---- controls ---- */
-.controls{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px;align-items:center}
-button.ctl{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;
-  text-transform:uppercase;background:var(--pitch-2);color:var(--chalk);
-  border:1px solid var(--line-2);padding:11px 16px;border-radius:3px;cursor:pointer;
-  transition:.15s;box-shadow:var(--shadow)}
-button.ctl:hover{border-color:var(--gold);color:var(--gold)}
-button.ctl.on{background:var(--gold);color:var(--pitch);border-color:var(--gold)}
-button.ctl.cyan.on{background:var(--cyan);color:var(--pitch);border-color:var(--cyan)}
-.legend{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto;font-family:'Space Mono',monospace;font-size:11px;color:var(--dim)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;align-items:center}
+button.ctl{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.05em;font-weight:700;
+  text-transform:uppercase;background:var(--panel);color:var(--ink);
+  border:1.5px solid var(--line-2);padding:11px 16px;border-radius:9px;cursor:pointer;
+  transition:transform .12s,box-shadow .15s,background .15s,color .15s,border-color .15s;box-shadow:var(--shadow)}
+button.ctl:hover{transform:translateY(-2px);border-color:var(--coral);color:var(--coral-d)}
+button.ctl:active{transform:translateY(0) scale(.97)}
+button.ctl.on{background:var(--coral);color:#fff;border-color:var(--coral)}
+button.ctl.cyan.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+button.ctl.ghost{background:transparent;box-shadow:none;border-style:dashed}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)}
 .legend span{display:flex;align-items:center;gap:6px}
-.dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+.dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+/* ---- flags ---- */
+.flag{width:24px;height:16px;border-radius:2.5px;overflow:hidden;flex-shrink:0;
+  box-shadow:0 0 0 1px rgba(18,38,26,.10);display:inline-block;vertical-align:middle}
 
 /* ---- bracket ---- */
-.bracket-scroll{overflow-x:auto;padding-bottom:12px}
-.bracket{display:flex;gap:18px;min-width:920px}
-.round{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:12px}
-.round-lbl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--dimmer);text-align:center;margin-bottom:4px;
-  position:sticky;top:0}
-.tie{background:var(--pitch-2);border:1px solid var(--line);border-radius:5px;
-  overflow:hidden;box-shadow:var(--shadow)}
-.tie.pending{opacity:.45}
-.slot{display:flex;align-items:center;gap:8px;padding:9px 11px;cursor:pointer;
-  border-bottom:1px solid var(--line);transition:.12s;position:relative;min-height:42px}
-.slot:last-child{border-bottom:none}
-.slot:hover:not(.locked):not(.empty){background:var(--line)}
-.slot.empty{cursor:default;color:var(--dimmer)}
-.slot .flag{font-size:16px;width:20px;text-align:center;flex-shrink:0}
-.slot .nm{font-weight:600;font-size:13.5px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.slot .sc{font-family:'Space Mono',monospace;font-size:13px;color:var(--dim);font-weight:700}
-.slot .wp{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--dimmer);
-  flex-shrink:0}
+.bracket-scroll{overflow-x:auto;padding:6px 2px 16px}
+.bracket{display:flex;gap:16px;min-width:1000px}
+.round{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:14px}
+.round-lbl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint);text-align:center;margin-bottom:2px;font-weight:700}
+.tie{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  overflow:hidden;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
+.tie:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.tie.pending{opacity:.5}
+.slot{display:flex;align-items:center;gap:9px;padding:10px 12px;cursor:pointer;
+  border-bottom:1px solid var(--line);transition:background .14s,padding .14s;position:relative;min-height:44px}
+.slot:last-of-type{border-bottom:none}
+.slot:hover:not(.locked):not(.empty){background:var(--panel-2);padding-left:15px}
+.slot.empty{cursor:default;color:var(--faint)}
+.slot .nm{font-weight:700;font-size:13.5px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slot .sc{font-family:'Space Mono',monospace;font-size:15px;color:var(--ink);font-weight:700;min-width:16px;text-align:center}
+.slot .wp{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--faint);flex-shrink:0;font-weight:700}
 /* states */
-.slot.picked-user{background:rgba(56,205,226,.13)}
-.slot.picked-user .nm{color:var(--cyan)}
-.slot.picked-user::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan)}
-.slot.model-pick .nm{color:var(--gold)}
-.slot.model-pick::after{content:'▸ model';position:absolute;right:9px;font-family:'Space Mono';font-size:9px;color:var(--gold);letter-spacing:.08em}
-.slot.advanced{background:rgba(87,210,104,.12)}
-.slot.advanced .nm{color:var(--win)}
-.slot.advanced::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--win)}
+.slot.picked-user{background:var(--blue-soft)}
+.slot.picked-user .nm{color:var(--blue)}
+.slot.picked-user::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue)}
+.slot.model-pick .nm{color:var(--coral-d)}
+.slot.model-pick::after{content:'▸ model';position:absolute;right:10px;font-family:'Space Mono';font-size:9px;color:var(--coral);letter-spacing:.06em;font-weight:700}
+.slot.advanced{background:var(--grass-soft)}
+.slot.advanced .nm{color:var(--grass-d)}
+.slot.advanced::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grass)}
 .slot.locked{cursor:default}
-.slot.out .nm{color:var(--dimmer);text-decoration:line-through;text-decoration-thickness:1px}
-.slot.agree::after{content:'✓ you+model';position:absolute;right:9px;font-family:'Space Mono';font-size:9px;color:var(--win);letter-spacing:.06em}
-.tie-meta{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--dimmer);
-  padding:4px 11px;text-align:center;letter-spacing:.05em;background:rgba(0,0,0,.15)}
-.champ-slot{background:linear-gradient(180deg,rgba(244,196,48,.14),rgba(244,196,48,.04));
-  border:1px solid var(--gold)}
-.champ-slot .round-lbl{color:var(--gold)}
+.slot.out{opacity:.6}
+.slot.out .nm{color:var(--faint);text-decoration:line-through;text-decoration-thickness:1.5px}
+.slot.out .flag{filter:grayscale(.7);opacity:.7}
+.slot.agree::after{content:'✓ you+model';position:absolute;right:10px;font-family:'Space Mono';font-size:9px;color:var(--grass);letter-spacing:.04em;font-weight:700}
+/* on a played tie, mark the team the model backed that LOST with a coral stripe */
+.slot.out.model-played::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--coral)}
+.tie-meta{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--faint);
+  padding:5px 12px;text-align:center;letter-spacing:.04em;background:var(--panel-2);font-weight:700}
+/* no-bias verdict ribbon on played ties */
+.verdict{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 10px;font-family:'Space Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:.03em;border-top:1px dashed var(--line-2)}
+.verdict .flag{width:18px;height:12px}
+.verdict.correct{background:var(--grass-soft);color:var(--grass-d)}
+.verdict.wrong{background:var(--coral-soft);color:var(--coral-d)}
+.verdict .tick{font-size:12px}
+.champ-slot{background:linear-gradient(180deg,#fff7e4,#fffdf7);border:1.5px solid var(--sun)}
+.champ-slot .round-lbl{color:var(--sun-d)}
+.champ-inner{display:flex;align-items:center;gap:10px;padding:15px 13px;min-height:58px}
+.champ-inner.won{animation:pulseGold 2.4s ease-in-out infinite}
+.champ-inner .nm{font-weight:800;font-size:16px;flex:1}
+.champ-inner .trophy{font-size:20px}
 
 /* ---- champ odds ---- */
-.odds{display:grid;grid-template-columns:1fr;gap:7px;max-width:560px}
-.odds-row{display:flex;align-items:center;gap:12px}
-.odds-row .flag{font-size:17px;width:22px}
-.odds-row .nm{width:96px;font-weight:600;font-size:14px}
-.bar-track{flex:1;height:22px;background:var(--pitch-2);border:1px solid var(--line);
-  border-radius:3px;overflow:hidden;position:relative}
-.bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),#e0a81a);
-  display:flex;align-items:center;justify-content:flex-end;padding-right:7px}
-.bar-fill span{font-family:'Space Mono';font-size:11px;font-weight:700;color:var(--pitch)}
-.your-champ{margin-top:22px;padding:14px 18px;background:var(--pitch-2);
-  border:1px solid var(--line-2);border-radius:5px;border-left:3px solid var(--cyan);
-  font-size:14px}
-.your-champ b{color:var(--cyan)}
-.your-champ .empty-note{color:var(--dim)}
+.odds{display:flex;flex-direction:column;gap:8px;max-width:620px}
+.odds-row{display:flex;align-items:center;gap:13px;padding:4px 8px;border-radius:9px;transition:background .15s}
+.odds-row:hover{background:var(--panel-2)}
+.odds-row .flag{width:28px;height:19px}
+.odds-row .nm{width:104px;font-weight:700;font-size:14px}
+.bar-track{flex:1;height:26px;background:var(--panel);border:1px solid var(--line);
+  border-radius:8px;overflow:hidden;position:relative}
+.bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--grass),#3bb16e);
+  display:flex;align-items:center;justify-content:flex-end;padding-right:9px;
+  border-radius:7px;transition:width 1.05s cubic-bezier(.2,.8,.2,1)}
+.odds-row:first-child .bar-fill{background:linear-gradient(90deg,var(--coral),#ff8a4d)}
+.bar-fill span{font-family:'Space Mono';font-size:11.5px;font-weight:700;color:#fff}
+.your-champ{margin-top:24px;padding:16px 20px;background:var(--panel);
+  border:1px solid var(--line);border-radius:13px;border-left:5px solid var(--blue);
+  font-size:14.5px;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.your-champ b{color:var(--blue)}
+.your-champ .empty-note{color:var(--muted)}
 
 /* ---- reliability ---- */
-.calib-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+.calib-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
 @media(max-width:820px){.calib-grid{grid-template-columns:1fr}}
-.chart{background:var(--pitch-2);border:1px solid var(--line);border-radius:6px;padding:20px}
-.calib-note{font-size:14px;color:var(--dim)}
-.calib-note strong{color:var(--chalk)}
-.calib-note .k{color:var(--gold);font-family:'Space Mono';font-weight:700}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+.calib-note{font-size:14.5px;color:var(--muted);line-height:1.65}
+.calib-note strong{color:var(--ink)}
+.calib-note .k{color:var(--coral-d);font-family:'Space Mono';font-weight:700}
 table.bt{width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;
   font-size:12.5px;margin-top:18px}
-table.bt th{text-align:right;color:var(--dim);font-weight:400;padding:6px 10px;
-  border-bottom:1px solid var(--line-2);font-size:11px;letter-spacing:.05em}
+table.bt th{text-align:right;color:var(--muted);font-weight:700;padding:7px 10px;
+  border-bottom:2px solid var(--line-2);font-size:11px;letter-spacing:.04em}
 table.bt th:first-child{text-align:left}
-table.bt td{text-align:right;padding:6px 10px;border-bottom:1px solid var(--line)}
-table.bt td:first-child{text-align:left;color:var(--dim)}
-table.bt tr.tot td{color:var(--gold);border-bottom:none;font-weight:700}
+table.bt td{text-align:right;padding:7px 10px;border-bottom:1px solid var(--line)}
+table.bt td:first-child{text-align:left;color:var(--muted)}
+table.bt tr{transition:background .14s}
+table.bt tr:hover td{background:var(--panel-2)}
+table.bt tr.tot td{color:var(--grass-d);border-bottom:none;font-weight:700;font-size:13.5px}
+.pill{display:inline-block;background:var(--panel-2);border:1px solid var(--line-2);
+  border-radius:100px;padding:2px 10px;font-size:10px;color:var(--muted);margin:0 2px;font-family:'Space Mono'}
 
 /* ---- match lab ---- */
-.lab{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:start}
-@media(max-width:820px){.lab{grid-template-columns:1fr;gap:14px}}
-.lab-team{background:var(--pitch-2);border:1px solid var(--line);border-radius:7px;padding:16px;box-shadow:var(--shadow)}
-.lab-team select{width:100%;background:var(--pitch);color:var(--chalk);border:1px solid var(--line-2);
-  border-radius:4px;padding:9px 10px;font-family:'Inter';font-weight:600;font-size:15px;margin-bottom:12px;cursor:pointer}
-.elo-line{display:flex;align-items:baseline;gap:8px;font-family:'Space Mono',monospace;margin-bottom:4px}
-.elo-line .now{font-size:24px;font-weight:700}
-.elo-line .was{font-size:13px;color:var(--dimmer);text-decoration:line-through}
+.lab{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:start}
+@media(max-width:860px){.lab{grid-template-columns:1fr;gap:14px}}
+.lab-team{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.lab-team.side-b{border-top:4px solid var(--coral)}
+.lab-team.side-a{border-top:4px solid var(--blue)}
+.lab-selrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.lab-selrow .flag{width:34px;height:23px}
+.lab-team select{flex:1;background:var(--panel-2);color:var(--ink);border:1.5px solid var(--line-2);
+  border-radius:9px;padding:10px 11px;font-family:'Inter';font-weight:700;font-size:15px;cursor:pointer;transition:border-color .15s}
+.lab-team select:hover{border-color:var(--grass)}
+.elo-line{display:flex;align-items:baseline;gap:9px;font-family:'Space Mono',monospace;margin-bottom:4px}
+.elo-line .now{font-size:26px;font-weight:700}
+.elo-line .was{font-size:13px;color:var(--faint);text-decoration:line-through}
 .elo-line .dlt{font-size:13px;font-weight:700}
-.dlt.up{color:var(--win)} .dlt.down{color:var(--loss)}
-.lab-lbl{font-family:'Space Mono';font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:14px 0 8px}
-.pl-row{display:flex;align-items:center;gap:9px;padding:7px 9px;border:1px solid var(--line);
-  border-radius:4px;margin-bottom:5px;cursor:pointer;transition:.12s;font-size:13px}
-.pl-row:hover{border-color:var(--line-2)}
-.pl-row.out{background:rgba(226,87,60,.12);border-color:var(--loss)}
-.pl-row .chk{width:15px;height:15px;border:1.5px solid var(--dimmer);border-radius:3px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:10px}
-.pl-row.out .chk{background:var(--loss);border-color:var(--loss);color:var(--pitch)}
+.dlt.up{color:var(--grass-d)} .dlt.down{color:var(--coral-d)}
+.lab-lbl{font-family:'Space Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 9px;font-weight:700}
+.pl-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line);
+  border-radius:9px;margin-bottom:6px;cursor:pointer;transition:.14s;font-size:13px;background:var(--panel)}
+.pl-row:hover{border-color:var(--line-2);transform:translateX(2px)}
+.pl-row.out{background:var(--coral-soft);border-color:var(--coral)}
+.pl-row .chk{width:16px;height:16px;border:1.5px solid var(--faint);border-radius:5px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:10px;transition:.14s}
+.pl-row.out .chk{background:var(--coral);border-color:var(--coral);color:#fff}
 .pl-row .pl-nm{flex:1;font-weight:600}
-.pl-row.out .pl-nm{text-decoration:line-through;color:var(--dim)}
-.pl-row .pl-meta{font-family:'Space Mono';font-size:10px;color:var(--dimmer)}
-.pl-row .pl-cost{font-family:'Space Mono';font-size:11px;font-weight:700;color:var(--loss);opacity:0;transition:.12s}
+.pl-row.out .pl-nm{text-decoration:line-through;color:var(--muted)}
+.pl-row .pl-meta{font-family:'Space Mono';font-size:10px;color:var(--faint)}
+.pl-row .pl-cost{font-family:'Space Mono';font-size:11px;font-weight:700;color:var(--coral-d);opacity:0;transition:.14s;min-width:26px;text-align:right}
 .pl-row.out .pl-cost{opacity:1}
-.mod-row{display:flex;align-items:center;gap:9px;padding:8px 9px;border:1px solid var(--line);
-  border-radius:4px;margin-bottom:5px;cursor:pointer;font-size:12.5px;transition:.12s}
-.mod-row:hover{border-color:var(--line-2)}
-.mod-row.on{background:rgba(244,196,48,.1);border-color:var(--gold)}
-.mod-row .chk{width:15px;height:15px;border:1.5px solid var(--dimmer);border-radius:3px;flex-shrink:0;
+.mod-row{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--line);
+  border-radius:9px;margin-bottom:6px;cursor:pointer;font-size:12.5px;transition:.14s;background:var(--panel)}
+.mod-row:hover{border-color:var(--line-2);transform:translateX(2px)}
+.mod-row.on{background:var(--sun);border-color:var(--sun-d)}
+.mod-row.on .mod-info{color:var(--ink)}
+.mod-row .chk{width:16px;height:16px;border:1.5px solid var(--faint);border-radius:5px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;font-size:10px}
-.mod-row.on .chk{background:var(--gold);border-color:var(--gold);color:var(--pitch)}
-.mod-row .mod-nm{flex:1}
-.mod-row .mod-info{font-family:'Space Mono';font-size:10px;color:var(--dimmer)}
-.lab-center{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding-top:60px;min-width:150px;gap:14px}
+.mod-row.on .chk{background:var(--ink);border-color:var(--ink);color:var(--sun)}
+.mod-row .mod-nm{flex:1;font-weight:600}
+.mod-row .mod-info{font-family:'Space Mono';font-size:10px;color:var(--faint);font-weight:700}
+.lab-center{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding-top:64px;min-width:172px;gap:14px}
+.vs-badge{font-family:'Anton';font-size:15px;color:var(--faint);letter-spacing:.1em}
 .vs-prob{text-align:center}
-.vs-prob .pct{font-family:'Anton';font-size:44px;line-height:1}
-.vs-prob .pl{font-family:'Space Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:4px}
-.prob-split{width:150px;height:12px;border-radius:6px;overflow:hidden;display:flex;border:1px solid var(--line-2)}
-.prob-split .a{background:var(--cyan)} .prob-split .b{background:var(--gold)}
-.prob-delta{font-family:'Space Mono';font-size:11px;color:var(--dim);text-align:center;min-height:16px}
-.vs-tag{font-family:'Space Mono';font-size:11px;color:var(--dimmer);letter-spacing:.14em}
-.mod-note{font-size:11px;color:var(--dim);margin:8px 0 0;line-height:1.45;min-height:0}
-.cond-shared{background:var(--pitch-2);border:1px dashed var(--line-2);border-radius:7px;padding:14px 16px;margin-top:16px}
+.vs-prob .pct{font-family:'Anton';font-size:52px;line-height:1;color:var(--blue)}
+.vs-prob.b .pct{font-size:34px;color:var(--coral-d)}
+.vs-prob .pl{font-family:'Space Mono';font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:5px;display:flex;align-items:center;gap:6px;justify-content:center}
+.vs-prob .pl .flag{width:20px;height:13px}
+.prob-split{width:172px;height:14px;border-radius:8px;overflow:hidden;display:flex;border:1px solid var(--line-2);background:var(--panel)}
+.prob-split .a{background:var(--blue);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.prob-split .b{background:var(--coral);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.prob-delta{font-family:'Space Mono';font-size:11px;color:var(--muted);text-align:center;min-height:16px;font-weight:700}
+.cond-shared{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:16px;box-shadow:var(--shadow)}
 .cond-shared .lab-lbl{margin-top:0}
+.mod-note{font-size:12px;color:var(--muted);margin:10px 0 0;line-height:1.55}
 
-footer{padding:34px 0 60px;color:var(--dimmer);font-family:'Space Mono',monospace;font-size:11.5px;line-height:1.8}
-footer a{color:var(--dim)}
-.pill{display:inline-block;background:var(--pitch-2);border:1px solid var(--line-2);
-  border-radius:100px;padding:2px 10px;font-size:10px;color:var(--dim);margin-left:6px}
+footer{padding:40px 0 70px;color:var(--faint);font-family:'Space Mono',monospace;font-size:11.5px;line-height:1.9;border-top:2px solid var(--line)}
+footer a{color:var(--muted)}
+footer b{color:var(--grass-d)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(12deg)}}
+@keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 rgba(245,166,35,.0)}50%{box-shadow:0 0 22px 2px rgba(245,166,35,.35)}}
+@keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
 </style>
 </head>
 <body>
 <div class="wrap">
+
 <header>
-  <div class="eyebrow">Elo Monte-Carlo Model · USA · Canada · Mexico</div>
-  <h1>The Bracket<span class="thin">Fill in your picks. See what a 150-year Elo model says. Watch it lock as the games are played.</span></h1>
+  <svg class="hero-ball" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="var(--grass)" stroke-width="3"/><path d="M50 22 62 32 57 47 43 47 38 32Z" fill="var(--grass)"/><path d="M50 78 38 68 43 60 57 60 62 68Z" fill="var(--grass)" opacity=".6"/><path d="M24 45 36 40 43 52 34 63 24 58Z" fill="var(--grass)" opacity=".4"/><path d="M76 45 64 40 57 52 66 63 76 58Z" fill="var(--grass)" opacity=".4"/></svg>
+  <div class="eyebrow"><svg class="ball" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="var(--grass-d)" stroke-width="6"/><circle cx="50" cy="50" r="10" fill="var(--grass-d)"/></svg> Elo Monte-Carlo Model · USA · Canada · Mexico</div>
+  <h1>The <span class="pop">Bracket</span><span class="thin">Fill in your picks. See what a 150-year Elo model says — even on the games already played. Watch it lock as the tournament unfolds.</span></h1>
   <div class="trust">
     <div class="stat"><div class="num" id="t-champ">—</div><div class="lbl">Model favorite</div></div>
+    <div class="stat"><div class="num" id="t-teams">10</div><div class="lbl">Teams still alive</div></div>
     <div class="stat"><div class="num">320</div><div class="lbl">Matches backtested</div></div>
-    <div class="stat"><div class="num">75%</div><div class="lbl">Knockout accuracy</div></div>
     <div class="stat"><div class="num">50k</div><div class="lbl">Simulations</div></div>
   </div>
 </header>
 
-<section id="bracket-sec">
+<section id="bracket-sec" class="reveal">
   <div class="sec-head"><span class="sec-num">01</span><h2>Your bracket vs the model</h2></div>
-  <p class="sec-sub">Click a team in any open match to advance them — your pick flows to the next round. Played matches are locked to the real result. Flip on the model to see its call and win probability on every tie.</p>
+  <p class="sec-sub">Click a team in any open match to advance them — your pick flows to the next round. Played matches are locked to the real result, and each one carries the model's honest <em>pre-game</em> call with a ✓ or ✗, so you can see where a 150-year Elo model was right and where it got burned. No cherry-picking. Flip on the model to see its picks and win probability on the ties still to come.</p>
   <div class="controls">
     <button class="ctl" id="btn-model">Show model picks</button>
     <button class="ctl cyan on" id="btn-mine">My picks on</button>
-    <button class="ctl" id="btn-reset">Reset my bracket</button>
+    <button class="ctl ghost" id="btn-reset">Reset my bracket</button>
     <div class="legend">
-      <span><i class="dot" style="background:var(--win)"></i>Advanced (real)</span>
-      <span><i class="dot" style="background:var(--cyan)"></i>Your pick</span>
-      <span><i class="dot" style="background:var(--gold)"></i>Model pick</span>
+      <span><i class="dot" style="background:var(--grass)"></i>Advanced (real)</span>
+      <span><i class="dot" style="background:var(--blue)"></i>Your pick</span>
+      <span><i class="dot" style="background:var(--coral)"></i>Model pick</span>
     </div>
   </div>
   <div class="bracket-scroll"><div class="bracket" id="bracket"></div></div>
 </section>
 
-<section id="odds-sec">
+<section id="odds-sec" class="reveal">
   <div class="sec-head"><span class="sec-num">02</span><h2>Title odds</h2></div>
   <p class="sec-sub">Each team's championship probability across 50,000 simulations of the remaining bracket, using Elo blended with in-tournament form. Your bracket's pick is shown against the model's.</p>
   <div class="odds" id="odds"></div>
   <div class="your-champ" id="your-champ"><span class="empty-note">Pick a champion in the bracket above to compare against the model.</span></div>
 </section>
 
-<section id="lab-sec">
+<section id="lab-sec" class="reveal">
   <div class="sec-head"><span class="sec-num">03</span><h2>Match Lab — what changes the odds</h2></div>
   <p class="sec-sub">Pick any two live teams, then sit players out, turn up the heat, or hand one side a rested crowd. Every switch moves the team's Elo and the win probability updates live. Player values come from each team's real share of goals this tournament — sit Messi and Argentina feels it; sit a squad player and it barely moves.</p>
   <div class="lab" id="lab"></div>
 </section>
 
-<section id="calib-sec">
+<section id="calib-sec" class="reveal">
   <div class="sec-head"><span class="sec-num">04</span><h2>Why trust it — calibration</h2></div>
   <p class="sec-sub">Accuracy is a trap: "always pick the favorite" already scores 56% on World Cup games, and the model scores the same. What matters is whether upsets happen as often as predicted. This reliability curve, from a leak-free backtest of the last five World Cups, is the real test.</p>
   <div class="calib-grid">
@@ -239,81 +299,81 @@ footer a{color:var(--dim)}
 <footer>
   Elo computed from ~<span id="f-matches">49,500</span> international matches, 1872–2026 (eloratings.net methodology: K-weighting by match importance, goal-difference multiplier, neutral-venue).<br>
   Backtest: frozen pre-tournament ratings, zero outcome leakage, no parameters tuned on test tournaments. Live-update variant reaches 59.7% three-way accuracy across 2006–2022.<br>
-  Data: openfootball · martj42/international_results · shootouts. Built as a portfolio project — not affiliated with FIFA.<br>
-  Model favorite is not a prediction of certainty; it's a probability. Underdogs win, and the model says how often.
+  Model calls on played games use each team's <b>pre-tournament</b> Elo — an honest grade, not hindsight. Data: openfootball · martj42/international_results · shootouts. Portfolio project, not affiliated with FIFA.<br>
+  The model favorite is a probability, not a promise. Underdogs win — and the model says how often.
 </footer>
 </div>
 
 <script>
-const DATA = {"teams": {"France": {"elo": 2159.2, "career": 2126.9, "flag": "🇫🇷"}, "Morocco": {"elo": 2020.9, "career": 1992.7, "flag": "🇲🇦"}, "Norway": {"elo": 2001.6, "career": 1973.9, "flag": "🇳🇴"}, "England": {"elo": 2113.2, "career": 2091.9, "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"}, "Portugal": {"elo": 2061.4, "career": 2048.3, "flag": "🇵🇹"}, "Spain": {"elo": 2223.0, "career": 2220.8, "flag": "🇪🇸"}, "USA": {"elo": 1867.8, "career": 1826.3, "flag": "🇺🇸"}, "Belgium": {"elo": 1970.8, "career": 1958.8, "flag": "🇧🇪"}, "Argentina": {"elo": 2207.9, "career": 2192.5, "flag": "🇦🇷"}, "Egypt": {"elo": 1824.8, "career": 1802.5, "flag": "🇪🇬"}, "Switzerland": {"elo": 1980.1, "career": 1958.4, "flag": "🇨🇭"}, "Colombia": {"elo": 2077.6, "career": 2065.6, "flag": "🇨🇴"}}, "bracket": {"r16": [{"id": "R16_1", "a": "Paraguay", "b": "France", "sa": 0, "sb": 1, "played": true, "date": "Jul 4", "venue": "Philadelphia"}, {"id": "R16_2", "a": "Canada", "b": "Morocco", "sa": 0, "sb": 3, "played": true, "date": "Jul 4", "venue": "Houston"}, {"id": "R16_3", "a": "Brazil", "b": "Norway", "sa": 1, "sb": 2, "played": true, "date": "Jul 5", "venue": "New York/NJ"}, {"id": "R16_4", "a": "Mexico", "b": "England", "sa": 2, "sb": 3, "played": true, "date": "Jul 5", "venue": "Mexico City"}, {"id": "R16_5", "a": "Portugal", "b": "Spain", "played": false, "date": "Jul 6", "venue": "Dallas"}, {"id": "R16_6", "a": "USA", "b": "Belgium", "played": false, "date": "Jul 6", "venue": "Seattle"}, {"id": "R16_7", "a": "Argentina", "b": "Egypt", "played": false, "date": "Jul 7", "venue": "Atlanta"}, {"id": "R16_8", "a": "Switzerland", "b": "Colombia", "played": false, "date": "Jul 7", "venue": "Vancouver"}], "qf": [{"id": "QF_1", "from": ["R16_1", "R16_2"], "date": "Jul 9", "venue": "Boston"}, {"id": "QF_2", "from": ["R16_3", "R16_4"], "date": "Jul 11", "venue": "Kansas City"}, {"id": "QF_3", "from": ["R16_5", "R16_6"], "date": "Jul 10", "venue": "Los Angeles"}, {"id": "QF_4", "from": ["R16_7", "R16_8"], "date": "Jul 11", "venue": "Miami"}], "sf": [{"id": "SF_1", "from": ["QF_1", "QF_2"], "date": "Jul 14", "venue": "Dallas"}, {"id": "SF_2", "from": ["QF_3", "QF_4"], "date": "Jul 15", "venue": "Atlanta"}], "final": {"id": "FINAL", "from": ["SF_1", "SF_2"], "date": "Jul 19", "venue": "New York/NJ"}}, "champ": {"France": 20.5, "Norway": 3.3, "Spain": 23.5, "Morocco": 3.9, "England": 13.5, "Switzerland": 1.0, "USA": 0.2, "Argentina": 24.7, "Colombia": 4.5, "Egypt": 0.1, "Belgium": 1.4, "Portugal": 3.3}, "reliability": [{"bucket": 0.35, "pred": 0.35, "actual": 0.4, "n": 90}, {"bucket": 0.45, "pred": 0.45, "actual": 0.538, "n": 65}, {"bucket": 0.55, "pred": 0.55, "actual": 0.633, "n": 60}, {"bucket": 0.65, "pred": 0.65, "actual": 0.621, "n": 58}, {"bucket": 0.75, "pred": 0.75, "actual": 0.744, "n": 43}], "backtest": {"n": 320, "model_acc": 0.562, "fav_acc": 0.559, "brier": 0.574, "logloss": 0.973, "live_acc": 0.597, "per_wc": {"2006": 0.609, "2010": 0.547, "2014": 0.609, "2018": 0.516, "2022": 0.531}}, "meta": {"sims": 50000, "alpha": 0.4, "matches_trained": 49497}, "players": {"France": [{"name": "Kylian Mbappé", "goals": 7, "share": 0.5, "elo": 60}, {"name": "Ousmane Dembélé", "goals": 4, "share": 0.286, "elo": 39}, {"name": "Bradley Barcola", "goals": 2, "share": 0.143, "elo": 26}, {"name": "Désiré Doué", "goals": 1, "share": 0.071, "elo": 19}], "Morocco": [{"name": "Ismael Saibari", "goals": 3, "share": 0.3, "elo": 40}, {"name": "Soufiane Rahimi", "goals": 2, "share": 0.2, "elo": 31}, {"name": "Azzedine Ounahi", "goals": 2, "share": 0.2, "elo": 31}, {"name": "Achraf Hakimi", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Gessime Yassine", "goals": 1, "share": 0.1, "elo": 22}], "Norway": [{"name": "Erling Haaland", "goals": 7, "share": 0.583, "elo": 67}, {"name": "Leo Østigard", "goals": 1, "share": 0.083, "elo": 20}, {"name": "Aymen Hussein", "goals": 1, "share": 0.083, "elo": 20}, {"name": "Marcus Holmgren Pedersen", "goals": 1, "share": 0.083, "elo": 20}, {"name": "Thelo Aasgaard", "goals": 1, "share": 0.083, "elo": 20}], "England": [{"name": "Harry Kane", "goals": 6, "share": 0.545, "elo": 64}, {"name": "Jude Bellingham", "goals": 4, "share": 0.364, "elo": 47}, {"name": "Marcus Rashford", "goals": 1, "share": 0.091, "elo": 21}], "Portugal": [{"name": "Cristiano Ronaldo", "goals": 3, "share": 0.375, "elo": 48}, {"name": "João Neves", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Nuno Mendes", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Abduvohid Nematov", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Rafael Leão", "goals": 1, "share": 0.125, "elo": 24}], "Spain": [{"name": "Mikel Oyarzabal", "goals": 4, "share": 0.5, "elo": 60}, {"name": "Lamine Yamal", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Hassan Al-Tambakti", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Álex Baena", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Pedro Porro", "goals": 1, "share": 0.125, "elo": 24}], "USA": [{"name": "Folarin Balogun", "goals": 3, "share": 0.3, "elo": 40}, {"name": "Damian Bobadilla", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Giovanni Reyna", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Cameron Burgess", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Alex Freeman", "goals": 1, "share": 0.1, "elo": 22}], "Belgium": [{"name": "Leandro Trossard", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Romelu Lukaku", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Youri Tielemans", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Mohamed Hany", "goals": 1, "share": 0.111, "elo": 23}, {"name": "Kevin De Bruyne", "goals": 1, "share": 0.111, "elo": 23}], "Argentina": [{"name": "Lionel Messi", "goals": 7, "share": 0.636, "elo": 72}, {"name": "Giovani Lo Celso", "goals": 1, "share": 0.091, "elo": 21}, {"name": "Lautaro Martínez", "goals": 1, "share": 0.091, "elo": 21}, {"name": "Lisandro Martínez", "goals": 1, "share": 0.091, "elo": 21}, {"name": "Diney Borges", "goals": 1, "share": 0.091, "elo": 21}], "Egypt": [{"name": "Emam Ashour", "goals": 2, "share": 0.333, "elo": 44}, {"name": "Mostafa Zico", "goals": 1, "share": 0.167, "elo": 28}, {"name": "Mohamed Salah", "goals": 1, "share": 0.167, "elo": 28}, {"name": "Trézéguet", "goals": 1, "share": 0.167, "elo": 28}, {"name": "Mahmoud Saber", "goals": 1, "share": 0.167, "elo": 28}], "Switzerland": [{"name": "Johan Manzambi", "goals": 3, "share": 0.333, "elo": 44}, {"name": "Breel Embolo", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Rubén Vargas", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Granit Xhaka", "goals": 1, "share": 0.111, "elo": 23}, {"name": "Dan Ndoye", "goals": 1, "share": 0.111, "elo": 23}], "Colombia": [{"name": "Daniel Muñoz", "goals": 2, "share": 0.4, "elo": 50}, {"name": "Luis Díaz", "goals": 1, "share": 0.2, "elo": 31}, {"name": "Jáminton Campaz", "goals": 1, "share": 0.2, "elo": 31}, {"name": "Jhon Arias", "goals": 1, "share": 0.2, "elo": 31}]}, "modifiers": {"gap_shrink": {"heat": {"label": "Extreme heat (32°C+)", "value": 0.11, "note": "Hot US venues (Dallas, KC, Atlanta, Miami) in July. Heat lowers pace & goals and narrows the gap between favorite and underdog."}, "rain": {"label": "Heavy rain / wet pitch", "value": 0.06, "note": "Wet conditions degrade passing and add randomness, slightly helping the underdog."}}, "elo_bonus": {"host": {"label": "Host-nation crowd", "value": 45, "note": "Neutral venue on paper, but USA / Mexico / Canada draw a de-facto home crowd. Crowd support is the dominant driver of home advantage."}, "rest": {"label": "Rest advantage", "value": 22, "note": "Extra recovery days vs an opponent coming off extra time. A small but real edge over a fatigued side."}, "altitude": {"label": "Altitude (Mexican venue)", "value": 40, "note": "Only applies at Mexico City / Guadalajara / Toluca. All REMAINING knockout venues are near sea level, so this is off by default for the current bracket."}}}, "host_nations": ["USA", "Mexico", "Canada"]};
+const DATA = {"teams": {"France": {"elo": 2159.2, "career": 2126.9, "flag": "🇫🇷"}, "Morocco": {"elo": 2020.9, "career": 1992.7, "flag": "🇲🇦"}, "Norway": {"elo": 2001.6, "career": 1973.9, "flag": "🇳🇴"}, "England": {"elo": 2113.2, "career": 2091.9, "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"}, "Spain": {"elo": 2223.0, "career": 2220.8, "flag": "🇪🇸"}, "Belgium": {"elo": 1970.8, "career": 1958.8, "flag": "🇧🇪"}, "Argentina": {"elo": 2207.9, "career": 2192.5, "flag": "🇦🇷"}, "Egypt": {"elo": 1824.8, "career": 1802.5, "flag": "🇪🇬"}, "Switzerland": {"elo": 1980.1, "career": 1958.4, "flag": "🇨🇭"}, "Colombia": {"elo": 2077.6, "career": 2065.6, "flag": "🇨🇴"}}, "bracket": {"r16": [{"id": "R16_1", "a": "Paraguay", "b": "France", "sa": 0, "sb": 1, "played": true, "date": "Jul 4", "venue": "Philadelphia"}, {"id": "R16_2", "a": "Canada", "b": "Morocco", "sa": 0, "sb": 3, "played": true, "date": "Jul 4", "venue": "Houston"}, {"id": "R16_3", "a": "Brazil", "b": "Norway", "sa": 1, "sb": 2, "played": true, "date": "Jul 5", "venue": "New York/NJ"}, {"id": "R16_4", "a": "Mexico", "b": "England", "sa": 2, "sb": 3, "played": true, "date": "Jul 5", "venue": "Mexico City"}, {"id": "R16_5", "a": "Portugal", "b": "Spain", "sa": 0, "sb": 1, "played": true, "date": "Jul 6", "venue": "Dallas"}, {"id": "R16_6", "a": "USA", "b": "Belgium", "sa": 1, "sb": 4, "played": true, "date": "Jul 6", "venue": "Seattle"}, {"id": "R16_7", "a": "Argentina", "b": "Egypt", "played": false, "date": "Jul 7", "venue": "Atlanta"}, {"id": "R16_8", "a": "Switzerland", "b": "Colombia", "played": false, "date": "Jul 7", "venue": "Vancouver"}], "qf": [{"id": "QF_1", "from": ["R16_1", "R16_2"], "date": "Jul 9", "venue": "Boston"}, {"id": "QF_2", "from": ["R16_3", "R16_4"], "date": "Jul 11", "venue": "Kansas City"}, {"id": "QF_3", "from": ["R16_5", "R16_6"], "date": "Jul 10", "venue": "Los Angeles"}, {"id": "QF_4", "from": ["R16_7", "R16_8"], "date": "Jul 11", "venue": "Miami"}], "sf": [{"id": "SF_1", "from": ["QF_1", "QF_2"], "date": "Jul 14", "venue": "Dallas"}, {"id": "SF_2", "from": ["QF_3", "QF_4"], "date": "Jul 15", "venue": "Atlanta"}], "final": {"id": "FINAL", "from": ["SF_1", "SF_2"], "date": "Jul 19", "venue": "New York/NJ"}}, "champ": {"France": 19.5, "Morocco": 3.8, "Belgium": 1.6, "Norway": 3.2, "England": 13.2, "Switzerland": 0.8, "Argentina": 22.1, "Spain": 31.7, "Colombia": 4.0, "Egypt": 0.1}, "r16_ratings": {"Argentina": 2192.5, "Belgium": 1958.8, "Brazil": 2065.6, "Canada": 1899.6, "Colombia": 2065.6, "Egypt": 1802.5, "England": 2091.9, "France": 2126.9, "Mexico": 1980.2, "Morocco": 1992.7, "Norway": 1973.9, "Paraguay": 1921.2, "Portugal": 2048.3, "Spain": 2220.8, "Switzerland": 1958.4, "USA": 1826.3}, "reliability": [{"bucket": 0.35, "pred": 0.35, "actual": 0.4, "n": 90}, {"bucket": 0.45, "pred": 0.45, "actual": 0.538, "n": 65}, {"bucket": 0.55, "pred": 0.55, "actual": 0.633, "n": 60}, {"bucket": 0.65, "pred": 0.65, "actual": 0.621, "n": 58}, {"bucket": 0.75, "pred": 0.75, "actual": 0.744, "n": 43}], "backtest": {"n": 320, "model_acc": 0.562, "fav_acc": 0.559, "brier": 0.574, "logloss": 0.973, "live_acc": 0.597, "per_wc": {"2006": 0.609, "2010": 0.547, "2014": 0.609, "2018": 0.516, "2022": 0.531}}, "meta": {"sims": 50000, "alpha": 0.4, "matches_trained": 49497}, "players": {"France": [{"name": "Kylian Mbappé", "goals": 7, "share": 0.5, "elo": 60}, {"name": "Ousmane Dembélé", "goals": 4, "share": 0.286, "elo": 39}, {"name": "Bradley Barcola", "goals": 2, "share": 0.143, "elo": 26}, {"name": "Désiré Doué", "goals": 1, "share": 0.071, "elo": 19}], "Morocco": [{"name": "Ismael Saibari", "goals": 3, "share": 0.3, "elo": 40}, {"name": "Soufiane Rahimi", "goals": 2, "share": 0.2, "elo": 31}, {"name": "Azzedine Ounahi", "goals": 2, "share": 0.2, "elo": 31}, {"name": "Achraf Hakimi", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Gessime Yassine", "goals": 1, "share": 0.1, "elo": 22}], "Norway": [{"name": "Erling Haaland", "goals": 7, "share": 0.583, "elo": 67}, {"name": "Leo Østigard", "goals": 1, "share": 0.083, "elo": 20}, {"name": "Aymen Hussein", "goals": 1, "share": 0.083, "elo": 20}, {"name": "Marcus Holmgren Pedersen", "goals": 1, "share": 0.083, "elo": 20}, {"name": "Thelo Aasgaard", "goals": 1, "share": 0.083, "elo": 20}], "England": [{"name": "Harry Kane", "goals": 6, "share": 0.545, "elo": 64}, {"name": "Jude Bellingham", "goals": 4, "share": 0.364, "elo": 47}, {"name": "Marcus Rashford", "goals": 1, "share": 0.091, "elo": 21}], "Spain": [{"name": "Mikel Oyarzabal", "goals": 4, "share": 0.5, "elo": 60}, {"name": "Lamine Yamal", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Hassan Al-Tambakti", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Álex Baena", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Pedro Porro", "goals": 1, "share": 0.125, "elo": 24}], "Belgium": [{"name": "Leandro Trossard", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Romelu Lukaku", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Youri Tielemans", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Mohamed Hany", "goals": 1, "share": 0.111, "elo": 23}, {"name": "Kevin De Bruyne", "goals": 1, "share": 0.111, "elo": 23}], "Argentina": [{"name": "Lionel Messi", "goals": 7, "share": 0.636, "elo": 72}, {"name": "Giovani Lo Celso", "goals": 1, "share": 0.091, "elo": 21}, {"name": "Lautaro Martínez", "goals": 1, "share": 0.091, "elo": 21}, {"name": "Lisandro Martínez", "goals": 1, "share": 0.091, "elo": 21}, {"name": "Diney Borges", "goals": 1, "share": 0.091, "elo": 21}], "Egypt": [{"name": "Emam Ashour", "goals": 2, "share": 0.333, "elo": 44}, {"name": "Mostafa Zico", "goals": 1, "share": 0.167, "elo": 28}, {"name": "Mohamed Salah", "goals": 1, "share": 0.167, "elo": 28}, {"name": "Trézéguet", "goals": 1, "share": 0.167, "elo": 28}, {"name": "Mahmoud Saber", "goals": 1, "share": 0.167, "elo": 28}], "Switzerland": [{"name": "Johan Manzambi", "goals": 3, "share": 0.333, "elo": 44}, {"name": "Breel Embolo", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Rubén Vargas", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Granit Xhaka", "goals": 1, "share": 0.111, "elo": 23}, {"name": "Dan Ndoye", "goals": 1, "share": 0.111, "elo": 23}], "Colombia": [{"name": "Daniel Muñoz", "goals": 2, "share": 0.4, "elo": 50}, {"name": "Luis Díaz", "goals": 1, "share": 0.2, "elo": 31}, {"name": "Jáminton Campaz", "goals": 1, "share": 0.2, "elo": 31}, {"name": "Jhon Arias", "goals": 1, "share": 0.2, "elo": 31}]}, "modifiers": {"gap_shrink": {"heat": {"label": "Extreme heat (32°C+)", "value": 0.11, "note": "Hot US venues (Dallas, KC, Atlanta, Miami) in July. Heat lowers pace & goals and narrows the gap between favorite and underdog."}, "rain": {"label": "Heavy rain / wet pitch", "value": 0.06, "note": "Wet conditions degrade passing and add randomness, slightly helping the underdog."}}, "elo_bonus": {"host": {"label": "Host-nation crowd", "value": 45, "note": "Neutral venue on paper, but USA / Mexico / Canada draw a de-facto home crowd. Crowd support is the dominant driver of home advantage."}, "rest": {"label": "Rest advantage", "value": 22, "note": "Extra recovery days vs an opponent coming off extra time. A small but real edge over a fatigued side."}, "altitude": {"label": "Altitude (Mexican venue)", "value": 40, "note": "Only applies at Mexico City / Guadalajara / Toluca. All REMAINING knockout venues are near sea level, so this is off by default for the current bracket."}}}, "host_nations": ["USA", "Mexico", "Canada"]};
 </script>
 <script>
+/* ============================================================
+   Inline SVG flags — render as real flags on every platform
+   (Windows shows emoji flags as "US/ES/PT", so we draw them).
+   viewBox 0 0 24 16.  All 16 Round-of-16 nations.
+   ============================================================ */
+const FLAGS = {
+ France:'<rect width="24" height="16" fill="#fff"/><rect width="8" height="16" fill="#0055A4"/><rect x="16" width="8" height="16" fill="#EF4135"/>',
+ Belgium:'<rect width="8" height="16" fill="#101010"/><rect x="8" width="8" height="16" fill="#FAE042"/><rect x="16" width="8" height="16" fill="#ED2939"/>',
+ Morocco:'<rect width="24" height="16" fill="#c1272d"/><path d="M12 3.4 13.12 6.46 16.37 6.58 13.81 8.59 14.7 11.72 12 9.9 9.3 11.72 10.19 8.59 7.63 6.58 10.88 6.46Z" fill="none" stroke="#006233" stroke-width="1"/>',
+ Norway:'<rect width="24" height="16" fill="#BA0C2F"/><rect y="6" width="24" height="4" fill="#fff"/><rect x="5" width="4" height="16" fill="#fff"/><rect y="7" width="24" height="2" fill="#00205B"/><rect x="6" width="2" height="16" fill="#00205B"/>',
+ England:'<rect width="24" height="16" fill="#fff"/><rect y="6" width="24" height="4" fill="#CE1124"/><rect x="10" width="4" height="16" fill="#CE1124"/>',
+ Portugal:'<rect width="24" height="16" fill="#FF0000"/><rect width="9.6" height="16" fill="#006600"/><circle cx="9.6" cy="8" r="2.4" fill="#FFD700" stroke="#8a6d00" stroke-width=".3"/>',
+ Spain:'<rect width="24" height="16" fill="#AA151B"/><rect y="4" width="24" height="8" fill="#F1BF00"/>',
+ USA:'<rect width="24" height="16" fill="#B22234"/><g fill="#fff"><rect y="1.23" width="24" height="1.23"/><rect y="3.69" width="24" height="1.23"/><rect y="6.15" width="24" height="1.23"/><rect y="8.61" width="24" height="1.23"/><rect y="11.07" width="24" height="1.23"/><rect y="13.53" width="24" height="1.23"/></g><rect width="10" height="8.6" fill="#3C3B6E"/>',
+ Argentina:'<rect width="24" height="16" fill="#74ACDF"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><circle cx="12" cy="8" r="1.7" fill="#F6B40E"/>',
+ Egypt:'<rect width="24" height="16" fill="#fff"/><rect width="24" height="5.33" fill="#CE1126"/><rect y="10.67" width="24" height="5.33" fill="#101010"/><circle cx="12" cy="8" r="1.1" fill="#C09300"/>',
+ Switzerland:'<rect width="24" height="16" fill="#D52B1E"/><rect x="10.5" y="4" width="3" height="8" fill="#fff"/><rect x="8" y="6.5" width="8" height="3" fill="#fff"/>',
+ Colombia:'<rect width="24" height="16" fill="#FCD116"/><rect y="8" width="24" height="4" fill="#003893"/><rect y="12" width="24" height="4" fill="#CE1126"/>',
+ Paraguay:'<rect width="24" height="16" fill="#fff"/><rect width="24" height="5.33" fill="#D52B1E"/><rect y="10.67" width="24" height="5.33" fill="#0038A8"/><circle cx="12" cy="8" r="1.2" fill="#128807"/>',
+ Canada:'<rect width="24" height="16" fill="#fff"/><rect width="6" height="16" fill="#FF0000"/><rect x="18" width="6" height="16" fill="#FF0000"/><path d="M12 4 12.7 6.2 14.6 5.3 13.9 7.5 16 7.2 14.3 8.7 16 10 13.9 9.8 14.4 12 12 10.6 9.6 12 10.1 9.8 8 10 9.7 8.7 8 7.2 10.1 7.5 9.4 5.3 11.3 6.2Z" fill="#FF0000"/>',
+ Brazil:'<rect width="24" height="16" fill="#009B3A"/><path d="M12 2 22 8 12 14 2 8Z" fill="#FEDF00"/><circle cx="12" cy="8" r="3" fill="#002776"/>',
+ Mexico:'<rect width="24" height="16" fill="#fff"/><rect width="8" height="16" fill="#006847"/><rect x="16" width="8" height="16" fill="#CE1126"/><circle cx="12" cy="8" r="1.3" fill="#8B5A2B"/>'
+};
+function flag(team){ return '<svg class="flag" viewBox="0 0 24 16">'+(FLAGS[team]||'')+'</svg>'; }
+
 /* ---------- model math ---------- */
-function winProb(a,b){ // knockout, neutral, no draw
+function winProb(a,b){ // knockout, neutral, no draw — blended (current) Elo
   const ra=DATA.teams[a]?.elo??1500, rb=DATA.teams[b]?.elo??1500;
   return 1/(1+Math.pow(10,(rb-ra)/400));
 }
 function modelPick(a,b){ return winProb(a,b)>=0.5 ? a : b; }
+// pre-tournament (career) pick, used to grade games already played — no hindsight
+function careerPick(a,b){
+  const ra=DATA.r16_ratings?.[a]??1500, rb=DATA.r16_ratings?.[b]??1500;
+  return ra>=rb ? a : b;
+}
 
 /* ---------- bracket state ---------- */
 const B = DATA.bracket;
-// resolve who is IN each slot's two feeder positions
-const userPick = {};   // slotId -> team chosen by user (unplayed only)
+const userPick = {};
 let showModel=false, showMine=true;
 
-// real results: R16 winners are fixed
 const realWinner = {};
 B.r16.forEach(m=>{ if(m.played){ realWinner[m.id]= m.sa>m.sb?m.a:m.b; }});
 
-function feederWinner(fid){
-  // fid is an R16 id or QF/SF id
-  if(fid.startsWith('R16')){
-    const m=B.r16.find(x=>x.id===fid);
-    if(m.played) return realWinner[fid];
-    // unplayed R16: user or model
-    return resolvePick(fid);
-  }
-  return resolvePick(fid);
-}
-function participants(node){
-  // returns [teamA,teamB] currently in this node, or nulls
-  return node.from.map(fid=>{
-    if(fid.startsWith('R16')){
-      const m=B.r16.find(x=>x.id===fid);
-      if(m.played) return realWinner[fid];
-      return resolvePick(fid);
-    }
-    const child = allNodes[fid];
-    return resolvePick(fid);
-  });
-}
+const allNodes={};
+B.qf.forEach(n=>allNodes[n.id]=n);
+B.sf.forEach(n=>allNodes[n.id]=n);
+allNodes[B.final.id]=B.final;
+
 function resolvePick(slotId){
-  // R16 unplayed
   if(slotId.startsWith('R16')){
     const m=B.r16.find(x=>x.id===slotId);
     if(m.played) return realWinner[slotId];
     if(showModel && userPick[slotId]===undefined) return modelPick(m.a,m.b);
-    return userPick[slotId]; // may be undefined
+    return userPick[slotId];
   }
-  // QF/SF/FINAL: need both participants first
   const node=allNodes[slotId];
   const [a,b]=node.from.map(f=>resolvePick(f));
   if(!a||!b) return undefined;
   if(showModel && userPick[slotId]===undefined) return modelPick(a,b);
   return userPick[slotId];
 }
-const allNodes={};
-B.qf.forEach(n=>allNodes[n.id]=n);
-B.sf.forEach(n=>allNodes[n.id]=n);
-allNodes[B.final.id]=B.final;
 
 /* ---------- rendering ---------- */
 const bracketEl=document.getElementById('bracket');
-function teamCell(team, opts={}){
-  const t=DATA.teams[team];
-  const flag=t?t.flag:'';
-  return {team,flag,name:team,...opts};
-}
 function render(){
   bracketEl.innerHTML='';
   const cols=[
@@ -335,47 +395,62 @@ function render(){
   syncTrust();
 }
 
-function makeSlot(team,{played,scoreOwn,isWinnerReal,isUserPick,isModelPick,isOut,agree,wp,onclick,empty}){
+function makeSlot(team,{played,scoreOwn,isWinnerReal,isUserPick,isModelPick,isOut,agree,modelPlayed,wp,onclick,empty}){
   const s=document.createElement('div');
   s.className='slot';
   if(empty){s.classList.add('empty');
-    s.innerHTML='<span class="flag"></span><span class="nm">— winner —</span>'; return s;}
-  const t=DATA.teams[team];
+    s.innerHTML='<span class="nm" style="color:var(--faint)">— winner —</span>'; return s;}
   if(played) s.classList.add('locked');
   if(isWinnerReal) s.classList.add('advanced');
   else if(isUserPick && showMine) s.classList.add('picked-user');
   if(isModelPick && showModel && !isWinnerReal) s.classList.add('model-pick');
   if(agree && showModel && showMine && !isWinnerReal) s.classList.add('agree');
+  if(modelPlayed && !agree) s.classList.add('model-played');
   if(isOut) s.classList.add('out');
-  const flag=t?t.flag:'';
   let right = played ? `<span class="sc">${scoreOwn}</span>`
             : (wp!==undefined? `<span class="wp">${Math.round(wp*100)}%</span>`:'');
-  s.innerHTML=`<span class="flag">${flag}</span><span class="nm">${team}</span>${right}`;
+  s.innerHTML=`${flag(team)}<span class="nm">${team}</span>${right}`;
   if(onclick && !played) s.addEventListener('click',onclick);
   return s;
 }
 
 function r16Box(m){
   const box=document.createElement('div'); box.className='tie';
-  const winU=resolvePick(m.id);
+  if(m.played){
+    const rw=realWinner[m.id];
+    const mp=careerPick(m.a,m.b);        // model's pre-game call
+    const correct = mp===rw;
+    [[m.a,m.sa],[m.b,m.sb]].forEach(([team,score])=>{
+      box.appendChild(makeSlot(team,{
+        played:true, scoreOwn:score,
+        isWinnerReal:rw===team, isOut:rw!==team,
+        modelPlayed: mp===team
+      }));
+    });
+    const meta=document.createElement('div'); meta.className='tie-meta';
+    meta.textContent=`${m.date} · ${m.venue}`; box.appendChild(meta);
+    const v=document.createElement('div');
+    v.className='verdict '+(correct?'correct':'wrong');
+    v.innerHTML = correct
+      ? `<span class="tick">✓</span> MODEL CALLED IT ${flag(mp)} ${mp}`
+      : `<span class="tick">✗</span> MODEL HAD ${flag(mp)} ${mp}`;
+    box.appendChild(v);
+    return box;
+  }
   const mp = modelPick(m.a,m.b);
-  [[m.a,m.sa],[m.b,m.sb]].forEach(([team,score])=>{
-    const isReal = m.played && realWinner[m.id]===team;
-    const isOutReal = m.played && realWinner[m.id]!==team;
-    const isUser = !m.played && userPick[m.id]===team;
-    const isModel = !m.played && mp===team;
+  [[m.a,m.sa],[m.b,m.sb]].forEach(([team])=>{
+    const isUser = userPick[m.id]===team;
+    const isModel = mp===team;
     const agree = isUser && mp===team;
-    const wp = m.played?undefined:winProb(team, team===m.a?m.b:m.a);
+    const wp = winProb(team, team===m.a?m.b:m.a);
     box.appendChild(makeSlot(team,{
-      played:m.played, scoreOwn:score,
-      isWinnerReal:isReal, isUserPick:isUser, isModelPick:isModel,
-      isOut:isOutReal, agree, wp,
+      played:false, isUserPick:isUser, isModelPick:isModel, agree, wp,
       onclick:()=>{ userPick[m.id]= (userPick[m.id]===team?undefined:team);
                     clearDownstream(m.id); render(); renderOdds(); }
     }));
   });
   const meta=document.createElement('div'); meta.className='tie-meta';
-  meta.textContent = m.played? `${m.date} · ${m.venue}` : `${m.date} · ${m.venue} · open`;
+  meta.textContent = `${m.date} · ${m.venue} · open`;
   box.appendChild(meta);
   return box;
 }
@@ -410,19 +485,16 @@ function champBox(){
   const box=document.createElement('div'); box.className='tie champ-slot';
   const champ=resolvePick('FINAL');
   if(champ){
-    const t=DATA.teams[champ];
     const gold = showModel && userPick['FINAL']===undefined;
-    box.innerHTML=`<div class="slot ${gold?'model-pick':'picked-user'}" style="min-height:56px">
-      <span class="flag" style="font-size:22px">${t.flag}</span>
-      <span class="nm" style="font-size:16px">${champ}</span>
-      <span class="wp">🏆</span></div>`;
+    box.innerHTML=`<div class="champ-inner won">${flag(champ)}
+      <span class="nm" style="color:${gold?'var(--coral-d)':'var(--blue)'}">${champ}</span>
+      <span class="trophy">🏆</span></div>`;
   } else {
-    box.innerHTML='<div class="slot empty" style="min-height:56px"><span class="flag">🏆</span><span class="nm">— your champion —</span></div>';
+    box.innerHTML='<div class="champ-inner"><span class="trophy">🏆</span><span class="nm" style="color:var(--faint)">— your champion —</span></div>';
   }
   return box;
 }
 
-/* clear user picks downstream of a changed slot */
 function downstreamOf(slotId){
   const kids=[];
   Object.values(allNodes).forEach(n=>{ if(n.from.includes(slotId)) kids.push(n.id); });
@@ -430,7 +502,6 @@ function downstreamOf(slotId){
 }
 function clearDownstream(slotId){
   downstreamOf(slotId).forEach(k=>{
-    // if the winner previously picked is no longer a participant, clear it
     const [a,b]=allNodes[k].from.map(f=>resolvePick(f));
     if(userPick[k] && userPick[k]!==a && userPick[k]!==b){ userPick[k]=undefined; }
     clearDownstream(k);
@@ -443,57 +514,64 @@ function renderOdds(){
   const rows=Object.entries(DATA.champ).sort((a,b)=>b[1]-a[1]);
   const max=rows[0][1];
   oddsEl.innerHTML='';
-  rows.forEach(([team,pct])=>{
-    const t=DATA.teams[team]; if(!t)return;
+  rows.forEach(([team,pct],i)=>{
+    if(!DATA.teams[team])return;
     const row=document.createElement('div'); row.className='odds-row';
-    row.innerHTML=`<span class="flag">${t.flag}</span><span class="nm">${team}</span>
-      <div class="bar-track"><div class="bar-fill" style="width:${Math.max(6,pct/max*100)}%">
+    row.innerHTML=`${flag(team)}<span class="nm">${team}</span>
+      <div class="bar-track"><div class="bar-fill" data-w="${Math.max(6,pct/max*100)}" style="transition-delay:${i*55}ms">
       <span>${pct}%</span></div></div>`;
     oddsEl.appendChild(row);
   });
+  requestAnimationFrame(()=>oddsEl.querySelectorAll('.bar-fill').forEach(f=>{
+    f.style.width=f.dataset.w+'%';
+  }));
   const champ=resolvePick('FINAL');
   const yc=document.getElementById('your-champ');
   if(champ && userPick['FINAL']!==undefined){
     const modelChamp=Object.entries(DATA.champ).sort((a,b)=>b[1]-a[1])[0][0];
     const odds=DATA.champ[champ]??'<1';
-    yc.innerHTML = `You picked <b>${DATA.teams[champ].flag} ${champ}</b> to lift the trophy — the model gives them <b>${odds}%</b>. ` +
-      (champ===modelChamp? `That's the model's favorite too.` : `The model leans ${DATA.teams[modelChamp].flag} ${modelChamp} (${DATA.champ[modelChamp]}%).`);
+    yc.innerHTML = `<span>You picked ${flag(champ)} <b>${champ}</b> to lift the trophy — the model gives them <b>${odds}%</b>. ` +
+      (champ===modelChamp? `That's the model's favorite too.` : `The model leans ${flag(modelChamp)} <b>${modelChamp}</b> (${DATA.champ[modelChamp]}%).`) + `</span>`;
   } else {
     yc.innerHTML='<span class="empty-note">Pick a champion in the bracket above to compare against the model.</span>';
   }
 }
 
-/* ---------- reliability diagram ---------- */
+/* ---------- reliability diagram (with draw-in animation) ---------- */
 function drawReliability(){
   const svg=document.getElementById('reliability');
   const W=400,H=340,pad=46;
-  const x=p=>pad+(p)* (W-pad-16);
+  const x=p=>pad+(p)*(W-pad-16);
   const y=v=>H-pad-(v)*(H-pad-16);
   let s='';
-  // grid
   for(let g=0;g<=1.0001;g+=0.25){
-    s+=`<line x1="${x(g)}" y1="${y(0)}" x2="${x(g)}" y2="${y(1)}" stroke="#1d322a" stroke-width="1"/>`;
-    s+=`<line x1="${x(0)}" y1="${y(g)}" x2="${x(1)}" y2="${y(g)}" stroke="#1d322a" stroke-width="1"/>`;
-    s+=`<text x="${x(g)}" y="${H-pad+18}" fill="#556259" font-size="10" font-family="Space Mono" text-anchor="middle">${Math.round(g*100)}</text>`;
-    s+=`<text x="${pad-10}" y="${y(g)+4}" fill="#556259" font-size="10" font-family="Space Mono" text-anchor="end">${Math.round(g*100)}</text>`;
+    s+=`<line x1="${x(g)}" y1="${y(0)}" x2="${x(g)}" y2="${y(1)}" stroke="#dde5d2" stroke-width="1"/>`;
+    s+=`<line x1="${x(0)}" y1="${y(g)}" x2="${x(1)}" y2="${y(g)}" stroke="#dde5d2" stroke-width="1"/>`;
+    s+=`<text x="${x(g)}" y="${H-pad+18}" fill="#93a293" font-size="10" font-family="Space Mono" text-anchor="middle">${Math.round(g*100)}</text>`;
+    s+=`<text x="${pad-10}" y="${y(g)+4}" fill="#93a293" font-size="10" font-family="Space Mono" text-anchor="end">${Math.round(g*100)}</text>`;
   }
-  // perfect calibration line
-  s+=`<line x1="${x(0)}" y1="${y(0)}" x2="${x(1)}" y2="${y(1)}" stroke="#7f958b" stroke-width="1.5" stroke-dasharray="5 5"/>`;
-  s+=`<text x="${x(0.72)}" y="${y(0.80)}" fill="#7f958b" font-size="10" font-family="Space Mono" transform="rotate(-33 ${x(0.72)} ${y(0.80)})">perfect calibration</text>`;
-  // model points + connecting line
+  s+=`<line x1="${x(0)}" y1="${y(0)}" x2="${x(1)}" y2="${y(1)}" stroke="#5f6f62" stroke-width="1.5" stroke-dasharray="5 5"/>`;
+  s+=`<text x="${x(0.72)}" y="${y(0.80)}" fill="#5f6f62" font-size="10" font-family="Space Mono" transform="rotate(-33 ${x(0.72)} ${y(0.80)})">perfect calibration</text>`;
   const pts=DATA.reliability;
   let path='';
   pts.forEach((p,i)=>{ path+=(i?'L':'M')+x(p.pred)+' '+y(p.actual)+' '; });
-  s+=`<path d="${path}" fill="none" stroke="#f4c430" stroke-width="2"/>`;
-  pts.forEach(p=>{
+  s+=`<path id="rel-path" d="${path}" fill="none" stroke="#ff5a4d" stroke-width="2.5"/>`;
+  pts.forEach((p,i)=>{
     const rad=6+Math.sqrt(p.n)/3;
-    s+=`<circle cx="${x(p.pred)}" cy="${y(p.actual)}" r="${rad}" fill="#f4c430" fill-opacity="0.16" stroke="#f4c430" stroke-width="2"/>`;
-    s+=`<circle cx="${x(p.pred)}" cy="${y(p.actual)}" r="3" fill="#f4c430"/>`;
+    s+=`<circle class="rel-pt" style="animation-delay:${400+i*120}ms" cx="${x(p.pred)}" cy="${y(p.actual)}" r="${rad}" fill="#ff5a4d" fill-opacity="0.14" stroke="#ff5a4d" stroke-width="2"/>`;
+    s+=`<circle class="rel-pt" style="animation-delay:${400+i*120}ms" cx="${x(p.pred)}" cy="${y(p.actual)}" r="3" fill="#ff5a4d"/>`;
   });
-  // axis labels
-  s+=`<text x="${(W+pad)/2}" y="${H-6}" fill="#7f958b" font-size="11" font-family="Inter" text-anchor="middle">Model's predicted favorite win %</text>`;
-  s+=`<text x="14" y="${(H)/2}" fill="#7f958b" font-size="11" font-family="Inter" text-anchor="middle" transform="rotate(-90 14 ${H/2})">Actual favorite win %</text>`;
+  s+=`<text x="${(W+pad)/2}" y="${H-6}" fill="#5f6f62" font-size="11" font-family="Inter" text-anchor="middle">Model's predicted favorite win %</text>`;
+  s+=`<text x="14" y="${(H)/2}" fill="#5f6f62" font-size="11" font-family="Inter" text-anchor="middle" transform="rotate(-90 14 ${H/2})">Actual favorite win %</text>`;
   svg.innerHTML=s;
+  const pathEl=svg.querySelector('#rel-path');
+  if(pathEl && !matchMedia('(prefers-reduced-motion:reduce)').matches){
+    const len=pathEl.getTotalLength();
+    pathEl.style.strokeDasharray=len; pathEl.style.strokeDashoffset=len;
+    pathEl.style.transition='stroke-dashoffset 1.1s ease .2s';
+    requestAnimationFrame(()=>{pathEl.style.strokeDashoffset=0;});
+    svg.querySelectorAll('.rel-pt').forEach(c=>{c.style.transformBox='fill-box';c.style.transformOrigin='center';c.style.animation='popIn .4s backwards';});
+  }
 }
 
 /* ---------- backtest table ---------- */
@@ -524,39 +602,36 @@ document.getElementById('btn-reset').addEventListener('click',()=>{
   Object.keys(userPick).forEach(k=>delete userPick[k]); render(); renderOdds();
 });
 
+/* ---------- trust ---------- */
 function syncTrust(){
   const fav=Object.entries(DATA.champ).sort((a,b)=>b[1]-a[1])[0];
-  document.getElementById('t-champ').textContent=DATA.teams[fav[0]].flag+' '+fav[1]+'%';
+  document.getElementById('t-champ').innerHTML=flag(fav[0])+' '+fav[1]+'%';
 }
 document.getElementById('f-matches').textContent=(DATA.meta.matches_trained).toLocaleString();
+document.getElementById('t-teams').textContent=Object.keys(DATA.teams).length;
 
 /* ---------- MATCH LAB ---------- */
 const labState={
   a:"Argentina", b:"Egypt",
   out:{a:new Set(), b:new Set()},
-  bonus:{a:new Set(), b:new Set()},   // host, rest, altitude per side
-  shared:new Set()                    // heat, rain
+  bonus:{a:new Set(), b:new Set()},
+  shared:new Set()
 };
 function adjustedElo(side){
   const team=labState[side];
   let elo=DATA.teams[team].elo;
-  // player-out penalties
-  (DATA.players[team]||[]).forEach((p,i)=>{
-    if(labState.out[side].has(i)) elo-=p.elo;
-  });
-  // per-side bonuses
+  (DATA.players[team]||[]).forEach((p,i)=>{ if(labState.out[side].has(i)) elo-=p.elo; });
   labState.bonus[side].forEach(key=>{ elo+=DATA.modifiers.elo_bonus[key].value; });
   return elo;
 }
 function labProbs(){
   let ea=adjustedElo('a'), eb=adjustedElo('b');
   let diff=ea-eb;
-  // shared gap-shrink modifiers push toward parity
   labState.shared.forEach(key=>{ diff*= (1-DATA.modifiers.gap_shrink[key].value); });
   const pa=1/(1+Math.pow(10,(-diff)/400));
   return {pa, pb:1-pa, ea:Math.round(ea), eb:Math.round(eb)};
 }
-function baseProbA(){ // no modifiers
+function baseProbA(){
   const ea=DATA.teams[labState.a].elo, eb=DATA.teams[labState.b].elo;
   return 1/(1+Math.pow(10,(eb-ea)/400));
 }
@@ -565,16 +640,15 @@ function teamPanel(side){
   const team=labState[side];
   const isHost=DATA.host_nations.includes(team);
   const opts=Object.keys(DATA.teams).map(t=>
-    `<option value="${t}" ${t===team?'selected':''}>${DATA.teams[t].flag} ${t}</option>`).join('');
+    `<option value="${t}" ${t===team?'selected':''}>${t}</option>`).join('');
   const players=(DATA.players[team]||[]).map((p,i)=>{
     const out=labState.out[side].has(i);
     return `<div class="pl-row ${out?'out':''}" data-side="${side}" data-pl="${i}">
       <span class="chk">${out?'✕':''}</span>
       <span class="pl-nm">${p.name}</span>
-      <span class="pl-meta">${p.goals}g · ${Math.round(p.share*100)}% of goals</span>
+      <span class="pl-meta">${p.goals}g · ${Math.round(p.share*100)}%</span>
       <span class="pl-cost">−${p.elo}</span></div>`;
   }).join('');
-  // per-side bonuses (host only if host nation; rest always; altitude off by default)
   const bonusKeys=['host','rest'];
   const bonuses=bonusKeys.map(key=>{
     if(key==='host' && !isHost) return '';
@@ -584,8 +658,8 @@ function teamPanel(side){
       <span class="chk">${on?'✓':''}</span><span class="mod-nm">${m.label}</span>
       <span class="mod-info">+${m.value}</span></div>`;
   }).join('');
-  return `<div class="lab-team">
-    <select data-side="${side}">${opts}</select>
+  return `<div class="lab-team side-${side}">
+    <div class="lab-selrow">${flag(team)}<select data-side="${side}">${opts}</select></div>
     <div class="elo-line"><span class="now" id="elo-${side}"></span>
       <span class="was" id="was-${side}"></span><span class="dlt" id="dlt-${side}"></span></div>
     <div class="lab-lbl">Sit a player (by goal share)</div>
@@ -596,10 +670,10 @@ function teamPanel(side){
 }
 function centerPanel(){
   return `<div class="lab-center">
-    <div class="vs-tag">WIN PROBABILITY</div>
-    <div class="vs-prob"><div class="pct" id="lab-pa"></div><div class="pl" id="lab-na"></div></div>
+    <div class="vs-badge">WIN %</div>
+    <div class="vs-prob a"><div class="pct" id="lab-pa"></div><div class="pl" id="lab-na"></div></div>
     <div class="prob-split"><div class="a" id="split-a"></div><div class="b" id="split-b"></div></div>
-    <div class="vs-prob"><div class="pct" id="lab-pb" style="font-size:28px"></div><div class="pl" id="lab-nb"></div></div>
+    <div class="vs-prob b"><div class="pct" id="lab-pb"></div><div class="pl" id="lab-nb"></div></div>
     <div class="prob-delta" id="lab-delta"></div>
   </div>`;
 }
@@ -613,13 +687,12 @@ function sharedPanel(){
   const active=[...labState.shared].map(k=>DATA.modifiers.gap_shrink[k].note);
   return `<div class="cond-shared" style="grid-column:1/-1">
     <div class="lab-lbl">Match conditions (affect both sides)</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">${rows}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">${rows}</div>
     <p class="mod-note">${active.join(' ')||'Neutral conditions. Toggle a factor to see how weather compresses the gap between favorite and underdog.'}</p>
   </div>`;
 }
 function renderLab(){
   labEl.innerHTML = teamPanel('a')+centerPanel()+teamPanel('b')+sharedPanel();
-  // wire selects
   labEl.querySelectorAll('select').forEach(sel=>{
     sel.addEventListener('change',e=>{
       const side=e.target.dataset.side;
@@ -629,7 +702,6 @@ function renderLab(){
       renderLab();
     });
   });
-  // wire player rows
   labEl.querySelectorAll('.pl-row').forEach(r=>{
     r.addEventListener('click',()=>{
       const side=r.dataset.side, i=+r.dataset.pl;
@@ -637,7 +709,6 @@ function renderLab(){
       renderLab();
     });
   });
-  // wire per-side bonuses
   labEl.querySelectorAll('.mod-row[data-bonus]').forEach(r=>{
     r.addEventListener('click',()=>{
       const side=r.dataset.side, key=r.dataset.bonus;
@@ -645,7 +716,6 @@ function renderLab(){
       renderLab();
     });
   });
-  // wire shared
   labEl.querySelectorAll('.mod-row[data-shared]').forEach(r=>{
     r.addEventListener('click',()=>{
       const key=r.dataset.shared;
@@ -670,17 +740,24 @@ function updateLabNumbers(){
   });
   document.getElementById('lab-pa').textContent=Math.round(pa*100)+'%';
   document.getElementById('lab-pb').textContent=Math.round(pb*100)+'%';
-  document.getElementById('lab-na').textContent=DATA.teams[labState.a].flag+' '+labState.a;
-  document.getElementById('lab-nb').textContent=DATA.teams[labState.b].flag+' '+labState.b;
+  document.getElementById('lab-na').innerHTML=flag(labState.a)+' '+labState.a;
+  document.getElementById('lab-nb').innerHTML=flag(labState.b)+' '+labState.b;
   document.getElementById('split-a').style.width=(pa*100)+'%';
   document.getElementById('split-b').style.width=(pb*100)+'%';
   const shift=Math.round((pa-base)*100);
   const del=document.getElementById('lab-delta');
   if(shift!==0){ del.textContent=`${labState.a} ${shift>0?'+':''}${shift} pts vs neutral`;
-    del.style.color = shift>0?'var(--win)':'var(--loss)'; }
-  else { del.textContent='neutral conditions'; del.style.color='var(--dimmer)'; }
+    del.style.color = shift>0?'var(--grass-d)':'var(--coral-d)'; }
+  else { del.textContent='neutral conditions'; del.style.color='var(--faint)'; }
 }
 
+/* ---------- reveal-on-scroll ---------- */
+const io=new IntersectionObserver((es)=>{
+  es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---------- boot ---------- */
 render(); renderOdds(); renderLab(); drawReliability(); drawBTtable();
 </script>
 </body>

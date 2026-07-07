@@ -20,20 +20,10 @@
    "career": 2091.9,
    "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
   },
-  "Portugal": {
-   "elo": 2061.4,
-   "career": 2048.3,
-   "flag": "🇵🇹"
-  },
   "Spain": {
    "elo": 2223.0,
    "career": 2220.8,
    "flag": "🇪🇸"
-  },
-  "USA": {
-   "elo": 1867.8,
-   "career": 1826.3,
-   "flag": "🇺🇸"
   },
   "Belgium": {
    "elo": 1970.8,
@@ -107,7 +97,9 @@
     "id": "R16_5",
     "a": "Portugal",
     "b": "Spain",
-    "played": false,
+    "sa": 0,
+    "sb": 1,
+    "played": true,
     "date": "Jul 6",
     "venue": "Dallas"
    },
@@ -115,7 +107,9 @@
     "id": "R16_6",
     "a": "USA",
     "b": "Belgium",
-    "played": false,
+    "sa": 1,
+    "sb": 4,
+    "played": true,
     "date": "Jul 6",
     "venue": "Seattle"
    },
@@ -205,18 +199,34 @@
   }
  },
  "champ": {
-  "France": 20.5,
-  "Norway": 3.3,
-  "Spain": 23.5,
-  "Morocco": 3.9,
-  "England": 13.5,
-  "Switzerland": 1.0,
-  "USA": 0.2,
-  "Argentina": 24.7,
-  "Colombia": 4.5,
-  "Egypt": 0.1,
-  "Belgium": 1.4,
-  "Portugal": 3.3
+  "France": 19.5,
+  "Morocco": 3.8,
+  "Belgium": 1.6,
+  "Norway": 3.2,
+  "England": 13.2,
+  "Switzerland": 0.8,
+  "Argentina": 22.1,
+  "Spain": 31.7,
+  "Colombia": 4.0,
+  "Egypt": 0.1
+ },
+ "r16_ratings": {
+  "Argentina": 2192.5,
+  "Belgium": 1958.8,
+  "Brazil": 2065.6,
+  "Canada": 1899.6,
+  "Colombia": 2065.6,
+  "Egypt": 1802.5,
+  "England": 2091.9,
+  "France": 2126.9,
+  "Mexico": 1980.2,
+  "Morocco": 1992.7,
+  "Norway": 1973.9,
+  "Paraguay": 1921.2,
+  "Portugal": 2048.3,
+  "Spain": 2220.8,
+  "Switzerland": 1958.4,
+  "USA": 1826.3
  },
  "reliability": [
   {
@@ -381,38 +391,6 @@
     "elo": 21
    }
   ],
-  "Portugal": [
-   {
-    "name": "Cristiano Ronaldo",
-    "goals": 3,
-    "share": 0.375,
-    "elo": 48
-   },
-   {
-    "name": "João Neves",
-    "goals": 1,
-    "share": 0.125,
-    "elo": 24
-   },
-   {
-    "name": "Nuno Mendes",
-    "goals": 1,
-    "share": 0.125,
-    "elo": 24
-   },
-   {
-    "name": "Abduvohid Nematov",
-    "goals": 1,
-    "share": 0.125,
-    "elo": 24
-   },
-   {
-    "name": "Rafael Leão",
-    "goals": 1,
-    "share": 0.125,
-    "elo": 24
-   }
-  ],
   "Spain": [
    {
     "name": "Mikel Oyarzabal",
@@ -443,38 +421,6 @@
     "goals": 1,
     "share": 0.125,
     "elo": 24
-   }
-  ],
-  "USA": [
-   {
-    "name": "Folarin Balogun",
-    "goals": 3,
-    "share": 0.3,
-    "elo": 40
-   },
-   {
-    "name": "Damian Bobadilla",
-    "goals": 1,
-    "share": 0.1,
-    "elo": 22
-   },
-   {
-    "name": "Giovanni Reyna",
-    "goals": 1,
-    "share": 0.1,
-    "elo": 22
-   },
-   {
-    "name": "Cameron Burgess",
-    "goals": 1,
-    "share": 0.1,
-    "elo": 22
-   },
-   {
-    "name": "Alex Freeman",
-    "goals": 1,
-    "share": 0.1,
-    "elo": 22
    }
   ],
   "Belgium": [

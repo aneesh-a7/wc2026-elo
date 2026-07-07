@@ -19,7 +19,7 @@ for r in wc:
     d=K*(w-we); form[h]+=d; form[a]-=d
 blend=lambda t:(1-ALPHA)*career.get(t,1500)+ALPHA*form.get(t,career.get(t,1500))
 
-alive=["France","Morocco","Norway","England","Portugal","Spain","USA",
+alive=["France","Morocco","Norway","England","Spain",
        "Belgium","Argentina","Egypt","Switzerland","Colombia"]
 flags={"France":"🇫🇷","Morocco":"🇲🇦","Norway":"🇳🇴","England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿",
  "Portugal":"🇵🇹","Spain":"🇪🇸","USA":"🇺🇸","Belgium":"🇧🇪","Argentina":"🇦🇷",
@@ -34,8 +34,8 @@ bracket={
    {"id":"R16_2","a":"Canada","b":"Morocco","sa":0,"sb":3,"played":True,"date":"Jul 4","venue":"Houston"},
    {"id":"R16_3","a":"Brazil","b":"Norway","sa":1,"sb":2,"played":True,"date":"Jul 5","venue":"New York/NJ"},
    {"id":"R16_4","a":"Mexico","b":"England","sa":2,"sb":3,"played":True,"date":"Jul 5","venue":"Mexico City"},
-   {"id":"R16_5","a":"Portugal","b":"Spain","played":False,"date":"Jul 6","venue":"Dallas"},
-   {"id":"R16_6","a":"USA","b":"Belgium","played":False,"date":"Jul 6","venue":"Seattle"},
+   {"id":"R16_5","a":"Portugal","b":"Spain","sa":0,"sb":1,"played":True,"date":"Jul 6","venue":"Dallas"},
+   {"id":"R16_6","a":"USA","b":"Belgium","sa":1,"sb":4,"played":True,"date":"Jul 6","venue":"Seattle"},
    {"id":"R16_7","a":"Argentina","b":"Egypt","played":False,"date":"Jul 7","venue":"Atlanta"},
    {"id":"R16_8","a":"Switzerland","b":"Colombia","played":False,"date":"Jul 7","venue":"Vancouver"},
  ],
@@ -90,7 +90,14 @@ reliability=[{"bucket":round(b+0.05,2),"pred":round(b+0.05,2),
              "actual":round(rel[b][0]/rel[b][1],3),"n":rel[b][1]}
             for b in sorted(rel) if rel[b][1]>=8]
 
+# Frozen pre-tournament (career) Elo for every R16 team, including the ones
+# already knocked out. The bracket uses these to show the model's *pre-game*
+# pick on played ties — an honest, leak-free grade, not hindsight.
+r16_teams=sorted({m[k] for m in bracket["r16"] for k in ("a","b")})
+r16_ratings={t:round(career.get(t,1500),1) for t in r16_teams}
+
 payload={"teams":teams,"bracket":bracket,"champ":champ,
+ "r16_ratings":r16_ratings,
  "reliability":reliability,
  "backtest":{"n":320,"model_acc":0.562,"fav_acc":0.559,"brier":0.574,
              "logloss":0.973,"live_acc":0.597,

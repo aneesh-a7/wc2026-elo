@@ -92,33 +92,6 @@
    "share": 0.091
   }
  ],
- "Portugal": [
-  {
-   "name": "Cristiano Ronaldo",
-   "goals": 3,
-   "share": 0.375
-  },
-  {
-   "name": "João Neves",
-   "goals": 1,
-   "share": 0.125
-  },
-  {
-   "name": "Nuno Mendes",
-   "goals": 1,
-   "share": 0.125
-  },
-  {
-   "name": "Abduvohid Nematov",
-   "goals": 1,
-   "share": 0.125
-  },
-  {
-   "name": "Rafael Leão",
-   "goals": 1,
-   "share": 0.125
-  }
- ],
  "Spain": [
   {
    "name": "Mikel Oyarzabal",
@@ -144,33 +117,6 @@
    "name": "Pedro Porro",
    "goals": 1,
    "share": 0.125
-  }
- ],
- "USA": [
-  {
-   "name": "Folarin Balogun",
-   "goals": 3,
-   "share": 0.3
-  },
-  {
-   "name": "Damian Bobadilla",
-   "goals": 1,
-   "share": 0.1
-  },
-  {
-   "name": "Giovanni Reyna",
-   "goals": 1,
-   "share": 0.1
-  },
-  {
-   "name": "Cameron Burgess",
-   "goals": 1,
-   "share": 0.1
-  },
-  {
-   "name": "Alex Freeman",
-   "goals": 1,
-   "share": 0.1
   }
  ],
  "Belgium": [
