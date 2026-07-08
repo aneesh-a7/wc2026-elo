@@ -195,13 +195,13 @@
   }
  },
  "champ": {
-  "Morocco": 3.6,
-  "England": 12.5,
-  "Switzerland": 1.8,
   "France": 18.8,
+  "Switzerland": 1.8,
+  "England": 12.5,
   "Spain": 31.8,
   "Belgium": 1.9,
   "Argentina": 26.8,
+  "Morocco": 3.6,
   "Norway": 2.9
  },
  "r16_ratings": {
