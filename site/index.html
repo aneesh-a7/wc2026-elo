@@ -110,7 +110,7 @@ button.ctl.ghost{background:transparent;box-shadow:none;border-style:dashed}
 .slot.picked-user .nm{color:var(--blue)}
 .slot.picked-user::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue)}
 .slot.model-pick .nm{color:var(--coral-d)}
-.slot.model-pick::after{content:'▸ model';position:absolute;right:10px;font-family:'Space Mono';font-size:9px;color:var(--coral);letter-spacing:.06em;font-weight:700}
+.slot.model-pick::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--coral)}
 .slot.advanced{background:var(--grass-soft)}
 .slot.advanced .nm{color:var(--grass-d)}
 .slot.advanced::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grass)}
@@ -118,7 +118,7 @@ button.ctl.ghost{background:transparent;box-shadow:none;border-style:dashed}
 .slot.out{opacity:.6}
 .slot.out .nm{color:var(--faint);text-decoration:line-through;text-decoration-thickness:1.5px}
 .slot.out .flag{filter:grayscale(.7);opacity:.7}
-.slot.agree::after{content:'✓ you+model';position:absolute;right:10px;font-family:'Space Mono';font-size:9px;color:var(--grass);letter-spacing:.04em;font-weight:700}
+.slot .mtag{font-family:'Space Mono';font-size:11px;font-weight:700;color:var(--grass);line-height:1;flex-shrink:0}
 /* on a played tie, mark the team the model backed that LOST with a coral stripe */
 .slot.out.model-played::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--coral)}
 .tie-meta{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--faint);
@@ -404,12 +404,14 @@ function makeSlot(team,{played,scoreOwn,isWinnerReal,isUserPick,isModelPick,isOu
   if(played) s.classList.add('locked');
   if(isWinnerReal) s.classList.add('advanced');
   else if(isUserPick && showMine) s.classList.add('picked-user');
-  if(isModelPick && showModel && !isWinnerReal) s.classList.add('model-pick');
-  if(agree && showModel && showMine && !isWinnerReal) s.classList.add('agree');
+  const isAgree = agree && showModel && showMine && !isWinnerReal;
+  if(isModelPick && showModel && !isWinnerReal && !isAgree) s.classList.add('model-pick');
+  if(isAgree) s.classList.add('agree');
   if(modelPlayed && !agree) s.classList.add('model-played');
   if(isOut) s.classList.add('out');
+  const mtag = isAgree ? '<span class="mtag" title="you and the model agree">✓ both</span>' : '';
   let right = played ? `<span class="sc">${scoreOwn}</span>${pk?'<span class="pkwin">PK</span>':''}`
-            : (wp!==undefined? `<span class="wp">${Math.round(wp*100)}%</span>`:'');
+            : `${mtag}${wp!==undefined? `<span class="wp">${Math.round(wp*100)}%</span>`:''}`;
   s.innerHTML=`${flag(team)}<span class="nm">${team}</span>${right}`;
   if(onclick && !played) s.addEventListener('click',onclick);
   return s;
