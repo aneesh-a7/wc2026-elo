@@ -20,7 +20,7 @@ for r in wc:
 blend=lambda t:(1-ALPHA)*career.get(t,1500)+ALPHA*form.get(t,career.get(t,1500))
 
 alive=["France","Morocco","Norway","England","Spain",
-       "Belgium","Argentina","Switzerland","Colombia"]
+       "Belgium","Argentina","Switzerland"]
 flags={"France":"🇫🇷","Morocco":"🇲🇦","Norway":"🇳🇴","England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿",
  "Portugal":"🇵🇹","Spain":"🇪🇸","USA":"🇺🇸","Belgium":"🇧🇪","Argentina":"🇦🇷",
  "Egypt":"🇪🇬","Switzerland":"🇨🇭","Colombia":"🇨🇴"}
@@ -37,7 +37,7 @@ bracket={
    {"id":"R16_5","a":"Portugal","b":"Spain","sa":0,"sb":1,"played":True,"date":"Jul 6","venue":"Dallas"},
    {"id":"R16_6","a":"USA","b":"Belgium","sa":1,"sb":4,"played":True,"date":"Jul 6","venue":"Seattle"},
    {"id":"R16_7","a":"Argentina","b":"Egypt","sa":3,"sb":2,"played":True,"date":"Jul 7","venue":"Atlanta"},
-   {"id":"R16_8","a":"Switzerland","b":"Colombia","played":False,"date":"Jul 7","venue":"Vancouver"},
+   {"id":"R16_8","a":"Switzerland","b":"Colombia","sa":1,"sb":1,"played":True,"winner":"Switzerland","pens":True,"date":"Jul 7","venue":"Vancouver"},
  ],
  # QF feeds: which two R16 slots feed each QF
  "qf":[{"id":"QF_1","from":["R16_1","R16_2"],"date":"Jul 9","venue":"Boston"},

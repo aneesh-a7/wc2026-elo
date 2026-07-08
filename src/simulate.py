@@ -36,8 +36,9 @@ def p_win(a,b):  # knockout: win prob (no draw), neutral venue
 # Remaining bracket structure (from live data). R16 winners feed QF.
 # Determined R16 (played): France, Morocco, Norway, England already through.
 # Remaining R16 ties -> then QF pairings per FIFA 2026 bracket.
-R16_REMAINING = [("Switzerland","Colombia")]
-# Decided: Spain (1-0 POR), Belgium (4-1 USA), Argentina (3-2 EGY) all through.
+R16_REMAINING = []   # Round of 16 complete — all quarter-final teams set.
+# Decided: Spain (1-0 POR), Belgium (4-1 USA), Argentina (3-2 EGY),
+# Switzerland (1-1, won on penalties vs Colombia).
 # QF pairings: (France v Morocco) and (Norway v England) already set.
 # The other two QFs come from the 4 remaining R16 winners:
 #   QF: winner(Portugal/Spain) v winner(USA/Belgium)
@@ -50,20 +51,18 @@ def sim_match(a,b):
     return a if random.random()<p_win(a,b) else b
 
 def simulate_once():
-    # remaining R16 (one tie left; Spain, Belgium & Argentina already through)
-    sc=sim_match("Switzerland","Colombia")
-    # QFs
+    # Round of 16 complete; all eight quarter-final teams are set.
     qf1=sim_match("France","Morocco")
     qf2=sim_match("Norway","England")
-    qf3=sim_match("Spain","Belgium")       # R16_5 v R16_6, both decided
-    qf4=sim_match("Argentina",sc)          # Argentina through, faces R16_8 winner
+    qf3=sim_match("Spain","Belgium")
+    qf4=sim_match("Argentina","Switzerland")
     # SFs
     sf1=sim_match(qf1,qf2)
     sf2=sim_match(qf3,qf4)
     champ=sim_match(sf1,sf2)
     finalists={sf1,sf2}
     semis={qf1,qf2,qf3,qf4}
-    quarters={"France","Morocco","Norway","England","Spain","Belgium","Argentina",sc}
+    quarters={"France","Morocco","Norway","England","Spain","Belgium","Argentina","Switzerland"}
     return quarters,semis,finalists,champ
 
 N=50000

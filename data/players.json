@@ -199,27 +199,5 @@
    "goals": 1,
    "share": 0.111
   }
- ],
- "Colombia": [
-  {
-   "name": "Daniel Muñoz",
-   "goals": 2,
-   "share": 0.4
-  },
-  {
-   "name": "Luis Díaz",
-   "goals": 1,
-   "share": 0.2
-  },
-  {
-   "name": "Jáminton Campaz",
-   "goals": 1,
-   "share": 0.2
-  },
-  {
-   "name": "Jhon Arias",
-   "goals": 1,
-   "share": 0.2
-  }
  ]
 }
