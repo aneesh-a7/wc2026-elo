@@ -21,22 +21,22 @@
    "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
   },
   "Spain": {
-   "elo": 2223.0,
+   "elo": 2230.3,
    "career": 2220.8,
    "flag": "🇪🇸"
   },
   "Belgium": {
-   "elo": 1970.8,
+   "elo": 1988.2,
    "career": 1958.8,
    "flag": "🇧🇪"
   },
   "Argentina": {
-   "elo": 2207.9,
+   "elo": 2210.4,
    "career": 2192.5,
    "flag": "🇦🇷"
   },
   "Switzerland": {
-   "elo": 1980.1,
+   "elo": 1982.9,
    "career": 1958.4,
    "flag": "🇨🇭"
   }
@@ -195,14 +195,14 @@
   }
  },
  "champ": {
-  "France": 19.1,
-  "Belgium": 1.6,
-  "Argentina": 26.9,
-  "Norway": 3.0,
+  "Morocco": 3.6,
+  "England": 12.5,
   "Switzerland": 1.8,
-  "Spain": 31.4,
-  "Morocco": 3.7,
-  "England": 12.7
+  "France": 18.8,
+  "Spain": 31.8,
+  "Belgium": 1.9,
+  "Argentina": 26.8,
+  "Norway": 2.9
  },
  "r16_ratings": {
   "Argentina": 2192.5,
@@ -272,7 +272,7 @@
  "meta": {
   "sims": 50000,
   "alpha": 0.4,
-  "matches_trained": 49497
+  "matches_trained": 49501
  },
  "players": {
   "France": [
@@ -389,96 +389,96 @@
    {
     "name": "Mikel Oyarzabal",
     "goals": 4,
-    "share": 0.5,
-    "elo": 60
+    "share": 0.444,
+    "elo": 54
    },
    {
     "name": "Lamine Yamal",
     "goals": 1,
-    "share": 0.125,
-    "elo": 24
+    "share": 0.111,
+    "elo": 23
    },
    {
     "name": "Hassan Al-Tambakti",
     "goals": 1,
-    "share": 0.125,
-    "elo": 24
+    "share": 0.111,
+    "elo": 23
    },
    {
     "name": "Álex Baena",
     "goals": 1,
-    "share": 0.125,
-    "elo": 24
+    "share": 0.111,
+    "elo": 23
    },
    {
     "name": "Pedro Porro",
     "goals": 1,
-    "share": 0.125,
-    "elo": 24
+    "share": 0.111,
+    "elo": 23
    }
   ],
   "Belgium": [
    {
-    "name": "Leandro Trossard",
-    "goals": 2,
-    "share": 0.222,
-    "elo": 33
+    "name": "Romelu Lukaku",
+    "goals": 3,
+    "share": 0.231,
+    "elo": 34
    },
    {
-    "name": "Romelu Lukaku",
+    "name": "Leandro Trossard",
     "goals": 2,
-    "share": 0.222,
-    "elo": 33
+    "share": 0.154,
+    "elo": 27
    },
    {
     "name": "Youri Tielemans",
     "goals": 2,
-    "share": 0.222,
-    "elo": 33
+    "share": 0.154,
+    "elo": 27
+   },
+   {
+    "name": "Charles De Ketelaere",
+    "goals": 2,
+    "share": 0.154,
+    "elo": 27
    },
    {
     "name": "Mohamed Hany",
     "goals": 1,
-    "share": 0.111,
-    "elo": 23
-   },
-   {
-    "name": "Kevin De Bruyne",
-    "goals": 1,
-    "share": 0.111,
-    "elo": 23
+    "share": 0.077,
+    "elo": 19
    }
   ],
   "Argentina": [
    {
     "name": "Lionel Messi",
-    "goals": 7,
-    "share": 0.636,
-    "elo": 72
+    "goals": 8,
+    "share": 0.571,
+    "elo": 66
    },
    {
     "name": "Giovani Lo Celso",
     "goals": 1,
-    "share": 0.091,
-    "elo": 21
+    "share": 0.071,
+    "elo": 19
    },
    {
     "name": "Lautaro Martínez",
     "goals": 1,
-    "share": 0.091,
-    "elo": 21
+    "share": 0.071,
+    "elo": 19
    },
    {
     "name": "Lisandro Martínez",
     "goals": 1,
-    "share": 0.091,
-    "elo": 21
+    "share": 0.071,
+    "elo": 19
    },
    {
     "name": "Diney Borges",
     "goals": 1,
-    "share": 0.091,
-    "elo": 21
+    "share": 0.071,
+    "elo": 19
    }
   ],
   "Switzerland": [
