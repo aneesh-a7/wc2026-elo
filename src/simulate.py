@@ -38,7 +38,7 @@ def p_win(a,b):  # knockout: win prob (no draw), neutral venue
 # Remaining R16 ties -> then QF pairings per FIFA 2026 bracket.
 R16_REMAINING = []   # Round of 16 complete — all quarter-final teams set.
 # Decided: Spain (1-0 POR), Belgium (4-1 USA), Argentina (3-2 EGY),
-# Switzerland (1-1, won on penalties vs Colombia).
+# Switzerland (0-0, won on penalties vs Colombia).
 # QF pairings: (France v Morocco) and (Norway v England) already set.
 # The other two QFs come from the 4 remaining R16 winners:
 #   QF: winner(Portugal/Spain) v winner(USA/Belgium)

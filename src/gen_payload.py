@@ -37,7 +37,7 @@ bracket={
    {"id":"R16_5","a":"Portugal","b":"Spain","sa":0,"sb":1,"played":True,"date":"Jul 6","venue":"Dallas"},
    {"id":"R16_6","a":"USA","b":"Belgium","sa":1,"sb":4,"played":True,"date":"Jul 6","venue":"Seattle"},
    {"id":"R16_7","a":"Argentina","b":"Egypt","sa":3,"sb":2,"played":True,"date":"Jul 7","venue":"Atlanta"},
-   {"id":"R16_8","a":"Switzerland","b":"Colombia","sa":1,"sb":1,"played":True,"winner":"Switzerland","pens":True,"date":"Jul 7","venue":"Vancouver"},
+   {"id":"R16_8","a":"Switzerland","b":"Colombia","sa":0,"sb":0,"played":True,"winner":"Switzerland","pens":True,"date":"Jul 7","venue":"Vancouver"},
  ],
  # QF feeds: which two R16 slots feed each QF
  "qf":[{"id":"QF_1","from":["R16_1","R16_2"],"date":"Jul 9","venue":"Boston"},

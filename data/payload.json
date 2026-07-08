@@ -117,8 +117,8 @@
     "id": "R16_8",
     "a": "Switzerland",
     "b": "Colombia",
-    "sa": 1,
-    "sb": 1,
+    "sa": 0,
+    "sb": 0,
     "played": true,
     "winner": "Switzerland",
     "pens": true,
@@ -197,12 +197,12 @@
  "champ": {
   "France": 19.1,
   "Belgium": 1.6,
-  "England": 12.7,
-  "Switzerland": 1.8,
   "Argentina": 26.9,
-  "Spain": 31.4,
   "Norway": 3.0,
-  "Morocco": 3.7
+  "Switzerland": 1.8,
+  "Spain": 31.4,
+  "Morocco": 3.7,
+  "England": 12.7
  },
  "r16_ratings": {
   "Argentina": 2192.5,
