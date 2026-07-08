@@ -89,9 +89,10 @@ button.ctl.ghost{background:transparent;box-shadow:none;border-style:dashed}
 /* ---- bracket ---- */
 .bracket-scroll{overflow-x:auto;padding:6px 2px 16px}
 .bracket{display:flex;gap:16px;min-width:1000px}
-.round{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:14px}
+.round{display:flex;flex-direction:column;flex:1}
 .round-lbl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--faint);text-align:center;margin-bottom:2px;font-weight:700}
+  text-transform:uppercase;color:var(--faint);text-align:center;margin-bottom:10px;font-weight:700;flex-shrink:0}
+.round-ties{flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:14px}
 .tie{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   overflow:hidden;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
 .tie:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
@@ -387,10 +388,12 @@ function render(){
   cols.forEach(col=>{
     const r=document.createElement('div'); r.className='round';
     const lbl=document.createElement('div'); lbl.className='round-lbl'; lbl.textContent=col.lbl; r.appendChild(lbl);
+    const ties=document.createElement('div'); ties.className='round-ties';
     col.nodes.forEach(nd=>{
-      if(nd.type==='champ'){ r.appendChild(champBox()); return; }
-      r.appendChild(nd.type==='r16'?r16Box(nd.m):nodeBox(nd.n));
+      if(nd.type==='champ'){ ties.appendChild(champBox()); return; }
+      ties.appendChild(nd.type==='r16'?r16Box(nd.m):nodeBox(nd.n));
     });
+    r.appendChild(ties);
     bracketEl.appendChild(r);
   });
   syncTrust();
