@@ -1,12 +1,12 @@
 {
  "teams": {
   "France": {
-   "elo": 2159.2,
+   "elo": 2170.1,
    "career": 2126.9,
    "flag": "🇫🇷"
   },
   "Morocco": {
-   "elo": 2020.9,
+   "elo": 2010.0,
    "career": 1992.7,
    "flag": "🇲🇦"
   },
@@ -195,14 +195,14 @@
   }
  },
  "champ": {
-  "Switzerland": 1.8,
-  "France": 18.8,
-  "Morocco": 3.6,
-  "England": 12.5,
-  "Spain": 31.8,
-  "Belgium": 1.9,
-  "Argentina": 26.8,
-  "Norway": 2.9
+  "Switzerland": 1.7,
+  "Norway": 2.9,
+  "England": 12.2,
+  "France": 20.7,
+  "Morocco": 3.0,
+  "Belgium": 1.8,
+  "Argentina": 26.3,
+  "Spain": 31.3
  },
  "r16_ratings": {
   "Argentina": 2192.5,
@@ -272,33 +272,33 @@
  "meta": {
   "sims": 50000,
   "alpha": 0.4,
-  "matches_trained": 49501
+  "matches_trained": 49502
  },
  "players": {
   "France": [
    {
     "name": "Kylian Mbappé",
-    "goals": 7,
+    "goals": 8,
     "share": 0.5,
     "elo": 60
    },
    {
     "name": "Ousmane Dembélé",
-    "goals": 4,
-    "share": 0.286,
-    "elo": 39
+    "goals": 5,
+    "share": 0.312,
+    "elo": 42
    },
    {
     "name": "Bradley Barcola",
     "goals": 2,
-    "share": 0.143,
-    "elo": 26
+    "share": 0.125,
+    "elo": 24
    },
    {
     "name": "Désiré Doué",
     "goals": 1,
-    "share": 0.071,
-    "elo": 19
+    "share": 0.062,
+    "elo": 18
    }
   ],
   "Morocco": [

@@ -2,23 +2,23 @@
  "France": [
   {
    "name": "Kylian Mbappé",
-   "goals": 7,
+   "goals": 8,
    "share": 0.5
   },
   {
    "name": "Ousmane Dembélé",
-   "goals": 4,
-   "share": 0.286
+   "goals": 5,
+   "share": 0.312
   },
   {
    "name": "Bradley Barcola",
    "goals": 2,
-   "share": 0.143
+   "share": 0.125
   },
   {
    "name": "Désiré Doué",
    "goals": 1,
-   "share": 0.071
+   "share": 0.062
   }
  ],
  "Morocco": [
