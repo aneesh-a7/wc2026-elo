@@ -96,54 +96,54 @@
   {
    "name": "Mikel Oyarzabal",
    "goals": 4,
-   "share": 0.444
+   "share": 0.364
+  },
+  {
+   "name": "Mikel Merino",
+   "goals": 2,
+   "share": 0.182
   },
   {
    "name": "Lamine Yamal",
    "goals": 1,
-   "share": 0.111
+   "share": 0.091
   },
   {
    "name": "Hassan Al-Tambakti",
    "goals": 1,
-   "share": 0.111
+   "share": 0.091
   },
   {
    "name": "Álex Baena",
    "goals": 1,
-   "share": 0.111
-  },
-  {
-   "name": "Pedro Porro",
-   "goals": 1,
-   "share": 0.111
+   "share": 0.091
   }
  ],
  "Belgium": [
   {
    "name": "Romelu Lukaku",
    "goals": 3,
-   "share": 0.231
+   "share": 0.214
+  },
+  {
+   "name": "Charles De Ketelaere",
+   "goals": 3,
+   "share": 0.214
   },
   {
    "name": "Leandro Trossard",
    "goals": 2,
-   "share": 0.154
+   "share": 0.143
   },
   {
    "name": "Youri Tielemans",
    "goals": 2,
-   "share": 0.154
-  },
-  {
-   "name": "Charles De Ketelaere",
-   "goals": 2,
-   "share": 0.154
+   "share": 0.143
   },
   {
    "name": "Mohamed Hany",
    "goals": 1,
-   "share": 0.077
+   "share": 0.071
   }
  ],
  "Argentina": [

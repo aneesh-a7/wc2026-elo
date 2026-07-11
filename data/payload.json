@@ -21,12 +21,12 @@
    "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
   },
   "Spain": {
-   "elo": 2230.3,
+   "elo": 2235.8,
    "career": 2220.8,
    "flag": "🇪🇸"
   },
   "Belgium": {
-   "elo": 1988.2,
+   "elo": 1982.8,
    "career": 1958.8,
    "flag": "🇧🇪"
   },
@@ -195,14 +195,14 @@
   }
  },
  "champ": {
-  "Switzerland": 1.7,
-  "Norway": 2.9,
-  "England": 12.2,
-  "France": 20.7,
+  "Norway": 2.8,
+  "Argentina": 25.9,
+  "France": 20.5,
+  "Belgium": 1.7,
   "Morocco": 3.0,
-  "Belgium": 1.8,
-  "Argentina": 26.3,
-  "Spain": 31.3
+  "Switzerland": 1.7,
+  "England": 12.0,
+  "Spain": 32.5
  },
  "r16_ratings": {
   "Argentina": 2192.5,
@@ -272,7 +272,7 @@
  "meta": {
   "sims": 50000,
   "alpha": 0.4,
-  "matches_trained": 49502
+  "matches_trained": 49503
  },
  "players": {
   "France": [
@@ -389,63 +389,63 @@
    {
     "name": "Mikel Oyarzabal",
     "goals": 4,
-    "share": 0.444,
-    "elo": 54
+    "share": 0.364,
+    "elo": 47
+   },
+   {
+    "name": "Mikel Merino",
+    "goals": 2,
+    "share": 0.182,
+    "elo": 29
    },
    {
     "name": "Lamine Yamal",
     "goals": 1,
-    "share": 0.111,
-    "elo": 23
+    "share": 0.091,
+    "elo": 21
    },
    {
     "name": "Hassan Al-Tambakti",
     "goals": 1,
-    "share": 0.111,
-    "elo": 23
+    "share": 0.091,
+    "elo": 21
    },
    {
     "name": "Álex Baena",
     "goals": 1,
-    "share": 0.111,
-    "elo": 23
-   },
-   {
-    "name": "Pedro Porro",
-    "goals": 1,
-    "share": 0.111,
-    "elo": 23
+    "share": 0.091,
+    "elo": 21
    }
   ],
   "Belgium": [
    {
     "name": "Romelu Lukaku",
     "goals": 3,
-    "share": 0.231,
-    "elo": 34
+    "share": 0.214,
+    "elo": 32
+   },
+   {
+    "name": "Charles De Ketelaere",
+    "goals": 3,
+    "share": 0.214,
+    "elo": 32
    },
    {
     "name": "Leandro Trossard",
     "goals": 2,
-    "share": 0.154,
-    "elo": 27
+    "share": 0.143,
+    "elo": 26
    },
    {
     "name": "Youri Tielemans",
     "goals": 2,
-    "share": 0.154,
-    "elo": 27
-   },
-   {
-    "name": "Charles De Ketelaere",
-    "goals": 2,
-    "share": 0.154,
-    "elo": 27
+    "share": 0.143,
+    "elo": 26
    },
    {
     "name": "Mohamed Hany",
     "goals": 1,
-    "share": 0.077,
+    "share": 0.071,
     "elo": 19
    }
   ],
