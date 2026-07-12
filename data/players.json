@@ -52,44 +52,44 @@
   {
    "name": "Erling Haaland",
    "goals": 7,
-   "share": 0.583
+   "share": 0.538
   },
   {
    "name": "Leo Østigard",
    "goals": 1,
-   "share": 0.083
+   "share": 0.077
   },
   {
    "name": "Aymen Hussein",
    "goals": 1,
-   "share": 0.083
+   "share": 0.077
   },
   {
    "name": "Marcus Holmgren Pedersen",
    "goals": 1,
-   "share": 0.083
+   "share": 0.077
   },
   {
    "name": "Thelo Aasgaard",
    "goals": 1,
-   "share": 0.083
+   "share": 0.077
   }
  ],
  "England": [
   {
    "name": "Harry Kane",
    "goals": 6,
-   "share": 0.545
+   "share": 0.462
   },
   {
    "name": "Jude Bellingham",
-   "goals": 4,
-   "share": 0.364
+   "goals": 6,
+   "share": 0.462
   },
   {
    "name": "Marcus Rashford",
    "goals": 1,
-   "share": 0.091
+   "share": 0.077
   }
  ],
  "Spain": [
@@ -150,54 +150,54 @@
   {
    "name": "Lionel Messi",
    "goals": 8,
-   "share": 0.571
+   "share": 0.471
+  },
+  {
+   "name": "Lautaro Martínez",
+   "goals": 2,
+   "share": 0.118
   },
   {
    "name": "Giovani Lo Celso",
    "goals": 1,
-   "share": 0.071
-  },
-  {
-   "name": "Lautaro Martínez",
-   "goals": 1,
-   "share": 0.071
+   "share": 0.059
   },
   {
    "name": "Lisandro Martínez",
    "goals": 1,
-   "share": 0.071
+   "share": 0.059
   },
   {
    "name": "Diney Borges",
    "goals": 1,
-   "share": 0.071
+   "share": 0.059
   }
  ],
  "Switzerland": [
   {
    "name": "Johan Manzambi",
    "goals": 3,
-   "share": 0.333
+   "share": 0.3
   },
   {
    "name": "Breel Embolo",
    "goals": 2,
-   "share": 0.222
+   "share": 0.2
   },
   {
    "name": "Rubén Vargas",
    "goals": 2,
-   "share": 0.222
+   "share": 0.2
+  },
+  {
+   "name": "Dan Ndoye",
+   "goals": 2,
+   "share": 0.2
   },
   {
    "name": "Granit Xhaka",
    "goals": 1,
-   "share": 0.111
-  },
-  {
-   "name": "Dan Ndoye",
-   "goals": 1,
-   "share": 0.111
+   "share": 0.1
   }
  ]
 }

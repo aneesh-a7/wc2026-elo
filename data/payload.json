@@ -195,14 +195,14 @@
   }
  },
  "champ": {
-  "Norway": 2.8,
-  "Argentina": 25.9,
   "France": 20.5,
-  "Belgium": 1.7,
+  "Spain": 32.5,
   "Morocco": 3.0,
+  "Norway": 2.8,
+  "Belgium": 1.7,
   "Switzerland": 1.7,
-  "England": 12.0,
-  "Spain": 32.5
+  "Argentina": 25.9,
+  "England": 12.0
  },
  "r16_ratings": {
   "Argentina": 2192.5,
@@ -337,52 +337,52 @@
    {
     "name": "Erling Haaland",
     "goals": 7,
-    "share": 0.583,
-    "elo": 67
+    "share": 0.538,
+    "elo": 63
    },
    {
     "name": "Leo Østigard",
     "goals": 1,
-    "share": 0.083,
-    "elo": 20
+    "share": 0.077,
+    "elo": 19
    },
    {
     "name": "Aymen Hussein",
     "goals": 1,
-    "share": 0.083,
-    "elo": 20
+    "share": 0.077,
+    "elo": 19
    },
    {
     "name": "Marcus Holmgren Pedersen",
     "goals": 1,
-    "share": 0.083,
-    "elo": 20
+    "share": 0.077,
+    "elo": 19
    },
    {
     "name": "Thelo Aasgaard",
     "goals": 1,
-    "share": 0.083,
-    "elo": 20
+    "share": 0.077,
+    "elo": 19
    }
   ],
   "England": [
    {
     "name": "Harry Kane",
     "goals": 6,
-    "share": 0.545,
-    "elo": 64
+    "share": 0.462,
+    "elo": 56
    },
    {
     "name": "Jude Bellingham",
-    "goals": 4,
-    "share": 0.364,
-    "elo": 47
+    "goals": 6,
+    "share": 0.462,
+    "elo": 56
    },
    {
     "name": "Marcus Rashford",
     "goals": 1,
-    "share": 0.091,
-    "elo": 21
+    "share": 0.077,
+    "elo": 19
    }
   ],
   "Spain": [
@@ -453,64 +453,64 @@
    {
     "name": "Lionel Messi",
     "goals": 8,
-    "share": 0.571,
-    "elo": 66
+    "share": 0.471,
+    "elo": 57
+   },
+   {
+    "name": "Lautaro Martínez",
+    "goals": 2,
+    "share": 0.118,
+    "elo": 23
    },
    {
     "name": "Giovani Lo Celso",
     "goals": 1,
-    "share": 0.071,
-    "elo": 19
-   },
-   {
-    "name": "Lautaro Martínez",
-    "goals": 1,
-    "share": 0.071,
-    "elo": 19
+    "share": 0.059,
+    "elo": 18
    },
    {
     "name": "Lisandro Martínez",
     "goals": 1,
-    "share": 0.071,
-    "elo": 19
+    "share": 0.059,
+    "elo": 18
    },
    {
     "name": "Diney Borges",
     "goals": 1,
-    "share": 0.071,
-    "elo": 19
+    "share": 0.059,
+    "elo": 18
    }
   ],
   "Switzerland": [
    {
     "name": "Johan Manzambi",
     "goals": 3,
-    "share": 0.333,
-    "elo": 44
+    "share": 0.3,
+    "elo": 40
    },
    {
     "name": "Breel Embolo",
     "goals": 2,
-    "share": 0.222,
-    "elo": 33
+    "share": 0.2,
+    "elo": 31
    },
    {
     "name": "Rubén Vargas",
     "goals": 2,
-    "share": 0.222,
-    "elo": 33
+    "share": 0.2,
+    "elo": 31
+   },
+   {
+    "name": "Dan Ndoye",
+    "goals": 2,
+    "share": 0.2,
+    "elo": 31
    },
    {
     "name": "Granit Xhaka",
     "goals": 1,
-    "share": 0.111,
-    "elo": 23
-   },
-   {
-    "name": "Dan Ndoye",
-    "goals": 1,
-    "share": 0.111,
-    "elo": 23
+    "share": 0.1,
+    "elo": 22
    }
   ]
  },
