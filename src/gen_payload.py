@@ -19,8 +19,7 @@ for r in wc:
     d=K*(w-we); form[h]+=d; form[a]-=d
 blend=lambda t:(1-ALPHA)*career.get(t,1500)+ALPHA*form.get(t,career.get(t,1500))
 
-alive=["France","Morocco","Norway","England","Spain",
-       "Belgium","Argentina","Switzerland"]
+alive=["France","England","Spain","Argentina"]
 flags={"France":"🇫🇷","Morocco":"🇲🇦","Norway":"🇳🇴","England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿",
  "Portugal":"🇵🇹","Spain":"🇪🇸","USA":"🇺🇸","Belgium":"🇧🇪","Argentina":"🇦🇷",
  "Egypt":"🇪🇬","Switzerland":"🇨🇭","Colombia":"🇨🇴"}
@@ -39,11 +38,12 @@ bracket={
    {"id":"R16_7","a":"Argentina","b":"Egypt","sa":3,"sb":2,"played":True,"date":"Jul 7","venue":"Atlanta"},
    {"id":"R16_8","a":"Switzerland","b":"Colombia","sa":0,"sb":0,"played":True,"winner":"Switzerland","pens":True,"date":"Jul 7","venue":"Vancouver"},
  ],
- # QF feeds: which two R16 slots feed each QF
- "qf":[{"id":"QF_1","from":["R16_1","R16_2"],"date":"Jul 9","venue":"Boston"},
-       {"id":"QF_2","from":["R16_3","R16_4"],"date":"Jul 11","venue":"Kansas City"},
-       {"id":"QF_3","from":["R16_5","R16_6"],"date":"Jul 10","venue":"Los Angeles"},
-       {"id":"QF_4","from":["R16_7","R16_8"],"date":"Jul 11","venue":"Miami"}],
+ # QF feeds: which two R16 slots feed each QF. Played QFs carry explicit
+ # teams/scores; "aet" marks a game decided in extra time.
+ "qf":[{"id":"QF_1","from":["R16_1","R16_2"],"a":"France","b":"Morocco","sa":2,"sb":0,"played":True,"date":"Jul 9","venue":"Boston"},
+       {"id":"QF_2","from":["R16_3","R16_4"],"a":"Norway","b":"England","sa":1,"sb":2,"played":True,"aet":True,"date":"Jul 11","venue":"Kansas City"},
+       {"id":"QF_3","from":["R16_5","R16_6"],"a":"Spain","b":"Belgium","sa":2,"sb":1,"played":True,"date":"Jul 10","venue":"Los Angeles"},
+       {"id":"QF_4","from":["R16_7","R16_8"],"a":"Argentina","b":"Switzerland","sa":3,"sb":1,"played":True,"aet":True,"date":"Jul 11","venue":"Miami"}],
  "sf":[{"id":"SF_1","from":["QF_1","QF_2"],"date":"Jul 14","venue":"Dallas"},
        {"id":"SF_2","from":["QF_3","QF_4"],"date":"Jul 15","venue":"Atlanta"}],
  "final":{"id":"FINAL","from":["SF_1","SF_2"],"date":"Jul 19","venue":"New York/NJ"}

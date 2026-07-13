@@ -33,36 +33,24 @@ R = build_blended()
 def p_win(a,b):  # knockout: win prob (no draw), neutral venue
     return expected(R.get(a,1500), R.get(b,1500))
 
-# Remaining bracket structure (from live data). R16 winners feed QF.
-# Determined R16 (played): France, Morocco, Norway, England already through.
-# Remaining R16 ties -> then QF pairings per FIFA 2026 bracket.
-R16_REMAINING = []   # Round of 16 complete — all quarter-final teams set.
-# Decided: Spain (1-0 POR), Belgium (4-1 USA), Argentina (3-2 EGY),
-# Switzerland (0-0, won on penalties vs Colombia).
-# QF pairings: (France v Morocco) and (Norway v England) already set.
-# The other two QFs come from the 4 remaining R16 winners:
-#   QF: winner(Portugal/Spain) v winner(USA/Belgium)
-#   QF: winner(Argentina/Egypt) v winner(Switzerland/Colombia)
-# SF: (France/Morocco winner) v (Norway/England winner)
-#     (PS/USB winner) v (AE/SC winner)
-# Final: SF1 v SF2
+# Remaining bracket structure (from live data).
+# R16 and quarter-finals complete. QF results:
+#   France 2-0 Morocco · Norway 1-2 England (aet)
+#   Spain 2-1 Belgium  · Argentina 3-1 Switzerland (aet)
+# SF (Jul 14/15): France v England, Spain v Argentina. Final Jul 19.
+R16_REMAINING = []   # kept for the round-update checklist; nothing left to draw
 
 def sim_match(a,b):
     return a if random.random()<p_win(a,b) else b
 
 def simulate_once():
-    # Round of 16 complete; all eight quarter-final teams are set.
-    qf1=sim_match("France","Morocco")
-    qf2=sim_match("Norway","England")
-    qf3=sim_match("Spain","Belgium")
-    qf4=sim_match("Argentina","Switzerland")
-    # SFs
-    sf1=sim_match(qf1,qf2)
-    sf2=sim_match(qf3,qf4)
+    # Quarter-finals decided; only the semis and final are simulated.
+    sf1=sim_match("France","England")
+    sf2=sim_match("Spain","Argentina")
     champ=sim_match(sf1,sf2)
     finalists={sf1,sf2}
-    semis={qf1,qf2,qf3,qf4}
-    quarters={"France","Morocco","Norway","England","Spain","Belgium","Argentina","Switzerland"}
+    semis={"France","England","Spain","Argentina"}
+    quarters=set(semis)
     return quarters,semis,finalists,champ
 
 N=50000

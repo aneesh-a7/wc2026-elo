@@ -5,16 +5,6 @@
    "career": 2126.9,
    "flag": "🇫🇷"
   },
-  "Morocco": {
-   "elo": 2010.0,
-   "career": 1992.7,
-   "flag": "🇲🇦"
-  },
-  "Norway": {
-   "elo": 2001.6,
-   "career": 1973.9,
-   "flag": "🇳🇴"
-  },
   "England": {
    "elo": 2113.2,
    "career": 2091.9,
@@ -25,20 +15,10 @@
    "career": 2220.8,
    "flag": "🇪🇸"
   },
-  "Belgium": {
-   "elo": 1982.8,
-   "career": 1958.8,
-   "flag": "🇧🇪"
-  },
   "Argentina": {
    "elo": 2210.4,
    "career": 2192.5,
    "flag": "🇦🇷"
-  },
-  "Switzerland": {
-   "elo": 1982.9,
-   "career": 1958.4,
-   "flag": "🇨🇭"
   }
  },
  "bracket": {
@@ -133,6 +113,11 @@
      "R16_1",
      "R16_2"
     ],
+    "a": "France",
+    "b": "Morocco",
+    "sa": 2,
+    "sb": 0,
+    "played": true,
     "date": "Jul 9",
     "venue": "Boston"
    },
@@ -142,6 +127,12 @@
      "R16_3",
      "R16_4"
     ],
+    "a": "Norway",
+    "b": "England",
+    "sa": 1,
+    "sb": 2,
+    "played": true,
+    "aet": true,
     "date": "Jul 11",
     "venue": "Kansas City"
    },
@@ -151,6 +142,11 @@
      "R16_5",
      "R16_6"
     ],
+    "a": "Spain",
+    "b": "Belgium",
+    "sa": 2,
+    "sb": 1,
+    "played": true,
     "date": "Jul 10",
     "venue": "Los Angeles"
    },
@@ -160,6 +156,12 @@
      "R16_7",
      "R16_8"
     ],
+    "a": "Argentina",
+    "b": "Switzerland",
+    "sa": 3,
+    "sb": 1,
+    "played": true,
+    "aet": true,
     "date": "Jul 11",
     "venue": "Miami"
    }
@@ -195,14 +197,10 @@
   }
  },
  "champ": {
-  "France": 20.5,
-  "Spain": 32.5,
-  "Morocco": 3.0,
-  "Norway": 2.8,
-  "Belgium": 1.7,
-  "Switzerland": 1.7,
-  "Argentina": 25.9,
-  "England": 12.0
+  "Spain": 33.5,
+  "France": 24.7,
+  "England": 14.4,
+  "Argentina": 27.3
  },
  "r16_ratings": {
   "Argentina": 2192.5,
@@ -301,70 +299,6 @@
     "elo": 18
    }
   ],
-  "Morocco": [
-   {
-    "name": "Ismael Saibari",
-    "goals": 3,
-    "share": 0.3,
-    "elo": 40
-   },
-   {
-    "name": "Soufiane Rahimi",
-    "goals": 2,
-    "share": 0.2,
-    "elo": 31
-   },
-   {
-    "name": "Azzedine Ounahi",
-    "goals": 2,
-    "share": 0.2,
-    "elo": 31
-   },
-   {
-    "name": "Achraf Hakimi",
-    "goals": 1,
-    "share": 0.1,
-    "elo": 22
-   },
-   {
-    "name": "Gessime Yassine",
-    "goals": 1,
-    "share": 0.1,
-    "elo": 22
-   }
-  ],
-  "Norway": [
-   {
-    "name": "Erling Haaland",
-    "goals": 7,
-    "share": 0.538,
-    "elo": 63
-   },
-   {
-    "name": "Leo Østigard",
-    "goals": 1,
-    "share": 0.077,
-    "elo": 19
-   },
-   {
-    "name": "Aymen Hussein",
-    "goals": 1,
-    "share": 0.077,
-    "elo": 19
-   },
-   {
-    "name": "Marcus Holmgren Pedersen",
-    "goals": 1,
-    "share": 0.077,
-    "elo": 19
-   },
-   {
-    "name": "Thelo Aasgaard",
-    "goals": 1,
-    "share": 0.077,
-    "elo": 19
-   }
-  ],
   "England": [
    {
     "name": "Harry Kane",
@@ -417,38 +351,6 @@
     "elo": 21
    }
   ],
-  "Belgium": [
-   {
-    "name": "Romelu Lukaku",
-    "goals": 3,
-    "share": 0.214,
-    "elo": 32
-   },
-   {
-    "name": "Charles De Ketelaere",
-    "goals": 3,
-    "share": 0.214,
-    "elo": 32
-   },
-   {
-    "name": "Leandro Trossard",
-    "goals": 2,
-    "share": 0.143,
-    "elo": 26
-   },
-   {
-    "name": "Youri Tielemans",
-    "goals": 2,
-    "share": 0.143,
-    "elo": 26
-   },
-   {
-    "name": "Mohamed Hany",
-    "goals": 1,
-    "share": 0.071,
-    "elo": 19
-   }
-  ],
   "Argentina": [
    {
     "name": "Lionel Messi",
@@ -479,38 +381,6 @@
     "goals": 1,
     "share": 0.059,
     "elo": 18
-   }
-  ],
-  "Switzerland": [
-   {
-    "name": "Johan Manzambi",
-    "goals": 3,
-    "share": 0.3,
-    "elo": 40
-   },
-   {
-    "name": "Breel Embolo",
-    "goals": 2,
-    "share": 0.2,
-    "elo": 31
-   },
-   {
-    "name": "Rubén Vargas",
-    "goals": 2,
-    "share": 0.2,
-    "elo": 31
-   },
-   {
-    "name": "Dan Ndoye",
-    "goals": 2,
-    "share": 0.2,
-    "elo": 31
-   },
-   {
-    "name": "Granit Xhaka",
-    "goals": 1,
-    "share": 0.1,
-    "elo": 22
    }
   ]
  },
