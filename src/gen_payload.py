@@ -41,11 +41,13 @@ bracket={
  # QF feeds: which two R16 slots feed each QF. Played QFs carry explicit
  # teams/scores; "aet" marks a game decided in extra time.
  "qf":[{"id":"QF_1","from":["R16_1","R16_2"],"a":"France","b":"Morocco","sa":2,"sb":0,"played":True,"date":"Jul 9","venue":"Boston"},
-       {"id":"QF_2","from":["R16_3","R16_4"],"a":"Norway","b":"England","sa":1,"sb":2,"played":True,"aet":True,"date":"Jul 11","venue":"Kansas City"},
+       {"id":"QF_2","from":["R16_3","R16_4"],"a":"Norway","b":"England","sa":1,"sb":2,"played":True,"aet":True,"date":"Jul 11","venue":"Miami"},
        {"id":"QF_3","from":["R16_5","R16_6"],"a":"Spain","b":"Belgium","sa":2,"sb":1,"played":True,"date":"Jul 10","venue":"Los Angeles"},
-       {"id":"QF_4","from":["R16_7","R16_8"],"a":"Argentina","b":"Switzerland","sa":3,"sb":1,"played":True,"aet":True,"date":"Jul 11","venue":"Miami"}],
- "sf":[{"id":"SF_1","from":["QF_1","QF_2"],"date":"Jul 14","venue":"Dallas"},
-       {"id":"SF_2","from":["QF_3","QF_4"],"date":"Jul 15","venue":"Atlanta"}],
+       {"id":"QF_4","from":["R16_7","R16_8"],"a":"Argentina","b":"Switzerland","sa":3,"sb":1,"played":True,"aet":True,"date":"Jul 11","venue":"Kansas City"}],
+ # Official bracket crosses the QF bracket halves: QF1(France) v QF3(Spain),
+ # QF2(England) v QF4(Argentina) — NOT adjacent QF pairs.
+ "sf":[{"id":"SF_1","from":["QF_1","QF_3"],"date":"Jul 14","venue":"Dallas"},
+       {"id":"SF_2","from":["QF_2","QF_4"],"date":"Jul 15","venue":"Atlanta"}],
  "final":{"id":"FINAL","from":["SF_1","SF_2"],"date":"Jul 19","venue":"New York/NJ"}
 }
 

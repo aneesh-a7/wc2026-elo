@@ -134,7 +134,7 @@
     "played": true,
     "aet": true,
     "date": "Jul 11",
-    "venue": "Kansas City"
+    "venue": "Miami"
    },
    {
     "id": "QF_3",
@@ -163,7 +163,7 @@
     "played": true,
     "aet": true,
     "date": "Jul 11",
-    "venue": "Miami"
+    "venue": "Kansas City"
    }
   ],
   "sf": [
@@ -171,7 +171,7 @@
     "id": "SF_1",
     "from": [
      "QF_1",
-     "QF_2"
+     "QF_3"
     ],
     "date": "Jul 14",
     "venue": "Dallas"
@@ -179,7 +179,7 @@
    {
     "id": "SF_2",
     "from": [
-     "QF_3",
+     "QF_2",
      "QF_4"
     ],
     "date": "Jul 15",
@@ -197,10 +197,10 @@
   }
  },
  "champ": {
-  "Spain": 33.5,
-  "France": 24.7,
-  "England": 14.4,
-  "Argentina": 27.3
+  "Spain": 34.8,
+  "France": 20.1,
+  "Argentina": 31.7,
+  "England": 13.4
  },
  "r16_ratings": {
   "Argentina": 2192.5,

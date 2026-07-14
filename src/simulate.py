@@ -37,7 +37,7 @@ def p_win(a,b):  # knockout: win prob (no draw), neutral venue
 # R16 and quarter-finals complete. QF results:
 #   France 2-0 Morocco · Norway 1-2 England (aet)
 #   Spain 2-1 Belgium  · Argentina 3-1 Switzerland (aet)
-# SF (Jul 14/15): France v England, Spain v Argentina. Final Jul 19.
+# SF (Jul 14/15): France v Spain, England v Argentina. Final Jul 19.
 R16_REMAINING = []   # kept for the round-update checklist; nothing left to draw
 
 def sim_match(a,b):
@@ -45,8 +45,8 @@ def sim_match(a,b):
 
 def simulate_once():
     # Quarter-finals decided; only the semis and final are simulated.
-    sf1=sim_match("France","England")
-    sf2=sim_match("Spain","Argentina")
+    sf1=sim_match("France","Spain")
+    sf2=sim_match("England","Argentina")
     champ=sim_match(sf1,sf2)
     finalists={sf1,sf2}
     semis={"France","England","Spain","Argentina"}
