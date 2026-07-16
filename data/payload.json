@@ -1,23 +1,13 @@
 {
  "teams": {
-  "France": {
-   "elo": 2170.1,
-   "career": 2126.9,
-   "flag": "🇫🇷"
-  },
-  "England": {
-   "elo": 2113.2,
-   "career": 2091.9,
-   "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
-  },
   "Spain": {
-   "elo": 2235.8,
-   "career": 2220.8,
+   "elo": 2252.8,
+   "career": 2221.1,
    "flag": "🇪🇸"
   },
   "Argentina": {
-   "elo": 2210.4,
-   "career": 2192.5,
+   "elo": 2227.4,
+   "career": 2192.6,
    "flag": "🇦🇷"
   }
  },
@@ -173,6 +163,11 @@
      "QF_1",
      "QF_3"
     ],
+    "a": "France",
+    "b": "Spain",
+    "sa": 0,
+    "sb": 2,
+    "played": true,
     "date": "Jul 14",
     "venue": "Dallas"
    },
@@ -182,6 +177,11 @@
      "QF_2",
      "QF_4"
     ],
+    "a": "England",
+    "b": "Argentina",
+    "sa": 1,
+    "sb": 2,
+    "played": true,
     "date": "Jul 15",
     "venue": "Atlanta"
    }
@@ -192,33 +192,34 @@
     "SF_1",
     "SF_2"
    ],
+   "a": "Spain",
+   "b": "Argentina",
+   "played": false,
    "date": "Jul 19",
    "venue": "New York/NJ"
   }
  },
  "champ": {
-  "Spain": 34.8,
-  "France": 20.1,
-  "Argentina": 31.7,
-  "England": 13.4
+  "Spain": 53.6,
+  "Argentina": 46.4
  },
  "r16_ratings": {
-  "Argentina": 2192.5,
-  "Belgium": 1958.8,
-  "Brazil": 2065.6,
-  "Canada": 1899.6,
-  "Colombia": 2065.6,
-  "Egypt": 1802.5,
-  "England": 2091.9,
-  "France": 2126.9,
-  "Mexico": 1980.2,
-  "Morocco": 1992.7,
-  "Norway": 1973.9,
-  "Paraguay": 1921.2,
-  "Portugal": 2048.3,
-  "Spain": 2220.8,
-  "Switzerland": 1958.4,
-  "USA": 1826.3
+  "Argentina": 2192.6,
+  "Belgium": 1959.0,
+  "Brazil": 2065.7,
+  "Canada": 1899.7,
+  "Colombia": 2065.7,
+  "Egypt": 1802.7,
+  "England": 2092.1,
+  "France": 2127.1,
+  "Mexico": 1980.3,
+  "Morocco": 1992.8,
+  "Norway": 1974.2,
+  "Paraguay": 1921.3,
+  "Portugal": 2048.5,
+  "Spain": 2221.1,
+  "Switzerland": 1958.6,
+  "USA": 1826.4
  },
  "reliability": [
   {
@@ -270,117 +271,71 @@
  "meta": {
   "sims": 50000,
   "alpha": 0.4,
-  "matches_trained": 49503
+  "matches_trained": 49518
  },
  "players": {
-  "France": [
-   {
-    "name": "Kylian Mbappé",
-    "goals": 8,
-    "share": 0.5,
-    "elo": 60
-   },
-   {
-    "name": "Ousmane Dembélé",
-    "goals": 5,
-    "share": 0.312,
-    "elo": 42
-   },
-   {
-    "name": "Bradley Barcola",
-    "goals": 2,
-    "share": 0.125,
-    "elo": 24
-   },
-   {
-    "name": "Désiré Doué",
-    "goals": 1,
-    "share": 0.062,
-    "elo": 18
-   }
-  ],
-  "England": [
-   {
-    "name": "Harry Kane",
-    "goals": 6,
-    "share": 0.462,
-    "elo": 56
-   },
-   {
-    "name": "Jude Bellingham",
-    "goals": 6,
-    "share": 0.462,
-    "elo": 56
-   },
-   {
-    "name": "Marcus Rashford",
-    "goals": 1,
-    "share": 0.077,
-    "elo": 19
-   }
-  ],
   "Spain": [
    {
     "name": "Mikel Oyarzabal",
-    "goals": 4,
-    "share": 0.364,
-    "elo": 47
+    "goals": 5,
+    "share": 0.385,
+    "elo": 49
+   },
+   {
+    "name": "Pedro Porro",
+    "goals": 2,
+    "share": 0.154,
+    "elo": 27
    },
    {
     "name": "Mikel Merino",
     "goals": 2,
-    "share": 0.182,
-    "elo": 29
+    "share": 0.154,
+    "elo": 27
    },
    {
     "name": "Lamine Yamal",
     "goals": 1,
-    "share": 0.091,
-    "elo": 21
+    "share": 0.077,
+    "elo": 19
    },
    {
     "name": "Hassan Al-Tambakti",
     "goals": 1,
-    "share": 0.091,
-    "elo": 21
-   },
-   {
-    "name": "Álex Baena",
-    "goals": 1,
-    "share": 0.091,
-    "elo": 21
+    "share": 0.077,
+    "elo": 19
    }
   ],
   "Argentina": [
    {
     "name": "Lionel Messi",
     "goals": 8,
-    "share": 0.471,
-    "elo": 57
+    "share": 0.421,
+    "elo": 52
    },
    {
     "name": "Lautaro Martínez",
+    "goals": 3,
+    "share": 0.158,
+    "elo": 27
+   },
+   {
+    "name": "Enzo Fernández",
     "goals": 2,
-    "share": 0.118,
-    "elo": 23
+    "share": 0.105,
+    "elo": 22
    },
    {
     "name": "Giovani Lo Celso",
     "goals": 1,
-    "share": 0.059,
-    "elo": 18
+    "share": 0.053,
+    "elo": 17
    },
    {
     "name": "Lisandro Martínez",
     "goals": 1,
-    "share": 0.059,
-    "elo": 18
-   },
-   {
-    "name": "Diney Borges",
-    "goals": 1,
-    "share": 0.059,
-    "elo": 18
+    "share": 0.053,
+    "elo": 17
    }
   ]
  },

@@ -1,95 +1,56 @@
 {
- "France": [
-  {
-   "name": "Kylian Mbappé",
-   "goals": 8,
-   "share": 0.5
-  },
-  {
-   "name": "Ousmane Dembélé",
-   "goals": 5,
-   "share": 0.312
-  },
-  {
-   "name": "Bradley Barcola",
-   "goals": 2,
-   "share": 0.125
-  },
-  {
-   "name": "Désiré Doué",
-   "goals": 1,
-   "share": 0.062
-  }
- ],
- "England": [
-  {
-   "name": "Harry Kane",
-   "goals": 6,
-   "share": 0.462
-  },
-  {
-   "name": "Jude Bellingham",
-   "goals": 6,
-   "share": 0.462
-  },
-  {
-   "name": "Marcus Rashford",
-   "goals": 1,
-   "share": 0.077
-  }
- ],
  "Spain": [
   {
    "name": "Mikel Oyarzabal",
-   "goals": 4,
-   "share": 0.364
+   "goals": 5,
+   "share": 0.385
+  },
+  {
+   "name": "Pedro Porro",
+   "goals": 2,
+   "share": 0.154
   },
   {
    "name": "Mikel Merino",
    "goals": 2,
-   "share": 0.182
+   "share": 0.154
   },
   {
    "name": "Lamine Yamal",
    "goals": 1,
-   "share": 0.091
+   "share": 0.077
   },
   {
    "name": "Hassan Al-Tambakti",
    "goals": 1,
-   "share": 0.091
-  },
-  {
-   "name": "Álex Baena",
-   "goals": 1,
-   "share": 0.091
+   "share": 0.077
   }
  ],
  "Argentina": [
   {
    "name": "Lionel Messi",
    "goals": 8,
-   "share": 0.471
+   "share": 0.421
   },
   {
    "name": "Lautaro Martínez",
+   "goals": 3,
+   "share": 0.158
+  },
+  {
+   "name": "Enzo Fernández",
    "goals": 2,
-   "share": 0.118
+   "share": 0.105
   },
   {
    "name": "Giovani Lo Celso",
    "goals": 1,
-   "share": 0.059
+   "share": 0.053
   },
   {
    "name": "Lisandro Martínez",
    "goals": 1,
-   "share": 0.059
-  },
-  {
-   "name": "Diney Borges",
-   "goals": 1,
-   "share": 0.059
+   "share": 0.053
   }
  ]
 }

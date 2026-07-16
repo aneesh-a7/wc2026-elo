@@ -34,23 +34,21 @@ def p_win(a,b):  # knockout: win prob (no draw), neutral venue
     return expected(R.get(a,1500), R.get(b,1500))
 
 # Remaining bracket structure (from live data).
-# R16 and quarter-finals complete. QF results:
-#   France 2-0 Morocco · Norway 1-2 England (aet)
-#   Spain 2-1 Belgium  · Argentina 3-1 Switzerland (aet)
-# SF (Jul 14/15): France v Spain, England v Argentina. Final Jul 19.
+# R16, quarter-finals, and semifinals all complete:
+#   SF: Spain 2-0 France · Argentina 2-1 England (comeback, 85'/92')
+# Final (Jul 19, MetLife Stadium): Spain v Argentina. Only the Final is left
+# to simulate; everyone else's Elo still matters via the form blend below.
 R16_REMAINING = []   # kept for the round-update checklist; nothing left to draw
 
 def sim_match(a,b):
     return a if random.random()<p_win(a,b) else b
 
 def simulate_once():
-    # Quarter-finals decided; only the semis and final are simulated.
-    sf1=sim_match("France","Spain")
-    sf2=sim_match("England","Argentina")
-    champ=sim_match(sf1,sf2)
-    finalists={sf1,sf2}
-    semis={"France","England","Spain","Argentina"}
-    quarters=set(semis)
+    # Semifinals decided; only the Final is simulated.
+    champ=sim_match("Spain","Argentina")
+    finalists={"Spain","Argentina"}
+    semis=set(finalists)
+    quarters=set(finalists)
     return quarters,semis,finalists,champ
 
 N=50000

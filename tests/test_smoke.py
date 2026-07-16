@@ -13,7 +13,9 @@ payload = ROOT/"data"/"payload.json"
 ok &= check(payload.exists(), "payload.json exists")
 if payload.exists():
     d = json.load(open(payload, encoding="utf-8"))
-    ok &= check(len(d.get("teams",{}))>=8, f"teams present ({len(d.get('teams',{}))})")
+    # Alive-team count shrinks every round (down to 2 for the Final), so just
+    # check it's non-empty and no bigger than a full Round of 16 draw.
+    ok &= check(1<=len(d.get("teams",{}))<=16, f"teams present ({len(d.get('teams',{}))})")
     ok &= check("modifiers" in d and "players" in d, "modifiers + players present")
     ok &= check(len(d.get("reliability",[]))>=3, "reliability curve present")
 html = (ROOT/"site"/"index.html").read_text(encoding="utf-8")

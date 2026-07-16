@@ -5,7 +5,7 @@ import json
 from collections import defaultdict
 from paths import WORLDCUP_JSON, PLAYERS_JSON
 
-ALIVE = ["France","England","Spain","Argentina"]
+ALIVE = ["Spain","Argentina"]
 
 def build():
     d = json.load(open(WORLDCUP_JSON))

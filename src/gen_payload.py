@@ -19,7 +19,7 @@ for r in wc:
     d=K*(w-we); form[h]+=d; form[a]-=d
 blend=lambda t:(1-ALPHA)*career.get(t,1500)+ALPHA*form.get(t,career.get(t,1500))
 
-alive=["France","England","Spain","Argentina"]
+alive=["Spain","Argentina"]
 flags={"France":"🇫🇷","Morocco":"🇲🇦","Norway":"🇳🇴","England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿",
  "Portugal":"🇵🇹","Spain":"🇪🇸","USA":"🇺🇸","Belgium":"🇧🇪","Argentina":"🇦🇷",
  "Egypt":"🇪🇬","Switzerland":"🇨🇭","Colombia":"🇨🇴"}
@@ -46,9 +46,9 @@ bracket={
        {"id":"QF_4","from":["R16_7","R16_8"],"a":"Argentina","b":"Switzerland","sa":3,"sb":1,"played":True,"aet":True,"date":"Jul 11","venue":"Kansas City"}],
  # Official bracket crosses the QF bracket halves: QF1(France) v QF3(Spain),
  # QF2(England) v QF4(Argentina) — NOT adjacent QF pairs.
- "sf":[{"id":"SF_1","from":["QF_1","QF_3"],"date":"Jul 14","venue":"Dallas"},
-       {"id":"SF_2","from":["QF_2","QF_4"],"date":"Jul 15","venue":"Atlanta"}],
- "final":{"id":"FINAL","from":["SF_1","SF_2"],"date":"Jul 19","venue":"New York/NJ"}
+ "sf":[{"id":"SF_1","from":["QF_1","QF_3"],"a":"France","b":"Spain","sa":0,"sb":2,"played":True,"date":"Jul 14","venue":"Dallas"},
+       {"id":"SF_2","from":["QF_2","QF_4"],"a":"England","b":"Argentina","sa":1,"sb":2,"played":True,"date":"Jul 15","venue":"Atlanta"}],
+ "final":{"id":"FINAL","from":["SF_1","SF_2"],"a":"Spain","b":"Argentina","played":False,"date":"Jul 19","venue":"New York/NJ"}
 }
 
 # Championship odds from the 50k sim
