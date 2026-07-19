@@ -200,8 +200,8 @@
   }
  },
  "champ": {
-  "Spain": 53.6,
-  "Argentina": 46.4
+  "Argentina": 46.4,
+  "Spain": 53.6
  },
  "r16_ratings": {
   "Argentina": 2192.6,
@@ -271,7 +271,7 @@
  "meta": {
   "sims": 50000,
   "alpha": 0.4,
-  "matches_trained": 49518
+  "matches_trained": 49519
  },
  "players": {
   "Spain": [
