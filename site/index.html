@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>World Cup 2026 · Bracket & Elo Model</title>
+<title>World Cup 2026 · Final Bracket & Elo Scorecard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(40px,7.4vw,82p
   line-height:.92;letter-spacing:.005em;text-transform:uppercase}
 h1 .pop{color:var(--coral);position:relative;display:inline-block}
 h1 .thin{display:block;color:var(--muted);font-size:.30em;letter-spacing:.01em;margin-top:16px;
-  font-family:'Inter';font-weight:600;text-transform:none;line-height:1.35;max-width:34ch}
+  font-family:'Inter';font-weight:600;text-transform:none;line-height:1.35;max-width:36ch}
 .trust{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
 .trust .stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;
   padding:14px 20px 12px;box-shadow:var(--shadow);min-width:132px;transition:transform .2s,box-shadow .2s}
@@ -67,24 +67,21 @@ section{padding:50px 0;border-top:2px solid var(--line)}
   text-transform:uppercase;letter-spacing:.01em}
 .sec-sub{color:var(--muted);font-size:15px;max-width:76ch;margin-bottom:26px;line-height:1.6}
 
-/* ---- controls ---- */
-.controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;align-items:center}
-button.ctl{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.05em;font-weight:700;
-  text-transform:uppercase;background:var(--panel);color:var(--ink);
-  border:1.5px solid var(--line-2);padding:11px 16px;border-radius:9px;cursor:pointer;
-  transition:transform .12s,box-shadow .15s,background .15s,color .15s,border-color .15s;box-shadow:var(--shadow)}
-button.ctl:hover{transform:translateY(-2px);border-color:var(--coral);color:var(--coral-d)}
-button.ctl:active{transform:translateY(0) scale(.97)}
-button.ctl.on{background:var(--coral);color:#fff;border-color:var(--coral)}
-button.ctl.cyan.on{background:var(--blue);color:#fff;border-color:var(--blue)}
-button.ctl.ghost{background:transparent;box-shadow:none;border-style:dashed}
-.legend{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)}
-.legend span{display:flex;align-items:center;gap:6px}
-.dot{width:11px;height:11px;border-radius:3px;display:inline-block}
-
 /* ---- flags ---- */
 .flag{width:24px;height:16px;border-radius:2.5px;overflow:hidden;flex-shrink:0;
   box-shadow:0 0 0 1px rgba(18,38,26,.10);display:inline-block;vertical-align:middle}
+
+/* ---- final standings (champion / third place) ---- */
+.final-standings{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:24px}
+.standing{display:flex;align-items:center;gap:13px;background:var(--panel);border:1.5px solid var(--line);
+  border-radius:14px;padding:15px 19px;box-shadow:var(--shadow);flex:1;min-width:230px}
+.standing .flag{width:32px;height:21px}
+.standing.gold{border-color:var(--sun);background:linear-gradient(180deg,#fff7e4,#fffdf7);animation:pulseGold 2.6s ease-in-out infinite}
+.standing.bronze{border-color:#c98a4b;background:linear-gradient(180deg,#fdf1e6,#fffdf9)}
+.st-lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.st-team{font-family:'Anton';font-size:20px;margin:2px 0;letter-spacing:.01em}
+.st-sub{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)}
+.medal{font-size:24px;margin-left:auto}
 
 /* ---- bracket ---- */
 .bracket-scroll{overflow-x:auto;padding:6px 2px 16px}
@@ -96,36 +93,25 @@ button.ctl.ghost{background:transparent;box-shadow:none;border-style:dashed}
 .tie{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   overflow:hidden;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
 .tie:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-.tie.pending{opacity:.5}
-.slot{display:flex;align-items:center;gap:9px;padding:10px 12px;cursor:pointer;
-  border-bottom:1px solid var(--line);transition:background .14s,padding .14s;position:relative;min-height:44px}
+.slot{display:flex;align-items:center;gap:9px;padding:10px 12px;
+  border-bottom:1px solid var(--line);position:relative;min-height:44px}
 .slot:last-of-type{border-bottom:none}
-.slot:hover:not(.locked):not(.empty){background:var(--panel-2);padding-left:15px}
-.slot.empty{cursor:default;color:var(--faint)}
 .slot .nm{font-weight:700;font-size:13.5px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .slot .sc{font-family:'Space Mono',monospace;font-size:15px;color:var(--ink);font-weight:700;min-width:16px;text-align:center}
 .slot .pkwin{font-family:'Space Mono',monospace;font-size:8px;font-weight:700;background:var(--grass);color:#fff;border-radius:4px;padding:1px 4px;margin-left:6px;letter-spacing:.03em}
 .slot .pkwin.aet{background:var(--sun-d)}
-.slot .wp{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--faint);flex-shrink:0;font-weight:700}
 /* states */
-.slot.picked-user{background:var(--blue-soft)}
-.slot.picked-user .nm{color:var(--blue)}
-.slot.picked-user::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue)}
-.slot.model-pick .nm{color:var(--coral-d)}
-.slot.model-pick::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--coral)}
 .slot.advanced{background:var(--grass-soft)}
 .slot.advanced .nm{color:var(--grass-d)}
 .slot.advanced::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grass)}
-.slot.locked{cursor:default}
 .slot.out{opacity:.6}
 .slot.out .nm{color:var(--faint);text-decoration:line-through;text-decoration-thickness:1.5px}
 .slot.out .flag{filter:grayscale(.7);opacity:.7}
-.slot .mtag{font-family:'Space Mono';font-size:11px;font-weight:700;color:var(--grass);line-height:1;flex-shrink:0}
 /* on a played tie, mark the team the model backed that LOST with a coral stripe */
 .slot.out.model-played::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--coral)}
 .tie-meta{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--faint);
   padding:5px 12px;text-align:center;letter-spacing:.04em;background:var(--panel-2);font-weight:700}
-/* no-bias verdict ribbon on played ties */
+/* no-bias verdict ribbon on every played tie */
 .verdict{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 10px;font-family:'Space Mono',monospace;
   font-size:10px;font-weight:700;letter-spacing:.03em;border-top:1px dashed var(--line-2)}
 .verdict .flag{width:18px;height:12px}
@@ -139,8 +125,27 @@ button.ctl.ghost{background:transparent;box-shadow:none;border-style:dashed}
 .champ-inner .nm{font-weight:800;font-size:16px;flex:1}
 .champ-inner .trophy{font-size:20px}
 
-/* ---- champ odds ---- */
-.odds{display:flex;flex-direction:column;gap:8px;max-width:620px}
+/* ---- scorecard / ROI section ---- */
+.calib-note{font-size:14.5px;color:var(--muted);line-height:1.7;max-width:82ch}
+.calib-note strong{color:var(--ink)}
+.calib-note .k{color:var(--coral-d);font-family:'Space Mono';font-weight:700}
+.calib-note em{color:var(--ink)}
+table.sc{width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:12px;min-width:660px}
+table.sc th{text-align:left;color:var(--muted);font-weight:700;padding:8px 10px;
+  border-bottom:2px solid var(--line-2);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase}
+table.sc td{padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.sc tr.ok td{background:var(--grass-soft)}
+table.sc tr.miss td{background:var(--coral-soft)}
+table.sc tr:hover td{filter:brightness(.97)}
+table.sc .oddspill{background:var(--panel);border:1px solid var(--line-2);border-radius:100px;padding:1px 7px;font-size:10.5px;margin-left:4px}
+.profit-up{color:var(--grass-d);font-weight:700}
+.profit-down{color:var(--coral-d);font-weight:700}
+.final-odds-aside{margin-top:24px}
+.lab-lbl{font-family:'Space Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 9px;font-weight:700}
+.mod-note{font-size:12px;color:var(--muted);margin:10px 0 0;line-height:1.55;max-width:70ch}
+
+/* ---- odds bars (reused for the final's pre-match odds) ---- */
+.odds{display:flex;flex-direction:column;gap:8px;max-width:420px}
 .odds-row{display:flex;align-items:center;gap:13px;padding:4px 8px;border-radius:9px;transition:background .15s}
 .odds-row:hover{background:var(--panel-2)}
 .odds-row .flag{width:28px;height:19px}
@@ -152,19 +157,11 @@ button.ctl.ghost{background:transparent;box-shadow:none;border-style:dashed}
   border-radius:7px;transition:width 1.05s cubic-bezier(.2,.8,.2,1)}
 .odds-row:first-child .bar-fill{background:linear-gradient(90deg,var(--coral),#ff8a4d)}
 .bar-fill span{font-family:'Space Mono';font-size:11.5px;font-weight:700;color:#fff}
-.your-champ{margin-top:24px;padding:16px 20px;background:var(--panel);
-  border:1px solid var(--line);border-radius:13px;border-left:5px solid var(--blue);
-  font-size:14.5px;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.your-champ b{color:var(--blue)}
-.your-champ .empty-note{color:var(--muted)}
 
-/* ---- reliability ---- */
+/* ---- calibration ---- */
 .calib-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
 @media(max-width:820px){.calib-grid{grid-template-columns:1fr}}
 .chart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
-.calib-note{font-size:14.5px;color:var(--muted);line-height:1.65}
-.calib-note strong{color:var(--ink)}
-.calib-note .k{color:var(--coral-d);font-family:'Space Mono';font-weight:700}
 table.bt{width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;
   font-size:12.5px;margin-top:18px}
 table.bt th{text-align:right;color:var(--muted);font-weight:700;padding:7px 10px;
@@ -194,7 +191,6 @@ table.bt tr.tot td{color:var(--grass-d);border-bottom:none;font-weight:700;font-
 .elo-line .was{font-size:13px;color:var(--faint);text-decoration:line-through}
 .elo-line .dlt{font-size:13px;font-weight:700}
 .dlt.up{color:var(--grass-d)} .dlt.down{color:var(--coral-d)}
-.lab-lbl{font-family:'Space Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 9px;font-weight:700}
 .pl-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line);
   border-radius:9px;margin-bottom:6px;cursor:pointer;transition:.14s;font-size:13px;background:var(--panel)}
 .pl-row:hover{border-color:var(--line-2);transform:translateX(2px)}
@@ -231,7 +227,6 @@ table.bt tr.tot td{color:var(--grass-d);border-bottom:none;font-weight:700;font-
 .prob-delta{font-family:'Space Mono';font-size:11px;color:var(--muted);text-align:center;min-height:16px;font-weight:700}
 .cond-shared{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:16px;box-shadow:var(--shadow)}
 .cond-shared .lab-lbl{margin-top:0}
-.mod-note{font-size:12px;color:var(--muted);margin:10px 0 0;line-height:1.55}
 
 footer{padding:40px 0 70px;color:var(--faint);font-family:'Space Mono',monospace;font-size:11.5px;line-height:1.9;border-top:2px solid var(--line)}
 footer a{color:var(--muted)}
@@ -248,42 +243,45 @@ footer b{color:var(--grass-d)}
 
 <header>
   <svg class="hero-ball" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="var(--grass)" stroke-width="3"/><path d="M50 22 62 32 57 47 43 47 38 32Z" fill="var(--grass)"/><path d="M50 78 38 68 43 60 57 60 62 68Z" fill="var(--grass)" opacity=".6"/><path d="M24 45 36 40 43 52 34 63 24 58Z" fill="var(--grass)" opacity=".4"/><path d="M76 45 64 40 57 52 66 63 76 58Z" fill="var(--grass)" opacity=".4"/></svg>
-  <div class="eyebrow"><svg class="ball" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="var(--grass-d)" stroke-width="6"/><circle cx="50" cy="50" r="10" fill="var(--grass-d)"/></svg> Elo Monte-Carlo Model · USA · Canada · Mexico</div>
-  <h1>The <span class="pop">Bracket</span><span class="thin">Fill in your picks. See what a 150-year Elo model says — even on the games already played. Watch it lock as the tournament unfolds.</span></h1>
+  <div class="eyebrow"><svg class="ball" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="var(--grass-d)" stroke-width="6"/><circle cx="50" cy="50" r="10" fill="var(--grass-d)"/></svg> Elo Model · Final: Spain 1–0 Argentina (AET)</div>
+  <h1>The <span class="pop">Bracket</span><span class="thin">The 2026 World Cup is over. Here's every knockout call a 150-year Elo model made before a ball was kicked, graded against what actually happened. No cherry-picking, no hindsight.</span></h1>
   <div class="trust">
-    <div class="stat"><div class="num" id="t-champ">—</div><div class="lbl">Model favorite</div></div>
-    <div class="stat"><div class="num" id="t-teams">2</div><div class="lbl">Teams still alive</div></div>
+    <div class="stat"><div class="num" id="t-champ">—</div><div class="lbl">Champion</div></div>
+    <div class="stat"><div class="num" id="t-acc">—</div><div class="lbl">Knockout accuracy</div></div>
     <div class="stat"><div class="num">320</div><div class="lbl">Matches backtested</div></div>
     <div class="stat"><div class="num">50k</div><div class="lbl">Simulations</div></div>
   </div>
 </header>
 
 <section id="bracket-sec" class="reveal">
-  <div class="sec-head"><span class="sec-num">01</span><h2>Your bracket vs the model</h2></div>
-  <p class="sec-sub">Click a team in any open match to advance them — your pick flows to the next round. Played matches are locked to the real result, and each one carries the model's honest <em>pre-game</em> call with a ✓ or ✗, so you can see where a 150-year Elo model was right and where it got burned. No cherry-picking. Flip on the model to see its picks and win probability on the ties still to come.</p>
-  <div class="controls">
-    <button class="ctl" id="btn-model">Show model picks</button>
-    <button class="ctl cyan on" id="btn-mine">My picks on</button>
-    <button class="ctl ghost" id="btn-reset">Reset my bracket</button>
-    <div class="legend">
-      <span><i class="dot" style="background:var(--grass)"></i>Advanced (real)</span>
-      <span><i class="dot" style="background:var(--blue)"></i>Your pick</span>
-      <span><i class="dot" style="background:var(--coral)"></i>Model pick</span>
-    </div>
-  </div>
+  <div class="sec-head"><span class="sec-num">01</span><h2>The knockout bracket, graded</h2></div>
+  <p class="sec-sub">Every one of the 16 games from the Round of 16 through the Final, locked to the real result. The ribbon under each tie is the model's <em>pre-tournament</em> call — one rating, frozen before Matchday 1, applied the exact same way from the first knockout game to the last. Green stripe = who actually advanced; a coral stripe marks the team the model backed that lost.</p>
+  <div class="final-standings" id="standings"></div>
   <div class="bracket-scroll"><div class="bracket" id="bracket"></div></div>
 </section>
 
-<section id="odds-sec" class="reveal">
-  <div class="sec-head"><span class="sec-num">02</span><h2>Title odds</h2></div>
-  <p class="sec-sub">Each team's championship probability across 50,000 simulations of the remaining bracket, using Elo blended with in-tournament form. Your bracket's pick is shown against the model's.</p>
-  <div class="odds" id="odds"></div>
-  <div class="your-champ" id="your-champ"><span class="empty-note">Pick a champion in the bracket above to compare against the model.</span></div>
+<section id="score-sec" class="reveal">
+  <div class="sec-head"><span class="sec-num">02</span><h2>How the model actually did</h2></div>
+  <p class="sec-sub">Turn the 16 graded calls above into a single number, then price them like a sportsbook would — using nothing but the model's own probabilities — to see what trusting it would have actually been worth.</p>
+
+  <div class="trust" id="roi-hero" style="margin-top:0"></div>
+
+  <p class="calib-note" id="roi-copy" style="margin-top:20px"></p>
+
+  <div class="final-odds-aside">
+    <div class="lab-lbl">The model's actual pre-final call</div>
+    <div class="odds" id="final-odds"></div>
+    <p class="mod-note">This one number works differently from the scorecard above — it's the live, in-tournament-form blend from the last 50,000-simulation run before kickoff, not the frozen pre-tournament rating used to grade every game. Frozen here on purpose: intl_results.csv now includes the final's own result, so re-running that simulation today would leak the outcome into its own "prediction" of it. This is exactly what the model said on July 19th, before the game was played.</p>
+  </div>
+
+  <div class="chart" style="margin-top:26px;overflow-x:auto">
+    <table class="sc" id="sc-table"></table>
+  </div>
 </section>
 
 <section id="lab-sec" class="reveal">
   <div class="sec-head"><span class="sec-num">03</span><h2>Match Lab — what changes the odds</h2></div>
-  <p class="sec-sub">Pick any two live teams, then sit players out, turn up the heat, or hand one side a rested crowd. Every switch moves the team's Elo and the win probability updates live. Player values come from each team's real share of goals this tournament — sit Messi and Argentina feels it; sit a squad player and it barely moves.</p>
+  <p class="sec-sub">Pick any two teams from the 2026 knockout field, then sit players out, turn up the heat, or hand one side a rested crowd. Every switch moves the team's Elo and the win probability updates live. Player values come from each team's real share of goals in the tournament — sit Messi and Argentina feels it; sit a squad player and it barely moves.</p>
   <div class="lab" id="lab"></div>
 </section>
 
@@ -293,7 +291,7 @@ footer b{color:var(--grass-d)}
   <div class="calib-grid">
     <div class="chart"><svg id="reliability" viewBox="0 0 400 340" width="100%"></svg></div>
     <div>
-      <p class="calib-note"><strong>Read it like this:</strong> each point is a group of matches where the model gave the favorite a certain win chance <span class="pill">predicted</span>. The vertical position is how often the favorite <em>actually</em> won <span class="pill">observed</span>. Points on the dashed line = perfectly calibrated. When the model says a favorite is only <span class="k">35%</span> likely, the underdog really does win about that often — the model takes the upset the right amount, instead of blindly backing the stronger name.</p>
+      <p class="calib-note"><strong>Read it like this:</strong> each point is a group of matches where the model gave the favorite a certain win chance <span class="pill">predicted</span>. The vertical position is how often the favorite <em>actually</em> won <span class="pill">observed</span>. Points on the dashed line = perfectly calibrated. When the model says a favorite is only <span class="k">35%</span> likely, the underdog really does win about that often — the model takes the upset the right amount, instead of blindly backing the stronger name. Come back to that when you look at the 2026 scorecard above: three wrong picks out of sixteen isn't a broken model — it's close to exactly what a well-calibrated one should expect over one tournament.</p>
       <table class="bt" id="bt-table"></table>
     </div>
   </div>
@@ -302,13 +300,13 @@ footer b{color:var(--grass-d)}
 <footer>
   Elo computed from ~<span id="f-matches">49,500</span> international matches, 1872–2026 (eloratings.net methodology: K-weighting by match importance, goal-difference multiplier, neutral-venue).<br>
   Backtest: frozen pre-tournament ratings, zero outcome leakage, no parameters tuned on test tournaments. Live-update variant reaches 59.7% three-way accuracy across 2006–2022.<br>
-  Model calls on played games use each team's <b>pre-tournament</b> Elo — an honest grade, not hindsight. Data: openfootball · martj42/international_results · shootouts. Portfolio project, not affiliated with FIFA.<br>
-  The model favorite is a probability, not a promise. Underdogs win — and the model says how often.
+  Every 2026 knockout game is graded on each team's <b>pre-tournament</b> Elo, frozen before Matchday 1 — an honest, leak-free call, not hindsight. Data: openfootball · martj42/international_results · shootouts. Portfolio project, not affiliated with FIFA.<br>
+  The model's pick was never a promise, just a probability — three of sixteen went the other way, exactly as a well-calibrated model should expect.
 </footer>
 </div>
 
 <script>
-const DATA = {"teams": {"Spain": {"elo": 2252.8, "career": 2221.1, "flag": "🇪🇸"}, "Argentina": {"elo": 2227.4, "career": 2192.6, "flag": "🇦🇷"}}, "bracket": {"r16": [{"id": "R16_1", "a": "Paraguay", "b": "France", "sa": 0, "sb": 1, "played": true, "date": "Jul 4", "venue": "Philadelphia"}, {"id": "R16_2", "a": "Canada", "b": "Morocco", "sa": 0, "sb": 3, "played": true, "date": "Jul 4", "venue": "Houston"}, {"id": "R16_3", "a": "Brazil", "b": "Norway", "sa": 1, "sb": 2, "played": true, "date": "Jul 5", "venue": "New York/NJ"}, {"id": "R16_4", "a": "Mexico", "b": "England", "sa": 2, "sb": 3, "played": true, "date": "Jul 5", "venue": "Mexico City"}, {"id": "R16_5", "a": "Portugal", "b": "Spain", "sa": 0, "sb": 1, "played": true, "date": "Jul 6", "venue": "Dallas"}, {"id": "R16_6", "a": "USA", "b": "Belgium", "sa": 1, "sb": 4, "played": true, "date": "Jul 6", "venue": "Seattle"}, {"id": "R16_7", "a": "Argentina", "b": "Egypt", "sa": 3, "sb": 2, "played": true, "date": "Jul 7", "venue": "Atlanta"}, {"id": "R16_8", "a": "Switzerland", "b": "Colombia", "sa": 0, "sb": 0, "played": true, "winner": "Switzerland", "pens": true, "date": "Jul 7", "venue": "Vancouver"}], "qf": [{"id": "QF_1", "from": ["R16_1", "R16_2"], "a": "France", "b": "Morocco", "sa": 2, "sb": 0, "played": true, "date": "Jul 9", "venue": "Boston"}, {"id": "QF_2", "from": ["R16_3", "R16_4"], "a": "Norway", "b": "England", "sa": 1, "sb": 2, "played": true, "aet": true, "date": "Jul 11", "venue": "Miami"}, {"id": "QF_3", "from": ["R16_5", "R16_6"], "a": "Spain", "b": "Belgium", "sa": 2, "sb": 1, "played": true, "date": "Jul 10", "venue": "Los Angeles"}, {"id": "QF_4", "from": ["R16_7", "R16_8"], "a": "Argentina", "b": "Switzerland", "sa": 3, "sb": 1, "played": true, "aet": true, "date": "Jul 11", "venue": "Kansas City"}], "sf": [{"id": "SF_1", "from": ["QF_1", "QF_3"], "a": "France", "b": "Spain", "sa": 0, "sb": 2, "played": true, "date": "Jul 14", "venue": "Dallas"}, {"id": "SF_2", "from": ["QF_2", "QF_4"], "a": "England", "b": "Argentina", "sa": 1, "sb": 2, "played": true, "date": "Jul 15", "venue": "Atlanta"}], "final": {"id": "FINAL", "from": ["SF_1", "SF_2"], "a": "Spain", "b": "Argentina", "played": false, "date": "Jul 19", "venue": "New York/NJ"}}, "champ": {"Argentina": 46.4, "Spain": 53.6}, "r16_ratings": {"Argentina": 2192.6, "Belgium": 1959.0, "Brazil": 2065.7, "Canada": 1899.7, "Colombia": 2065.7, "Egypt": 1802.7, "England": 2092.1, "France": 2127.1, "Mexico": 1980.3, "Morocco": 1992.8, "Norway": 1974.2, "Paraguay": 1921.3, "Portugal": 2048.5, "Spain": 2221.1, "Switzerland": 1958.6, "USA": 1826.4}, "reliability": [{"bucket": 0.35, "pred": 0.35, "actual": 0.4, "n": 90}, {"bucket": 0.45, "pred": 0.45, "actual": 0.538, "n": 65}, {"bucket": 0.55, "pred": 0.55, "actual": 0.633, "n": 60}, {"bucket": 0.65, "pred": 0.65, "actual": 0.621, "n": 58}, {"bucket": 0.75, "pred": 0.75, "actual": 0.744, "n": 43}], "backtest": {"n": 320, "model_acc": 0.562, "fav_acc": 0.559, "brier": 0.574, "logloss": 0.973, "live_acc": 0.597, "per_wc": {"2006": 0.609, "2010": 0.547, "2014": 0.609, "2018": 0.516, "2022": 0.531}}, "meta": {"sims": 50000, "alpha": 0.4, "matches_trained": 49519}, "players": {"Spain": [{"name": "Mikel Oyarzabal", "goals": 5, "share": 0.385, "elo": 49}, {"name": "Pedro Porro", "goals": 2, "share": 0.154, "elo": 27}, {"name": "Mikel Merino", "goals": 2, "share": 0.154, "elo": 27}, {"name": "Lamine Yamal", "goals": 1, "share": 0.077, "elo": 19}, {"name": "Hassan Al-Tambakti", "goals": 1, "share": 0.077, "elo": 19}], "Argentina": [{"name": "Lionel Messi", "goals": 8, "share": 0.421, "elo": 52}, {"name": "Lautaro Martínez", "goals": 3, "share": 0.158, "elo": 27}, {"name": "Enzo Fernández", "goals": 2, "share": 0.105, "elo": 22}, {"name": "Giovani Lo Celso", "goals": 1, "share": 0.053, "elo": 17}, {"name": "Lisandro Martínez", "goals": 1, "share": 0.053, "elo": 17}]}, "modifiers": {"gap_shrink": {"heat": {"label": "Extreme heat (32°C+)", "value": 0.11, "note": "Hot US venues (Dallas, KC, Atlanta, Miami) in July. Heat lowers pace & goals and narrows the gap between favorite and underdog."}, "rain": {"label": "Heavy rain / wet pitch", "value": 0.06, "note": "Wet conditions degrade passing and add randomness, slightly helping the underdog."}}, "elo_bonus": {"host": {"label": "Host-nation crowd", "value": 45, "note": "Neutral venue on paper, but USA / Mexico / Canada draw a de-facto home crowd. Crowd support is the dominant driver of home advantage."}, "rest": {"label": "Rest advantage", "value": 22, "note": "Extra recovery days vs an opponent coming off extra time. A small but real edge over a fatigued side."}, "altitude": {"label": "Altitude (Mexican venue)", "value": 40, "note": "Only applies at Mexico City / Guadalajara / Toluca. All REMAINING knockout venues are near sea level, so this is off by default for the current bracket."}}}, "host_nations": ["USA", "Mexico", "Canada"]};
+const DATA = {"teams": {"Paraguay": {"elo": 1909.2, "career": 1921.3, "flag": "🇵🇾"}, "France": {"elo": 2133.0, "career": 2127.1, "flag": "🇫🇷"}, "Canada": {"elo": 1883.3, "career": 1899.7, "flag": "🇨🇦"}, "Morocco": {"elo": 2010.1, "career": 1992.8, "flag": "🇲🇦"}, "Brazil": {"elo": 2069.9, "career": 2065.7, "flag": "🇧🇷"}, "Norway": {"elo": 1993.3, "career": 1974.2, "flag": "🇳🇴"}, "Mexico": {"elo": 2007.9, "career": 1980.3, "flag": "🇲🇽"}, "England": {"elo": 2133.6, "career": 2092.1, "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"}, "Portugal": {"elo": 2054.3, "career": 2048.5, "flag": "🇵🇹"}, "Spain": {"elo": 2264.1, "career": 2221.1, "flag": "🇪🇸"}, "USA": {"elo": 1850.4, "career": 1826.4, "flag": "🇺🇸"}, "Belgium": {"elo": 1983.0, "career": 1959.0, "flag": "🇧🇪"}, "Argentina": {"elo": 2216.1, "career": 2192.6, "flag": "🇦🇷"}, "Egypt": {"elo": 1822.4, "career": 1802.7, "flag": "🇪🇬"}, "Switzerland": {"elo": 1975.1, "career": 1958.6, "flag": "🇨🇭"}, "Colombia": {"elo": 2074.8, "career": 2065.7, "flag": "🇨🇴"}}, "bracket": {"r16": [{"id": "R16_1", "a": "Paraguay", "b": "France", "sa": 0, "sb": 1, "played": true, "date": "Jul 4", "venue": "Philadelphia"}, {"id": "R16_2", "a": "Canada", "b": "Morocco", "sa": 0, "sb": 3, "played": true, "date": "Jul 4", "venue": "Houston"}, {"id": "R16_3", "a": "Brazil", "b": "Norway", "sa": 1, "sb": 2, "played": true, "date": "Jul 5", "venue": "New York/NJ"}, {"id": "R16_4", "a": "Mexico", "b": "England", "sa": 2, "sb": 3, "played": true, "date": "Jul 5", "venue": "Mexico City"}, {"id": "R16_5", "a": "Portugal", "b": "Spain", "sa": 0, "sb": 1, "played": true, "date": "Jul 6", "venue": "Dallas"}, {"id": "R16_6", "a": "USA", "b": "Belgium", "sa": 1, "sb": 4, "played": true, "date": "Jul 6", "venue": "Seattle"}, {"id": "R16_7", "a": "Argentina", "b": "Egypt", "sa": 3, "sb": 2, "played": true, "date": "Jul 7", "venue": "Atlanta"}, {"id": "R16_8", "a": "Switzerland", "b": "Colombia", "sa": 0, "sb": 0, "played": true, "winner": "Switzerland", "pens": true, "date": "Jul 7", "venue": "Vancouver"}], "qf": [{"id": "QF_1", "from": ["R16_1", "R16_2"], "a": "France", "b": "Morocco", "sa": 2, "sb": 0, "played": true, "date": "Jul 9", "venue": "Boston"}, {"id": "QF_2", "from": ["R16_3", "R16_4"], "a": "Norway", "b": "England", "sa": 1, "sb": 2, "played": true, "aet": true, "date": "Jul 11", "venue": "Miami"}, {"id": "QF_3", "from": ["R16_5", "R16_6"], "a": "Spain", "b": "Belgium", "sa": 2, "sb": 1, "played": true, "date": "Jul 10", "venue": "Los Angeles"}, {"id": "QF_4", "from": ["R16_7", "R16_8"], "a": "Argentina", "b": "Switzerland", "sa": 3, "sb": 1, "played": true, "aet": true, "date": "Jul 11", "venue": "Kansas City"}], "sf": [{"id": "SF_1", "from": ["QF_1", "QF_3"], "a": "France", "b": "Spain", "sa": 0, "sb": 2, "played": true, "date": "Jul 14", "venue": "Dallas"}, {"id": "SF_2", "from": ["QF_2", "QF_4"], "a": "England", "b": "Argentina", "sa": 1, "sb": 2, "played": true, "date": "Jul 15", "venue": "Atlanta"}], "third": {"id": "THIRD", "a": "France", "b": "England", "sa": 4, "sb": 6, "played": true, "date": "Jul 18", "venue": "Miami"}, "final": {"id": "FINAL", "from": ["SF_1", "SF_2"], "a": "Spain", "b": "Argentina", "sa": 1, "sb": 0, "played": true, "aet": true, "date": "Jul 19", "venue": "New York/NJ"}}, "champ": {"Argentina": 46.4, "Spain": 53.6}, "scorecard": {"games": [{"round": "R16", "a": "Paraguay", "b": "France", "sa": 0, "sb": 1, "date": "Jul 4", "venue": "Philadelphia", "aet": false, "pens": false, "pick": "France", "pick_prob": 0.766, "odds": -327, "odds_a": 327, "odds_b": -327, "actual": "France", "correct": true, "profit": 1.53}, {"round": "R16", "a": "Canada", "b": "Morocco", "sa": 0, "sb": 3, "date": "Jul 4", "venue": "Houston", "aet": false, "pens": false, "pick": "Morocco", "pick_prob": 0.631, "odds": -171, "odds_a": 171, "odds_b": -171, "actual": "Morocco", "correct": true, "profit": 2.92}, {"round": "R16", "a": "Brazil", "b": "Norway", "sa": 1, "sb": 2, "date": "Jul 5", "venue": "New York/NJ", "aet": false, "pens": false, "pick": "Brazil", "pick_prob": 0.629, "odds": -169, "odds_a": -169, "odds_b": 169, "actual": "Norway", "correct": false, "profit": -5}, {"round": "R16", "a": "Mexico", "b": "England", "sa": 2, "sb": 3, "date": "Jul 5", "venue": "Mexico City", "aet": false, "pens": false, "pick": "England", "pick_prob": 0.656, "odds": -190, "odds_a": 190, "odds_b": -190, "actual": "England", "correct": true, "profit": 2.63}, {"round": "R16", "a": "Portugal", "b": "Spain", "sa": 0, "sb": 1, "date": "Jul 6", "venue": "Dallas", "aet": false, "pens": false, "pick": "Spain", "pick_prob": 0.73, "odds": -270, "odds_a": 270, "odds_b": -270, "actual": "Spain", "correct": true, "profit": 1.85}, {"round": "R16", "a": "USA", "b": "Belgium", "sa": 1, "sb": 4, "date": "Jul 6", "venue": "Seattle", "aet": false, "pens": false, "pick": "Belgium", "pick_prob": 0.682, "odds": -215, "odds_a": 215, "odds_b": -215, "actual": "Belgium", "correct": true, "profit": 2.33}, {"round": "R16", "a": "Argentina", "b": "Egypt", "sa": 3, "sb": 2, "date": "Jul 7", "venue": "Atlanta", "aet": false, "pens": false, "pick": "Argentina", "pick_prob": 0.904, "odds": -944, "odds_a": -944, "odds_b": 944, "actual": "Argentina", "correct": true, "profit": 0.53}, {"round": "R16", "a": "Switzerland", "b": "Colombia", "sa": 0, "sb": 0, "date": "Jul 7", "venue": "Vancouver", "aet": false, "pens": true, "pick": "Colombia", "pick_prob": 0.649, "odds": -185, "odds_a": 185, "odds_b": -185, "actual": "Switzerland", "correct": false, "profit": -5}, {"round": "QF", "a": "France", "b": "Morocco", "sa": 2, "sb": 0, "date": "Jul 9", "venue": "Boston", "aet": false, "pens": false, "pick": "France", "pick_prob": 0.684, "odds": -217, "odds_a": -217, "odds_b": 217, "actual": "France", "correct": true, "profit": 2.3}, {"round": "QF", "a": "Norway", "b": "England", "sa": 1, "sb": 2, "date": "Jul 11", "venue": "Miami", "aet": true, "pens": false, "pick": "England", "pick_prob": 0.663, "odds": -197, "odds_a": 197, "odds_b": -197, "actual": "England", "correct": true, "profit": 2.54}, {"round": "QF", "a": "Spain", "b": "Belgium", "sa": 2, "sb": 1, "date": "Jul 10", "venue": "Los Angeles", "aet": false, "pens": false, "pick": "Spain", "pick_prob": 0.819, "odds": -452, "odds_a": -452, "odds_b": 452, "actual": "Spain", "correct": true, "profit": 1.11}, {"round": "QF", "a": "Argentina", "b": "Switzerland", "sa": 3, "sb": 1, "date": "Jul 11", "venue": "Kansas City", "aet": true, "pens": false, "pick": "Argentina", "pick_prob": 0.794, "odds": -384, "odds_a": -384, "odds_b": 384, "actual": "Argentina", "correct": true, "profit": 1.3}, {"round": "SF", "a": "France", "b": "Spain", "sa": 0, "sb": 2, "date": "Jul 14", "venue": "Dallas", "aet": false, "pens": false, "pick": "Spain", "pick_prob": 0.632, "odds": -172, "odds_a": 172, "odds_b": -172, "actual": "Spain", "correct": true, "profit": 2.91}, {"round": "SF", "a": "England", "b": "Argentina", "sa": 1, "sb": 2, "date": "Jul 15", "venue": "Atlanta", "aet": false, "pens": false, "pick": "Argentina", "pick_prob": 0.641, "odds": -178, "odds_a": 178, "odds_b": -178, "actual": "Argentina", "correct": true, "profit": 2.81}, {"round": "3rd Place", "a": "France", "b": "England", "sa": 4, "sb": 6, "date": "Jul 18", "venue": "Miami", "aet": false, "pens": false, "pick": "France", "pick_prob": 0.55, "odds": -122, "odds_a": -122, "odds_b": 122, "actual": "England", "correct": false, "profit": -5}, {"round": "Final", "a": "Spain", "b": "Argentina", "sa": 1, "sb": 0, "date": "Jul 19", "venue": "New York/NJ", "aet": true, "pens": false, "pick": "Spain", "pick_prob": 0.541, "odds": -118, "odds_a": -118, "odds_b": 118, "actual": "Spain", "correct": true, "profit": 4.24}], "correct": 13, "total": 16, "stake_per_game": 5, "total_staked": 80, "total_profit": 14.0, "total_return": 94.0}, "r16_ratings": {"Argentina": 2192.6, "Belgium": 1959.0, "Brazil": 2065.7, "Canada": 1899.7, "Colombia": 2065.7, "Egypt": 1802.7, "England": 2092.1, "France": 2127.1, "Mexico": 1980.3, "Morocco": 1992.8, "Norway": 1974.2, "Paraguay": 1921.3, "Portugal": 2048.5, "Spain": 2221.1, "Switzerland": 1958.6, "USA": 1826.4}, "reliability": [{"bucket": 0.35, "pred": 0.35, "actual": 0.4, "n": 90}, {"bucket": 0.45, "pred": 0.45, "actual": 0.538, "n": 65}, {"bucket": 0.55, "pred": 0.55, "actual": 0.633, "n": 60}, {"bucket": 0.65, "pred": 0.65, "actual": 0.621, "n": 58}, {"bucket": 0.75, "pred": 0.75, "actual": 0.744, "n": 43}], "backtest": {"n": 320, "model_acc": 0.562, "fav_acc": 0.559, "brier": 0.574, "logloss": 0.973, "live_acc": 0.597, "per_wc": {"2006": 0.609, "2010": 0.547, "2014": 0.609, "2018": 0.516, "2022": 0.531}}, "meta": {"sims": 50000, "alpha": 0.4, "matches_trained": 49520}, "players": {"Paraguay": [{"name": "Mauricio", "goals": 1, "share": 0.333, "elo": 44}, {"name": "Matías Galarza", "goals": 1, "share": 0.333, "elo": 44}, {"name": "Julio Enciso", "goals": 1, "share": 0.333, "elo": 44}], "France": [{"name": "Kylian Mbappé", "goals": 10, "share": 0.5, "elo": 60}, {"name": "Ousmane Dembélé", "goals": 6, "share": 0.3, "elo": 40}, {"name": "Bradley Barcola", "goals": 3, "share": 0.15, "elo": 26}, {"name": "Désiré Doué", "goals": 1, "share": 0.05, "elo": 17}], "Canada": [{"name": "Jonathan David", "goals": 3, "share": 0.333, "elo": 44}, {"name": "Cyle Larin", "goals": 2, "share": 0.222, "elo": 33}, {"name": "Nathan Saliba", "goals": 1, "share": 0.111, "elo": 23}, {"name": "Mohamed Manai", "goals": 1, "share": 0.111, "elo": 23}, {"name": "Promise David", "goals": 1, "share": 0.111, "elo": 23}], "Morocco": [{"name": "Ismael Saibari", "goals": 3, "share": 0.3, "elo": 40}, {"name": "Soufiane Rahimi", "goals": 2, "share": 0.2, "elo": 31}, {"name": "Azzedine Ounahi", "goals": 2, "share": 0.2, "elo": 31}, {"name": "Achraf Hakimi", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Gessime Yassine", "goals": 1, "share": 0.1, "elo": 22}], "Brazil": [{"name": "Vinícius Júnior", "goals": 4, "share": 0.4, "elo": 50}, {"name": "Matheus Cunha", "goals": 3, "share": 0.3, "elo": 40}, {"name": "Casemiro", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Gabriel Martinelli", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Neymar", "goals": 1, "share": 0.1, "elo": 22}], "Norway": [{"name": "Erling Haaland", "goals": 7, "share": 0.538, "elo": 63}, {"name": "Leo Østigard", "goals": 1, "share": 0.077, "elo": 19}, {"name": "Aymen Hussein", "goals": 1, "share": 0.077, "elo": 19}, {"name": "Marcus Holmgren Pedersen", "goals": 1, "share": 0.077, "elo": 19}, {"name": "Thelo Aasgaard", "goals": 1, "share": 0.077, "elo": 19}], "Mexico": [{"name": "Julián Quiñones", "goals": 4, "share": 0.4, "elo": 50}, {"name": "Raúl Jiménez", "goals": 3, "share": 0.3, "elo": 40}, {"name": "Luis Romo", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Mateo Chávez", "goals": 1, "share": 0.1, "elo": 22}, {"name": "Álvaro Fidalgo", "goals": 1, "share": 0.1, "elo": 22}], "England": [{"name": "Jude Bellingham", "goals": 7, "share": 0.35, "elo": 45}, {"name": "Harry Kane", "goals": 6, "share": 0.3, "elo": 40}, {"name": "Bukayo Saka", "goals": 3, "share": 0.15, "elo": 26}, {"name": "Marcus Rashford", "goals": 1, "share": 0.05, "elo": 17}, {"name": "Anthony Gordon", "goals": 1, "share": 0.05, "elo": 17}], "Portugal": [{"name": "Cristiano Ronaldo", "goals": 3, "share": 0.375, "elo": 48}, {"name": "João Neves", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Nuno Mendes", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Abduvohid Nematov", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Rafael Leão", "goals": 1, "share": 0.125, "elo": 24}], "Spain": [{"name": "Mikel Oyarzabal", "goals": 5, "share": 0.357, "elo": 46}, {"name": "Pedro Porro", "goals": 2, "share": 0.143, "elo": 26}, {"name": "Mikel Merino", "goals": 2, "share": 0.143, "elo": 26}, {"name": "Lamine Yamal", "goals": 1, "share": 0.071, "elo": 19}, {"name": "Hassan Al-Tambakti", "goals": 1, "share": 0.071, "elo": 19}], "USA": [{"name": "Folarin Balogun", "goals": 3, "share": 0.273, "elo": 38}, {"name": "Malik Tillman", "goals": 2, "share": 0.182, "elo": 29}, {"name": "Damian Bobadilla", "goals": 1, "share": 0.091, "elo": 21}, {"name": "Giovanni Reyna", "goals": 1, "share": 0.091, "elo": 21}, {"name": "Cameron Burgess", "goals": 1, "share": 0.091, "elo": 21}], "Belgium": [{"name": "Romelu Lukaku", "goals": 3, "share": 0.214, "elo": 32}, {"name": "Charles De Ketelaere", "goals": 3, "share": 0.214, "elo": 32}, {"name": "Leandro Trossard", "goals": 2, "share": 0.143, "elo": 26}, {"name": "Youri Tielemans", "goals": 2, "share": 0.143, "elo": 26}, {"name": "Mohamed Hany", "goals": 1, "share": 0.071, "elo": 19}], "Argentina": [{"name": "Lionel Messi", "goals": 8, "share": 0.421, "elo": 52}, {"name": "Lautaro Martínez", "goals": 3, "share": 0.158, "elo": 27}, {"name": "Enzo Fernández", "goals": 2, "share": 0.105, "elo": 22}, {"name": "Giovani Lo Celso", "goals": 1, "share": 0.053, "elo": 17}, {"name": "Lisandro Martínez", "goals": 1, "share": 0.053, "elo": 17}], "Egypt": [{"name": "Emam Ashour", "goals": 2, "share": 0.25, "elo": 36}, {"name": "Mostafa Zico", "goals": 2, "share": 0.25, "elo": 36}, {"name": "Mohamed Salah", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Trézéguet", "goals": 1, "share": 0.125, "elo": 24}, {"name": "Mahmoud Saber", "goals": 1, "share": 0.125, "elo": 24}], "Switzerland": [{"name": "Johan Manzambi", "goals": 3, "share": 0.3, "elo": 40}, {"name": "Breel Embolo", "goals": 2, "share": 0.2, "elo": 31}, {"name": "Rubén Vargas", "goals": 2, "share": 0.2, "elo": 31}, {"name": "Dan Ndoye", "goals": 2, "share": 0.2, "elo": 31}, {"name": "Granit Xhaka", "goals": 1, "share": 0.1, "elo": 22}], "Colombia": [{"name": "Daniel Muñoz", "goals": 2, "share": 0.4, "elo": 50}, {"name": "Luis Díaz", "goals": 1, "share": 0.2, "elo": 31}, {"name": "Jáminton Campaz", "goals": 1, "share": 0.2, "elo": 31}, {"name": "Jhon Arias", "goals": 1, "share": 0.2, "elo": 31}]}, "modifiers": {"gap_shrink": {"heat": {"label": "Extreme heat (32°C+)", "value": 0.11, "note": "Hot US venues (Dallas, KC, Atlanta, Miami) in July. Heat lowers pace & goals and narrows the gap between favorite and underdog."}, "rain": {"label": "Heavy rain / wet pitch", "value": 0.06, "note": "Wet conditions degrade passing and add randomness, slightly helping the underdog."}}, "elo_bonus": {"host": {"label": "Host-nation crowd", "value": 45, "note": "Neutral venue on paper, but USA / Mexico / Canada draw a de-facto home crowd. Crowd support is the dominant driver of home advantage."}, "rest": {"label": "Rest advantage", "value": 22, "note": "Extra recovery days vs an opponent coming off extra time. A small but real edge over a fatigued side."}, "altitude": {"label": "Altitude (Mexican venue)", "value": 40, "note": "Only applies at Mexico City / Guadalajara / Toluca. All REMAINING knockout venues are near sea level, so this is off by default for the current bracket."}}}, "host_nations": ["USA", "Mexico", "Canada"]};
 </script>
 <script>
 /* ============================================================
@@ -335,105 +333,58 @@ const FLAGS = {
  Mexico:'<rect width="24" height="16" fill="#fff"/><rect width="8" height="16" fill="#006847"/><rect x="16" width="8" height="16" fill="#CE1126"/><circle cx="12" cy="8" r="1.3" fill="#8B5A2B"/>'
 };
 function flag(team){ return '<svg class="flag" viewBox="0 0 24 16">'+(FLAGS[team]||'')+'</svg>'; }
+function fmtOdds(o){ return (o>0?'+':'')+o; }
+function fmtMoney(n){ return (n<0?'-$':'$')+Math.abs(n).toFixed(2); }
 
 /* ---------- model math ---------- */
-function winProb(a,b){ // knockout, neutral, no draw — blended (current) Elo
-  const ra=DATA.teams[a]?.elo??1500, rb=DATA.teams[b]?.elo??1500;
-  return 1/(1+Math.pow(10,(rb-ra)/400));
-}
-function modelPick(a,b){ return winProb(a,b)>=0.5 ? a : b; }
-// pre-tournament (career) pick, used to grade games already played — no hindsight
+// pre-tournament (career) pick — the ONE rating used to grade every played
+// tie, from Round of 16 through the Final. No hindsight, no leakage.
 function careerPick(a,b){
   const ra=DATA.r16_ratings?.[a]??1500, rb=DATA.r16_ratings?.[b]??1500;
   return ra>=rb ? a : b;
 }
+function winnerOf(m){ return m.winner || (m.sa>m.sb ? m.a : m.b); }
 
-/* ---------- bracket state ---------- */
 const B = DATA.bracket;
-const userPick = {};
-let showModel=false, showMine=true;
 
-const realWinner = {};
-[...B.r16, ...B.qf, ...B.sf, B.final].forEach(m=>{ if(m.played){ realWinner[m.id]= m.winner || (m.sa>m.sb?m.a:m.b); }});
-
-const allNodes={};
-B.qf.forEach(n=>allNodes[n.id]=n);
-B.sf.forEach(n=>allNodes[n.id]=n);
-allNodes[B.final.id]=B.final;
-
-function resolvePick(slotId){
-  if(slotId.startsWith('R16')){
-    const m=B.r16.find(x=>x.id===slotId);
-    if(m.played) return realWinner[slotId];
-    if(showModel && userPick[slotId]===undefined) return modelPick(m.a,m.b);
-    return userPick[slotId];
-  }
-  const node=allNodes[slotId];
-  if(node.played) return realWinner[slotId];
-  const [a,b]=node.from.map(f=>resolvePick(f));
-  if(!a||!b) return undefined;
-  if(showModel && userPick[slotId]===undefined) return modelPick(a,b);
-  return userPick[slotId];
+/* ---------- final standings: champion + third place ---------- */
+function scoreline(m){
+  const w=winnerOf(m), l=(w===m.a)?m.b:m.a;
+  const [ws,ls]=(w===m.a)?[m.sa,m.sb]:[m.sb,m.sa];
+  return {winner:w, loser:l, ws, ls};
+}
+function renderStandings(){
+  const champ=scoreline(B.final), third=scoreline(B.third);
+  document.getElementById('standings').innerHTML=`
+    <div class="standing gold">${flag(champ.winner)}<div><div class="st-lbl">Champion</div>
+      <div class="st-team">${champ.winner}</div>
+      <div class="st-sub">def. ${champ.loser} ${champ.ws}–${champ.ls}${B.final.aet?' (AET)':''}</div></div>
+      <span class="medal">🏆</span></div>
+    <div class="standing bronze">${flag(third.winner)}<div><div class="st-lbl">Third place</div>
+      <div class="st-team">${third.winner}</div>
+      <div class="st-sub">def. ${third.loser} ${third.ws}–${third.ls}</div></div>
+      <span class="medal">🥉</span></div>`;
 }
 
-/* ---------- rendering ---------- */
-const bracketEl=document.getElementById('bracket');
-function render(){
-  bracketEl.innerHTML='';
-  const cols=[
-    {lbl:'Round of 16',nodes:B.r16.map(m=>({type:'r16',m}))},
-    {lbl:'Quarter-finals',nodes:B.qf.map(n=>({type:'node',n}))},
-    {lbl:'Semi-finals',nodes:B.sf.map(n=>({type:'node',n}))},
-    {lbl:'Final',nodes:[{type:'node',n:B.final}]},
-    {lbl:'Champion',nodes:[{type:'champ'}]},
-  ];
-  cols.forEach(col=>{
-    const r=document.createElement('div'); r.className='round';
-    const lbl=document.createElement('div'); lbl.className='round-lbl'; lbl.textContent=col.lbl; r.appendChild(lbl);
-    const ties=document.createElement('div'); ties.className='round-ties';
-    col.nodes.forEach(nd=>{
-      if(nd.type==='champ'){ ties.appendChild(champBox()); return; }
-      ties.appendChild(nd.type==='r16'?r16Box(nd.m):nodeBox(nd.n));
-    });
-    r.appendChild(ties);
-    bracketEl.appendChild(r);
-  });
-  syncTrust();
-}
-
-function makeSlot(team,{played,scoreOwn,isWinnerReal,isUserPick,isModelPick,isOut,agree,modelPlayed,pk,aet,wp,onclick,empty}){
+/* ---------- bracket rendering (fully read-only: every tie is played) ---------- */
+function makeSlot(team,{scoreOwn,isWinnerReal,isOut,modelPlayed,pk,aet}){
   const s=document.createElement('div');
-  s.className='slot';
-  if(empty){s.classList.add('empty');
-    s.innerHTML='<span class="nm" style="color:var(--faint)">— winner —</span>'; return s;}
-  if(played) s.classList.add('locked');
+  s.className='slot locked';
   if(isWinnerReal) s.classList.add('advanced');
-  else if(isUserPick && showMine) s.classList.add('picked-user');
-  const isAgree = agree && showModel && showMine && !isWinnerReal;
-  if(isModelPick && showModel && !isWinnerReal && !isAgree) s.classList.add('model-pick');
-  if(isAgree) s.classList.add('agree');
-  if(modelPlayed && !agree) s.classList.add('model-played');
+  if(modelPlayed) s.classList.add('model-played');
   if(isOut) s.classList.add('out');
-  const mtag = isAgree ? '<span class="mtag" title="you and the model agree">✓ both</span>' : '';
-  let right = played ? `<span class="sc">${scoreOwn}</span>${pk?'<span class="pkwin">PK</span>':''}${aet?'<span class="pkwin aet">AET</span>':''}`
-            : `${mtag}${wp!==undefined? `<span class="wp">${Math.round(wp*100)}%</span>`:''}`;
-  s.innerHTML=`${flag(team)}<span class="nm">${team}</span>${right}`;
-  if(onclick && !played) s.addEventListener('click',onclick);
+  s.innerHTML=`${flag(team)}<span class="nm">${team}</span><span class="sc">${scoreOwn}</span>${pk?'<span class="pkwin">PK</span>':''}${aet?'<span class="pkwin aet">AET</span>':''}`;
   return s;
 }
-
-/* a completed tie (any round): locked slots, scores, and the model's pre-game grade */
 function playedTie(m){
   const box=document.createElement('div'); box.className='tie';
-  const rw=realWinner[m.id];
-  const mp=careerPick(m.a,m.b);        // model's pre-game call
-  const correct = mp===rw;
+  const rw=winnerOf(m);
+  const mp=careerPick(m.a,m.b);         // model's pre-tournament call
+  const correct=mp===rw;
   [[m.a,m.sa],[m.b,m.sb]].forEach(([team,score])=>{
-    box.appendChild(makeSlot(team,{
-      played:true, scoreOwn:score,
+    box.appendChild(makeSlot(team,{scoreOwn:score,
       isWinnerReal:rw===team, isOut:rw!==team,
-      modelPlayed: mp===team, pk: m.pens && rw===team, aet: m.aet && rw===team
-    }));
+      modelPlayed:mp===team, pk:m.pens&&rw===team, aet:m.aet&&rw===team}));
   });
   const meta=document.createElement('div'); meta.className='tie-meta';
   meta.textContent=`${m.date} · ${m.venue}`; box.appendChild(meta);
@@ -445,109 +396,82 @@ function playedTie(m){
   box.appendChild(v);
   return box;
 }
-
-function r16Box(m){
-  if(m.played) return playedTie(m);
-  const box=document.createElement('div'); box.className='tie';
-  const mp = modelPick(m.a,m.b);
-  [[m.a,m.sa],[m.b,m.sb]].forEach(([team])=>{
-    const isUser = userPick[m.id]===team;
-    const isModel = mp===team;
-    const agree = isUser && mp===team;
-    const wp = winProb(team, team===m.a?m.b:m.a);
-    box.appendChild(makeSlot(team,{
-      played:false, isUserPick:isUser, isModelPick:isModel, agree, wp,
-      onclick:()=>{ userPick[m.id]= (userPick[m.id]===team?undefined:team);
-                    clearDownstream(m.id); render(); renderOdds(); }
-    }));
-  });
-  const meta=document.createElement('div'); meta.className='tie-meta';
-  meta.textContent = `${m.date} · ${m.venue} · open`;
-  box.appendChild(meta);
-  return box;
-}
-
-function nodeBox(node){
-  if(node.played) return playedTie(node);
-  const [a,b]=node.from.map(f=>resolvePick(f));
-  const box=document.createElement('div'); box.className='tie';
-  if(!a||!b){ box.classList.add('pending');
-    box.appendChild(makeSlot(null,{empty:true}));
-    box.appendChild(makeSlot(null,{empty:true}));
-    const meta=document.createElement('div');meta.className='tie-meta';
-    meta.textContent=`${node.date} · ${node.venue}`; box.appendChild(meta);
-    return box; }
-  const mp=modelPick(a,b);
-  [a,b].forEach(team=>{
-    const isUser=userPick[node.id]===team;
-    const isModel=mp===team;
-    const agree=isUser&&mp===team;
-    const wp=winProb(team, team===a?b:a);
-    box.appendChild(makeSlot(team,{
-      played:false, isUserPick:isUser, isModelPick:isModel, agree, wp,
-      onclick:()=>{ userPick[node.id]=(userPick[node.id]===team?undefined:team);
-                    clearDownstream(node.id); render(); renderOdds(); }
-    }));
-  });
-  const meta=document.createElement('div');meta.className='tie-meta';
-  meta.textContent=`${node.date} · ${node.venue} · open`; box.appendChild(meta);
-  return box;
-}
-
 function champBox(){
   const box=document.createElement('div'); box.className='tie champ-slot';
-  const champ=resolvePick('FINAL');
-  if(champ){
-    const gold = showModel && userPick['FINAL']===undefined;
-    box.innerHTML=`<div class="champ-inner won">${flag(champ)}
-      <span class="nm" style="color:${gold?'var(--coral-d)':'var(--blue)'}">${champ}</span>
-      <span class="trophy">🏆</span></div>`;
-  } else {
-    box.innerHTML='<div class="champ-inner"><span class="trophy">🏆</span><span class="nm" style="color:var(--faint)">— your champion —</span></div>';
-  }
+  const champ=winnerOf(B.final);
+  box.innerHTML=`<div class="champ-inner won">${flag(champ)}
+    <span class="nm" style="color:var(--grass-d)">${champ}</span>
+    <span class="trophy">🏆</span></div>`;
   return box;
 }
-
-function downstreamOf(slotId){
-  const kids=[];
-  Object.values(allNodes).forEach(n=>{ if(n.from.includes(slotId)) kids.push(n.id); });
-  return kids;
-}
-function clearDownstream(slotId){
-  downstreamOf(slotId).forEach(k=>{
-    const [a,b]=allNodes[k].from.map(f=>resolvePick(f));
-    if(userPick[k] && userPick[k]!==a && userPick[k]!==b){ userPick[k]=undefined; }
-    clearDownstream(k);
+const bracketEl=document.getElementById('bracket');
+function render(){
+  bracketEl.innerHTML='';
+  const cols=[
+    {lbl:'Round of 16', nodes:B.r16},
+    {lbl:'Quarter-finals', nodes:B.qf},
+    {lbl:'Semi-finals', nodes:B.sf},
+    {lbl:'Final', nodes:[B.final]},
+    {lbl:'Champion', nodes:['champ']},
+  ];
+  cols.forEach(col=>{
+    const r=document.createElement('div'); r.className='round';
+    const lbl=document.createElement('div'); lbl.className='round-lbl'; lbl.textContent=col.lbl; r.appendChild(lbl);
+    const ties=document.createElement('div'); ties.className='round-ties';
+    col.nodes.forEach(n=>{ ties.appendChild(n==='champ'?champBox():playedTie(n)); });
+    r.appendChild(ties);
+    bracketEl.appendChild(r);
   });
 }
 
-/* ---------- odds ---------- */
-const oddsEl=document.getElementById('odds');
-function renderOdds(){
+/* ---------- section 02: scorecard + fair-odds ROI ---------- */
+function renderRoiHero(){
+  const sc=DATA.scorecard;
+  const up=sc.total_profit>=0;
+  document.getElementById('roi-hero').innerHTML=`
+    <div class="stat"><div class="num">${sc.correct}/${sc.total}</div><div class="lbl">Called correctly</div></div>
+    <div class="stat"><div class="num">$${sc.total_staked} → $${sc.total_return.toFixed(2)}</div><div class="lbl">Flat $${sc.stake_per_game} on every pick</div></div>
+    <div class="stat"><div class="num" style="color:${up?'var(--grass-d)':'var(--coral-d)'}">${up?'+':''}${fmtMoney(sc.total_profit)}</div><div class="lbl">Net, fair odds, no vig</div></div>`;
+}
+function renderRoiCopy(){
+  const sc=DATA.scorecard, games=sc.games;
+  const misses=games.filter(g=>!g.correct);
+  const missText=misses.map(g=>{
+    const dogOdds = g.pick===g.a ? g.odds_b : g.odds_a;
+    return `${g.actual} (${fmtOdds(dogOdds)}) over ${g.pick} (${fmtOdds(g.odds)}) in the ${g.round}`;
+  }).join('; ');
+  const biggestFav=games.reduce((a,b)=> b.pick_prob>a.pick_prob? b:a);
+  const bfOpp = biggestFav.pick===biggestFav.a ? biggestFav.b : biggestFav.a;
+  const closest=games.filter(g=>g.correct).reduce((a,b)=> b.pick_prob<a.pick_prob? b:a);
+  const up=sc.total_profit>=0;
+  document.getElementById('roi-copy').innerHTML =
+    `Price each of those 16 calls at the model's own <em>fair</em> odds — the break-even line implied by its probability, with no bookmaker's cut built in — and flat-betting $${sc.stake_per_game} on the model's pick in every one of them would have turned $${sc.total_staked} into $${sc.total_return.toFixed(2)}: a <span class="k">${up?'+':''}${fmtMoney(sc.total_profit)}</span> profit. That's real, but it's one tournament's worth of games priced at odds nobody was actually offering — a real sportsbook builds in a margin these numbers don't — so read it as what the model's calibration was worth here, not a betting system.
+    <br><br>Where it missed, it wasn't shy about it: ${missText}. And it wasn't just backing chalk blindly, either — its most lopsided pick, <span class="k">${biggestFav.pick}</span> at <span class="k">${fmtOdds(biggestFav.odds)}</span> over ${bfOpp} in the ${biggestFav.round}, paid out about <span class="k">${fmtMoney(biggestFav.profit)}</span> on a $${sc.stake_per_game} bet — being right there was barely worth anything. The Final was the opposite: <span class="k">${closest.pick}</span> only at <span class="k">${fmtOdds(closest.odds)}</span>, about as close to a coin flip as the bracket got, and the model's side won it in extra time.`;
+}
+function renderFinalOdds(){
+  const el=document.getElementById('final-odds');
   const rows=Object.entries(DATA.champ).sort((a,b)=>b[1]-a[1]);
   const max=rows[0][1];
-  oddsEl.innerHTML='';
-  rows.forEach(([team,pct],i)=>{
-    if(!DATA.teams[team])return;
-    const row=document.createElement('div'); row.className='odds-row';
-    row.innerHTML=`${flag(team)}<span class="nm">${team}</span>
-      <div class="bar-track"><div class="bar-fill" data-w="${Math.max(6,pct/max*100)}" style="transition-delay:${i*55}ms">
-      <span>${pct}%</span></div></div>`;
-    oddsEl.appendChild(row);
+  el.innerHTML=rows.map(([team,pct],i)=>`
+    <div class="odds-row">${flag(team)}<span class="nm">${team}</span>
+      <div class="bar-track"><div class="bar-fill" data-w="${pct/max*100}" style="transition-delay:${i*90}ms"><span>${pct}%</span></div></div></div>`).join('');
+  requestAnimationFrame(()=>el.querySelectorAll('.bar-fill').forEach(f=>f.style.width=f.dataset.w+'%'));
+}
+function renderScoreTable(){
+  const t=document.getElementById('sc-table');
+  let h='<tr><th>Round</th><th>Matchup</th><th>Model picked</th><th>Result</th><th>Call</th><th>$5 bet</th></tr>';
+  DATA.scorecard.games.forEach(g=>{
+    const tag = g.pens?' <span class="pkwin" style="position:static">PK</span>' : (g.aet?' <span class="pkwin aet" style="position:static">AET</span>':'');
+    h+=`<tr class="${g.correct?'ok':'miss'}">
+      <td>${g.round}</td>
+      <td>${flag(g.a)} ${g.a} ${g.sa}–${g.sb} ${g.b} ${flag(g.b)}${tag}</td>
+      <td>${flag(g.pick)} ${g.pick} <span class="oddspill">${fmtOdds(g.odds)}</span></td>
+      <td>${flag(g.actual)} ${g.actual}</td>
+      <td>${g.correct?'✓':'✗'}</td>
+      <td class="${g.correct?'profit-up':'profit-down'}">${g.correct?'+':''}${fmtMoney(g.profit)}</td>
+    </tr>`;
   });
-  requestAnimationFrame(()=>oddsEl.querySelectorAll('.bar-fill').forEach(f=>{
-    f.style.width=f.dataset.w+'%';
-  }));
-  const champ=resolvePick('FINAL');
-  const yc=document.getElementById('your-champ');
-  if(champ && userPick['FINAL']!==undefined){
-    const modelChamp=Object.entries(DATA.champ).sort((a,b)=>b[1]-a[1])[0][0];
-    const odds=DATA.champ[champ]??'<1';
-    yc.innerHTML = `<span>You picked ${flag(champ)} <b>${champ}</b> to lift the trophy — the model gives them <b>${odds}%</b>. ` +
-      (champ===modelChamp? `That's the model's favorite too.` : `The model leans ${flag(modelChamp)} <b>${modelChamp}</b> (${DATA.champ[modelChamp]}%).`) + `</span>`;
-  } else {
-    yc.innerHTML='<span class="empty-note">Pick a champion in the bracket above to compare against the model.</span>';
-  }
+  t.innerHTML=h;
 }
 
 /* ---------- reliability diagram (with draw-in animation) ---------- */
@@ -600,32 +524,17 @@ function drawBTtable(){
   t.innerHTML=h;
 }
 
-/* ---------- controls ---------- */
-document.getElementById('btn-model').addEventListener('click',e=>{
-  showModel=!showModel; e.target.classList.toggle('on',showModel);
-  e.target.textContent= showModel?'Model picks on':'Show model picks';
-  render(); renderOdds();
-});
-document.getElementById('btn-mine').addEventListener('click',e=>{
-  showMine=!showMine; e.target.classList.toggle('on',showMine);
-  e.target.textContent= showMine?'My picks on':'Show my picks';
-  render();
-});
-document.getElementById('btn-reset').addEventListener('click',()=>{
-  Object.keys(userPick).forEach(k=>delete userPick[k]); render(); renderOdds();
-});
-
-/* ---------- trust ---------- */
+/* ---------- header trust stats ---------- */
 function syncTrust(){
-  const fav=Object.entries(DATA.champ).sort((a,b)=>b[1]-a[1])[0];
-  document.getElementById('t-champ').innerHTML=flag(fav[0])+' '+fav[1]+'%';
+  const champ=winnerOf(B.final);
+  document.getElementById('t-champ').innerHTML=flag(champ)+' '+champ;
+  document.getElementById('t-acc').textContent=DATA.scorecard.correct+'/'+DATA.scorecard.total;
 }
 document.getElementById('f-matches').textContent=(DATA.meta.matches_trained).toLocaleString();
-document.getElementById('t-teams').textContent=Object.keys(DATA.teams).length;
 
-/* ---------- MATCH LAB ---------- */
+/* ---------- MATCH LAB (spans the full 16-team knockout field) ---------- */
 const labState={
-  a:"Argentina", b:"Spain",
+  a:"Spain", b:"Argentina",
   out:{a:new Set(), b:new Set()},
   bonus:{a:new Set(), b:new Set()},
   shared:new Set()
@@ -771,7 +680,9 @@ const io=new IntersectionObserver((es)=>{
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* ---------- boot ---------- */
-render(); renderOdds(); renderLab(); drawReliability(); drawBTtable();
+renderStandings(); render(); syncTrust();
+renderRoiHero(); renderRoiCopy(); renderFinalOdds(); renderScoreTable();
+renderLab(); drawReliability(); drawBTtable();
 </script>
 </body>
 </html>

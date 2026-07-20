@@ -7,10 +7,13 @@ from paths import PAYLOAD_JSON, INDEX_HTML
 def build():
     payload = json.dumps(json.load(open(PAYLOAD_JSON)), ensure_ascii=False)
     html = INDEX_HTML.read_text()
-    new = re.sub(r"const DATA = \{.*?\};\s*\n</script>",
+    # re.subn's match count (not a before/after string diff) detects a missing
+    # block: a same-payload rerun on unchanged data is a legitimate no-op, and
+    # `new == html` would misreport that as "block not found".
+    new, n = re.subn(r"const DATA = \{.*?\};\s*\n</script>",
                  "const DATA = " + payload + ";\n</script>",
                  html, count=1, flags=re.DOTALL)
-    if new == html:
+    if n == 0:
         raise SystemExit("ERROR: could not find `const DATA = {...};` block to replace.")
     INDEX_HTML.write_text(new)
     print(f"site/index.html rebuilt ({len(payload):,} bytes of data embedded)")

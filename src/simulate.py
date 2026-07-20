@@ -4,6 +4,12 @@ Uses enhanced blended Elo (career + in-tournament form). Simulates the
 remaining R16 + QF + SF + Final N times, tracking each team's probability
 of reaching each round and winning the Cup. Knockouts -> no draws (extra
 time / penalties modeled as a coin-flip nudged by Elo).
+
+The 2026 tournament is over, so pipeline.py no longer calls this file: with
+every 2026 result (including the final's) now in intl_results.csv, running
+this again would fold the final's own outcome into its "prediction" of it.
+Kept for the record and for future tournaments; data/sim_results.json stays
+frozen at its last pre-final run (Spain 53.6% / Argentina 46.4%).
 """
 import csv, math, random
 from collections import defaultdict

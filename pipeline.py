@@ -5,7 +5,15 @@
     python pipeline.py --no-fetch # skip download, rebuild from cached data
     python pipeline.py --backtest # also print the rigorous multi-WC backtest
 
-Run order matters: fetch -> players -> simulate -> payload -> modifiers -> site.
+Run order matters: fetch -> players -> payload -> modifiers -> site.
+
+NOTE: the 2026 World Cup is over (final: Spain 1-0 Argentina, Jul 19), so
+this no longer calls simulate.py. intl_results.csv now includes every 2026
+result, including the final's — re-running the Monte Carlo would fold the
+final's own result into its "prediction" of it. data/sim_results.json is
+frozen at its last pre-final value (Spain 53.6% / Argentina 46.4%) and read
+as-is by gen_payload.py. See src/simulate.py's docstring for how it worked
+while the bracket was still live.
 """
 import sys, subprocess
 from pathlib import Path
@@ -29,12 +37,11 @@ def run(mod, label):
 def main():
     args = set(sys.argv[1:])
     if "--no-fetch" not in args:
-        run("fetch_data.py", "1/6 fetch live data")
-    run("build_players.py", "2/6 extract player goal-share")
-    run("simulate.py",      "3/6 monte-carlo simulation (50k)")
-    run("gen_payload.py",   "4/6 build model payload")
-    run("add_modifiers.py", "5/6 add match-lab modifiers")
-    run("build_site.py",    "6/6 embed payload into site")
+        run("fetch_data.py", "1/5 fetch live data")
+    run("build_players.py", "2/5 extract player goal-share")
+    run("gen_payload.py",   "3/5 build model payload")
+    run("add_modifiers.py", "4/5 add match-lab modifiers")
+    run("build_site.py",    "5/5 embed payload into site")
     if "--backtest" in args:
         run("rigorous_backtest.py", "extra: rigorous multi-WC backtest")
     print("\n✓ done — open site/index.html")

@@ -3,10 +3,15 @@
 I built this to settle an argument I keep having: once you strip out the flags
 and the vibes, who is actually likely to win the 2026 World Cup? So it's an Elo
 rating model and a Monte Carlo simulation of the knockout bracket, wrapped in a
-single interactive page you can poke at. Fill in your own bracket and see where
-you disagree with the model, throw two teams into a "Match Lab" and change the
-weather or bench a star, and (the part I care about most) check the calibration
-that tells you whether the numbers are worth trusting in the first place.
+single interactive page you can poke at.
+
+**The tournament's over — Spain beat Argentina 1–0 in extra time on July 19th.**
+So the site is now a graded retrospective: all 16 knockout games locked to their
+real results, each one carrying the model's honest *pre-tournament* call, plus a
+scorecard on how those calls would have paid out at fair odds. Throw two teams
+into a "Match Lab" and change the weather or bench a star, and (the part I care
+about most) check the calibration that tells you whether the numbers were ever
+worth trusting in the first place.
 
 The ratings come from about 49,500 real international matches going back to 1872,
 using the [World Football Elo Ratings](https://www.eloratings.net/about) method.
@@ -28,19 +33,21 @@ want to run the headless render test.)
 
 ## What you can do with it
 
-**Fill in the bracket.** Pick winners in the games that haven't happened yet and
-your picks flow forward through the rounds. Games that have already been played
-lock to the real result. Want to know where you and the model part ways? Flip its
-picks on top of yours.
+**Read the graded bracket.** All 16 knockout games, locked to their real scores,
+each one carrying the model's *pre-tournament* call and a ✓ or ✗ for whether it
+got it right. One frozen rating, applied the same way from the Round of 16 to
+the Final — no cherry-picking, no hindsight.
 
-**Read the title odds.** Each team's championship probability, straight out of
-50,000 simulations of the games that are left. The ratings behind those sims
-blend a team's career Elo with how it's actually looked in this tournament.
+**See what trusting it would've been worth.** The model went 13 for 16. Price
+those calls at fair odds (no bookmaker's cut) and a flat $5 on every pick would
+have turned $80 into $94 — not a betting system, just an honest look at what the
+calibration bought you this time around.
 
-**Break things in the Match Lab.** Drop any two live teams into a hypothetical and
-start turning knobs: sit a player (weighted by how much of their team's scoring
-they actually account for), crank up the heat, soak the pitch, hand one side a
-host crowd or an extra day of rest. The Elo and the win probability move as you go.
+**Break things in the Match Lab.** Drop any two teams from the 2026 knockout
+field into a hypothetical and start turning knobs: sit a player (weighted by how
+much of their team's scoring they actually account for), crank up the heat, soak
+the pitch, hand one side a host crowd or an extra day of rest. The Elo and the
+win probability move as you go.
 
 **See the calibration.** A reliability curve pulled straight from the backtest,
 showing that when the model calls something close to a coin flip, it lands like one.
@@ -57,17 +64,27 @@ calibration: when the model gives a favorite a 35% chance, does the underdog
 really win about 65% of the time? It does. The full write-up, including how I kept
 the backtest from cheating, is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
 
-## Keeping it live
+2026 itself turned out to be a decent stress test of that idea. The model called
+13 of the 16 knockout games correctly, missing on two real upsets (Norway over
+Brazil, Switzerland over Colombia on penalties) and one third-place shootout
+(England over France). Three misses out of sixteen isn't a broken model — over
+one tournament, it's close to exactly what a well-calibrated one should produce.
 
-There's a GitHub Actions workflow (`.github/workflows/refresh.yml`) that re-runs
-the pipeline every morning at 09:00 New York time, and if anything changed it
-commits the fresh `data/` and `site/` on its own. So the bracket keeps up with
-real results through the final without me touching it. You can also kick it off by
-hand from the repo's **Actions** tab. It needs no secrets — the built-in
-`GITHUB_TOKEN` with `contents: write` is enough to make the commit.
+## Keeping it live (well, it isn't anymore)
 
-Once the tournament's over and you want the automation to stop, delete the
-workflow file or switch it off in the Actions tab.
+There's a GitHub Actions workflow (`.github/workflows/refresh.yml`) that used to
+re-run the pipeline every morning at 09:00 New York time and commit the fresh
+`data/` and `site/` if anything changed — that's how the bracket stayed current
+through the tournament without me touching it. Now that the final's been played,
+the daily schedule is off (nothing left to refresh), but the workflow's still
+there as `workflow_dispatch` if I ever need to rerun it by hand, and as a
+starting point for the next tournament.
+
+`pipeline.py` also stopped calling `simulate.py` for the same reason results are
+now frozen: the results feed includes the final's own score, so re-running the
+Monte Carlo today would leak that result into its own "prediction" of it.
+`data/sim_results.json` stays frozen at its last pre-final run — exactly the
+53.6% / 46.4% the site showed for Spain and Argentina before kickoff.
 
 ## How the repo is laid out
 
@@ -77,8 +94,8 @@ src/
   fetch_data.py        # pull live source data
   elo_engine.py        # Elo core (eloratings.net methodology)
   build_players.py     # per-team goal share -> data/players.json
-  simulate.py          # 50k Monte Carlo -> data/sim_results.json
-  gen_payload.py       # assemble the front-end payload
+  simulate.py          # 50k Monte Carlo -> data/sim_results.json (frozen post-final, see above)
+  gen_payload.py       # assemble the front-end payload, incl. the 16-game scorecard
   add_modifiers.py     # Match Lab modifier config (documented magnitudes)
   build_site.py        # embed payload into site/index.html
   rigorous_backtest.py # leak-free multi-World-Cup validation

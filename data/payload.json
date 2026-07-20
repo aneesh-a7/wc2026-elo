@@ -1,14 +1,84 @@
 {
  "teams": {
+  "Paraguay": {
+   "elo": 1909.2,
+   "career": 1921.3,
+   "flag": "🇵🇾"
+  },
+  "France": {
+   "elo": 2133.0,
+   "career": 2127.1,
+   "flag": "🇫🇷"
+  },
+  "Canada": {
+   "elo": 1883.3,
+   "career": 1899.7,
+   "flag": "🇨🇦"
+  },
+  "Morocco": {
+   "elo": 2010.1,
+   "career": 1992.8,
+   "flag": "🇲🇦"
+  },
+  "Brazil": {
+   "elo": 2069.9,
+   "career": 2065.7,
+   "flag": "🇧🇷"
+  },
+  "Norway": {
+   "elo": 1993.3,
+   "career": 1974.2,
+   "flag": "🇳🇴"
+  },
+  "Mexico": {
+   "elo": 2007.9,
+   "career": 1980.3,
+   "flag": "🇲🇽"
+  },
+  "England": {
+   "elo": 2133.6,
+   "career": 2092.1,
+   "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
+  },
+  "Portugal": {
+   "elo": 2054.3,
+   "career": 2048.5,
+   "flag": "🇵🇹"
+  },
   "Spain": {
-   "elo": 2252.8,
+   "elo": 2264.1,
    "career": 2221.1,
    "flag": "🇪🇸"
   },
+  "USA": {
+   "elo": 1850.4,
+   "career": 1826.4,
+   "flag": "🇺🇸"
+  },
+  "Belgium": {
+   "elo": 1983.0,
+   "career": 1959.0,
+   "flag": "🇧🇪"
+  },
   "Argentina": {
-   "elo": 2227.4,
+   "elo": 2216.1,
    "career": 2192.6,
    "flag": "🇦🇷"
+  },
+  "Egypt": {
+   "elo": 1822.4,
+   "career": 1802.7,
+   "flag": "🇪🇬"
+  },
+  "Switzerland": {
+   "elo": 1975.1,
+   "career": 1958.6,
+   "flag": "🇨🇭"
+  },
+  "Colombia": {
+   "elo": 2074.8,
+   "career": 2065.7,
+   "flag": "🇨🇴"
   }
  },
  "bracket": {
@@ -186,6 +256,16 @@
     "venue": "Atlanta"
    }
   ],
+  "third": {
+   "id": "THIRD",
+   "a": "France",
+   "b": "England",
+   "sa": 4,
+   "sb": 6,
+   "played": true,
+   "date": "Jul 18",
+   "venue": "Miami"
+  },
   "final": {
    "id": "FINAL",
    "from": [
@@ -194,7 +274,10 @@
    ],
    "a": "Spain",
    "b": "Argentina",
-   "played": false,
+   "sa": 1,
+   "sb": 0,
+   "played": true,
+   "aet": true,
    "date": "Jul 19",
    "venue": "New York/NJ"
   }
@@ -202,6 +285,320 @@
  "champ": {
   "Argentina": 46.4,
   "Spain": 53.6
+ },
+ "scorecard": {
+  "games": [
+   {
+    "round": "R16",
+    "a": "Paraguay",
+    "b": "France",
+    "sa": 0,
+    "sb": 1,
+    "date": "Jul 4",
+    "venue": "Philadelphia",
+    "aet": false,
+    "pens": false,
+    "pick": "France",
+    "pick_prob": 0.766,
+    "odds": -327,
+    "odds_a": 327,
+    "odds_b": -327,
+    "actual": "France",
+    "correct": true,
+    "profit": 1.53
+   },
+   {
+    "round": "R16",
+    "a": "Canada",
+    "b": "Morocco",
+    "sa": 0,
+    "sb": 3,
+    "date": "Jul 4",
+    "venue": "Houston",
+    "aet": false,
+    "pens": false,
+    "pick": "Morocco",
+    "pick_prob": 0.631,
+    "odds": -171,
+    "odds_a": 171,
+    "odds_b": -171,
+    "actual": "Morocco",
+    "correct": true,
+    "profit": 2.92
+   },
+   {
+    "round": "R16",
+    "a": "Brazil",
+    "b": "Norway",
+    "sa": 1,
+    "sb": 2,
+    "date": "Jul 5",
+    "venue": "New York/NJ",
+    "aet": false,
+    "pens": false,
+    "pick": "Brazil",
+    "pick_prob": 0.629,
+    "odds": -169,
+    "odds_a": -169,
+    "odds_b": 169,
+    "actual": "Norway",
+    "correct": false,
+    "profit": -5
+   },
+   {
+    "round": "R16",
+    "a": "Mexico",
+    "b": "England",
+    "sa": 2,
+    "sb": 3,
+    "date": "Jul 5",
+    "venue": "Mexico City",
+    "aet": false,
+    "pens": false,
+    "pick": "England",
+    "pick_prob": 0.656,
+    "odds": -190,
+    "odds_a": 190,
+    "odds_b": -190,
+    "actual": "England",
+    "correct": true,
+    "profit": 2.63
+   },
+   {
+    "round": "R16",
+    "a": "Portugal",
+    "b": "Spain",
+    "sa": 0,
+    "sb": 1,
+    "date": "Jul 6",
+    "venue": "Dallas",
+    "aet": false,
+    "pens": false,
+    "pick": "Spain",
+    "pick_prob": 0.73,
+    "odds": -270,
+    "odds_a": 270,
+    "odds_b": -270,
+    "actual": "Spain",
+    "correct": true,
+    "profit": 1.85
+   },
+   {
+    "round": "R16",
+    "a": "USA",
+    "b": "Belgium",
+    "sa": 1,
+    "sb": 4,
+    "date": "Jul 6",
+    "venue": "Seattle",
+    "aet": false,
+    "pens": false,
+    "pick": "Belgium",
+    "pick_prob": 0.682,
+    "odds": -215,
+    "odds_a": 215,
+    "odds_b": -215,
+    "actual": "Belgium",
+    "correct": true,
+    "profit": 2.33
+   },
+   {
+    "round": "R16",
+    "a": "Argentina",
+    "b": "Egypt",
+    "sa": 3,
+    "sb": 2,
+    "date": "Jul 7",
+    "venue": "Atlanta",
+    "aet": false,
+    "pens": false,
+    "pick": "Argentina",
+    "pick_prob": 0.904,
+    "odds": -944,
+    "odds_a": -944,
+    "odds_b": 944,
+    "actual": "Argentina",
+    "correct": true,
+    "profit": 0.53
+   },
+   {
+    "round": "R16",
+    "a": "Switzerland",
+    "b": "Colombia",
+    "sa": 0,
+    "sb": 0,
+    "date": "Jul 7",
+    "venue": "Vancouver",
+    "aet": false,
+    "pens": true,
+    "pick": "Colombia",
+    "pick_prob": 0.649,
+    "odds": -185,
+    "odds_a": 185,
+    "odds_b": -185,
+    "actual": "Switzerland",
+    "correct": false,
+    "profit": -5
+   },
+   {
+    "round": "QF",
+    "a": "France",
+    "b": "Morocco",
+    "sa": 2,
+    "sb": 0,
+    "date": "Jul 9",
+    "venue": "Boston",
+    "aet": false,
+    "pens": false,
+    "pick": "France",
+    "pick_prob": 0.684,
+    "odds": -217,
+    "odds_a": -217,
+    "odds_b": 217,
+    "actual": "France",
+    "correct": true,
+    "profit": 2.3
+   },
+   {
+    "round": "QF",
+    "a": "Norway",
+    "b": "England",
+    "sa": 1,
+    "sb": 2,
+    "date": "Jul 11",
+    "venue": "Miami",
+    "aet": true,
+    "pens": false,
+    "pick": "England",
+    "pick_prob": 0.663,
+    "odds": -197,
+    "odds_a": 197,
+    "odds_b": -197,
+    "actual": "England",
+    "correct": true,
+    "profit": 2.54
+   },
+   {
+    "round": "QF",
+    "a": "Spain",
+    "b": "Belgium",
+    "sa": 2,
+    "sb": 1,
+    "date": "Jul 10",
+    "venue": "Los Angeles",
+    "aet": false,
+    "pens": false,
+    "pick": "Spain",
+    "pick_prob": 0.819,
+    "odds": -452,
+    "odds_a": -452,
+    "odds_b": 452,
+    "actual": "Spain",
+    "correct": true,
+    "profit": 1.11
+   },
+   {
+    "round": "QF",
+    "a": "Argentina",
+    "b": "Switzerland",
+    "sa": 3,
+    "sb": 1,
+    "date": "Jul 11",
+    "venue": "Kansas City",
+    "aet": true,
+    "pens": false,
+    "pick": "Argentina",
+    "pick_prob": 0.794,
+    "odds": -384,
+    "odds_a": -384,
+    "odds_b": 384,
+    "actual": "Argentina",
+    "correct": true,
+    "profit": 1.3
+   },
+   {
+    "round": "SF",
+    "a": "France",
+    "b": "Spain",
+    "sa": 0,
+    "sb": 2,
+    "date": "Jul 14",
+    "venue": "Dallas",
+    "aet": false,
+    "pens": false,
+    "pick": "Spain",
+    "pick_prob": 0.632,
+    "odds": -172,
+    "odds_a": 172,
+    "odds_b": -172,
+    "actual": "Spain",
+    "correct": true,
+    "profit": 2.91
+   },
+   {
+    "round": "SF",
+    "a": "England",
+    "b": "Argentina",
+    "sa": 1,
+    "sb": 2,
+    "date": "Jul 15",
+    "venue": "Atlanta",
+    "aet": false,
+    "pens": false,
+    "pick": "Argentina",
+    "pick_prob": 0.641,
+    "odds": -178,
+    "odds_a": 178,
+    "odds_b": -178,
+    "actual": "Argentina",
+    "correct": true,
+    "profit": 2.81
+   },
+   {
+    "round": "3rd Place",
+    "a": "France",
+    "b": "England",
+    "sa": 4,
+    "sb": 6,
+    "date": "Jul 18",
+    "venue": "Miami",
+    "aet": false,
+    "pens": false,
+    "pick": "France",
+    "pick_prob": 0.55,
+    "odds": -122,
+    "odds_a": -122,
+    "odds_b": 122,
+    "actual": "England",
+    "correct": false,
+    "profit": -5
+   },
+   {
+    "round": "Final",
+    "a": "Spain",
+    "b": "Argentina",
+    "sa": 1,
+    "sb": 0,
+    "date": "Jul 19",
+    "venue": "New York/NJ",
+    "aet": true,
+    "pens": false,
+    "pick": "Spain",
+    "pick_prob": 0.541,
+    "odds": -118,
+    "odds_a": -118,
+    "odds_b": 118,
+    "actual": "Spain",
+    "correct": true,
+    "profit": 4.24
+   }
+  ],
+  "correct": 13,
+  "total": 16,
+  "stake_per_game": 5,
+  "total_staked": 80,
+  "total_profit": 14.0,
+  "total_return": 94.0
  },
  "r16_ratings": {
   "Argentina": 2192.6,
@@ -271,38 +668,372 @@
  "meta": {
   "sims": 50000,
   "alpha": 0.4,
-  "matches_trained": 49519
+  "matches_trained": 49520
  },
  "players": {
-  "Spain": [
+  "Paraguay": [
    {
-    "name": "Mikel Oyarzabal",
-    "goals": 5,
-    "share": 0.385,
-    "elo": 49
+    "name": "Mauricio",
+    "goals": 1,
+    "share": 0.333,
+    "elo": 44
    },
    {
-    "name": "Pedro Porro",
+    "name": "Matías Galarza",
+    "goals": 1,
+    "share": 0.333,
+    "elo": 44
+   },
+   {
+    "name": "Julio Enciso",
+    "goals": 1,
+    "share": 0.333,
+    "elo": 44
+   }
+  ],
+  "France": [
+   {
+    "name": "Kylian Mbappé",
+    "goals": 10,
+    "share": 0.5,
+    "elo": 60
+   },
+   {
+    "name": "Ousmane Dembélé",
+    "goals": 6,
+    "share": 0.3,
+    "elo": 40
+   },
+   {
+    "name": "Bradley Barcola",
+    "goals": 3,
+    "share": 0.15,
+    "elo": 26
+   },
+   {
+    "name": "Désiré Doué",
+    "goals": 1,
+    "share": 0.05,
+    "elo": 17
+   }
+  ],
+  "Canada": [
+   {
+    "name": "Jonathan David",
+    "goals": 3,
+    "share": 0.333,
+    "elo": 44
+   },
+   {
+    "name": "Cyle Larin",
     "goals": 2,
-    "share": 0.154,
-    "elo": 27
+    "share": 0.222,
+    "elo": 33
    },
    {
-    "name": "Mikel Merino",
+    "name": "Nathan Saliba",
+    "goals": 1,
+    "share": 0.111,
+    "elo": 23
+   },
+   {
+    "name": "Mohamed Manai",
+    "goals": 1,
+    "share": 0.111,
+    "elo": 23
+   },
+   {
+    "name": "Promise David",
+    "goals": 1,
+    "share": 0.111,
+    "elo": 23
+   }
+  ],
+  "Morocco": [
+   {
+    "name": "Ismael Saibari",
+    "goals": 3,
+    "share": 0.3,
+    "elo": 40
+   },
+   {
+    "name": "Soufiane Rahimi",
     "goals": 2,
-    "share": 0.154,
-    "elo": 27
+    "share": 0.2,
+    "elo": 31
    },
    {
-    "name": "Lamine Yamal",
+    "name": "Azzedine Ounahi",
+    "goals": 2,
+    "share": 0.2,
+    "elo": 31
+   },
+   {
+    "name": "Achraf Hakimi",
+    "goals": 1,
+    "share": 0.1,
+    "elo": 22
+   },
+   {
+    "name": "Gessime Yassine",
+    "goals": 1,
+    "share": 0.1,
+    "elo": 22
+   }
+  ],
+  "Brazil": [
+   {
+    "name": "Vinícius Júnior",
+    "goals": 4,
+    "share": 0.4,
+    "elo": 50
+   },
+   {
+    "name": "Matheus Cunha",
+    "goals": 3,
+    "share": 0.3,
+    "elo": 40
+   },
+   {
+    "name": "Casemiro",
+    "goals": 1,
+    "share": 0.1,
+    "elo": 22
+   },
+   {
+    "name": "Gabriel Martinelli",
+    "goals": 1,
+    "share": 0.1,
+    "elo": 22
+   },
+   {
+    "name": "Neymar",
+    "goals": 1,
+    "share": 0.1,
+    "elo": 22
+   }
+  ],
+  "Norway": [
+   {
+    "name": "Erling Haaland",
+    "goals": 7,
+    "share": 0.538,
+    "elo": 63
+   },
+   {
+    "name": "Leo Østigard",
     "goals": 1,
     "share": 0.077,
     "elo": 19
    },
    {
-    "name": "Hassan Al-Tambakti",
+    "name": "Aymen Hussein",
     "goals": 1,
     "share": 0.077,
+    "elo": 19
+   },
+   {
+    "name": "Marcus Holmgren Pedersen",
+    "goals": 1,
+    "share": 0.077,
+    "elo": 19
+   },
+   {
+    "name": "Thelo Aasgaard",
+    "goals": 1,
+    "share": 0.077,
+    "elo": 19
+   }
+  ],
+  "Mexico": [
+   {
+    "name": "Julián Quiñones",
+    "goals": 4,
+    "share": 0.4,
+    "elo": 50
+   },
+   {
+    "name": "Raúl Jiménez",
+    "goals": 3,
+    "share": 0.3,
+    "elo": 40
+   },
+   {
+    "name": "Luis Romo",
+    "goals": 1,
+    "share": 0.1,
+    "elo": 22
+   },
+   {
+    "name": "Mateo Chávez",
+    "goals": 1,
+    "share": 0.1,
+    "elo": 22
+   },
+   {
+    "name": "Álvaro Fidalgo",
+    "goals": 1,
+    "share": 0.1,
+    "elo": 22
+   }
+  ],
+  "England": [
+   {
+    "name": "Jude Bellingham",
+    "goals": 7,
+    "share": 0.35,
+    "elo": 45
+   },
+   {
+    "name": "Harry Kane",
+    "goals": 6,
+    "share": 0.3,
+    "elo": 40
+   },
+   {
+    "name": "Bukayo Saka",
+    "goals": 3,
+    "share": 0.15,
+    "elo": 26
+   },
+   {
+    "name": "Marcus Rashford",
+    "goals": 1,
+    "share": 0.05,
+    "elo": 17
+   },
+   {
+    "name": "Anthony Gordon",
+    "goals": 1,
+    "share": 0.05,
+    "elo": 17
+   }
+  ],
+  "Portugal": [
+   {
+    "name": "Cristiano Ronaldo",
+    "goals": 3,
+    "share": 0.375,
+    "elo": 48
+   },
+   {
+    "name": "João Neves",
+    "goals": 1,
+    "share": 0.125,
+    "elo": 24
+   },
+   {
+    "name": "Nuno Mendes",
+    "goals": 1,
+    "share": 0.125,
+    "elo": 24
+   },
+   {
+    "name": "Abduvohid Nematov",
+    "goals": 1,
+    "share": 0.125,
+    "elo": 24
+   },
+   {
+    "name": "Rafael Leão",
+    "goals": 1,
+    "share": 0.125,
+    "elo": 24
+   }
+  ],
+  "Spain": [
+   {
+    "name": "Mikel Oyarzabal",
+    "goals": 5,
+    "share": 0.357,
+    "elo": 46
+   },
+   {
+    "name": "Pedro Porro",
+    "goals": 2,
+    "share": 0.143,
+    "elo": 26
+   },
+   {
+    "name": "Mikel Merino",
+    "goals": 2,
+    "share": 0.143,
+    "elo": 26
+   },
+   {
+    "name": "Lamine Yamal",
+    "goals": 1,
+    "share": 0.071,
+    "elo": 19
+   },
+   {
+    "name": "Hassan Al-Tambakti",
+    "goals": 1,
+    "share": 0.071,
+    "elo": 19
+   }
+  ],
+  "USA": [
+   {
+    "name": "Folarin Balogun",
+    "goals": 3,
+    "share": 0.273,
+    "elo": 38
+   },
+   {
+    "name": "Malik Tillman",
+    "goals": 2,
+    "share": 0.182,
+    "elo": 29
+   },
+   {
+    "name": "Damian Bobadilla",
+    "goals": 1,
+    "share": 0.091,
+    "elo": 21
+   },
+   {
+    "name": "Giovanni Reyna",
+    "goals": 1,
+    "share": 0.091,
+    "elo": 21
+   },
+   {
+    "name": "Cameron Burgess",
+    "goals": 1,
+    "share": 0.091,
+    "elo": 21
+   }
+  ],
+  "Belgium": [
+   {
+    "name": "Romelu Lukaku",
+    "goals": 3,
+    "share": 0.214,
+    "elo": 32
+   },
+   {
+    "name": "Charles De Ketelaere",
+    "goals": 3,
+    "share": 0.214,
+    "elo": 32
+   },
+   {
+    "name": "Leandro Trossard",
+    "goals": 2,
+    "share": 0.143,
+    "elo": 26
+   },
+   {
+    "name": "Youri Tielemans",
+    "goals": 2,
+    "share": 0.143,
+    "elo": 26
+   },
+   {
+    "name": "Mohamed Hany",
+    "goals": 1,
+    "share": 0.071,
     "elo": 19
    }
   ],
@@ -336,6 +1067,96 @@
     "goals": 1,
     "share": 0.053,
     "elo": 17
+   }
+  ],
+  "Egypt": [
+   {
+    "name": "Emam Ashour",
+    "goals": 2,
+    "share": 0.25,
+    "elo": 36
+   },
+   {
+    "name": "Mostafa Zico",
+    "goals": 2,
+    "share": 0.25,
+    "elo": 36
+   },
+   {
+    "name": "Mohamed Salah",
+    "goals": 1,
+    "share": 0.125,
+    "elo": 24
+   },
+   {
+    "name": "Trézéguet",
+    "goals": 1,
+    "share": 0.125,
+    "elo": 24
+   },
+   {
+    "name": "Mahmoud Saber",
+    "goals": 1,
+    "share": 0.125,
+    "elo": 24
+   }
+  ],
+  "Switzerland": [
+   {
+    "name": "Johan Manzambi",
+    "goals": 3,
+    "share": 0.3,
+    "elo": 40
+   },
+   {
+    "name": "Breel Embolo",
+    "goals": 2,
+    "share": 0.2,
+    "elo": 31
+   },
+   {
+    "name": "Rubén Vargas",
+    "goals": 2,
+    "share": 0.2,
+    "elo": 31
+   },
+   {
+    "name": "Dan Ndoye",
+    "goals": 2,
+    "share": 0.2,
+    "elo": 31
+   },
+   {
+    "name": "Granit Xhaka",
+    "goals": 1,
+    "share": 0.1,
+    "elo": 22
+   }
+  ],
+  "Colombia": [
+   {
+    "name": "Daniel Muñoz",
+    "goals": 2,
+    "share": 0.4,
+    "elo": 50
+   },
+   {
+    "name": "Luis Díaz",
+    "goals": 1,
+    "share": 0.2,
+    "elo": 31
+   },
+   {
+    "name": "Jáminton Campaz",
+    "goals": 1,
+    "share": 0.2,
+    "elo": 31
+   },
+   {
+    "name": "Jhon Arias",
+    "goals": 1,
+    "share": 0.2,
+    "elo": 31
    }
   ]
  },

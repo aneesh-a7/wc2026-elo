@@ -5,7 +5,11 @@ import json
 from collections import defaultdict
 from paths import WORLDCUP_JSON, PLAYERS_JSON
 
-ALIVE = ["Spain","Argentina"]
+# Tournament is over — this now means "made the Round of 16" (the full
+# knockout field), so the Match Lab sandbox has all 16 teams to pick from,
+# not just the eventual finalists.
+ALIVE = ["Paraguay","France","Canada","Morocco","Brazil","Norway","Mexico","England",
+         "Portugal","Spain","USA","Belgium","Argentina","Egypt","Switzerland","Colombia"]
 
 def build():
     d = json.load(open(WORLDCUP_JSON))

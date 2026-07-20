@@ -1,29 +1,311 @@
 {
+ "Paraguay": [
+  {
+   "name": "Mauricio",
+   "goals": 1,
+   "share": 0.333
+  },
+  {
+   "name": "Matías Galarza",
+   "goals": 1,
+   "share": 0.333
+  },
+  {
+   "name": "Julio Enciso",
+   "goals": 1,
+   "share": 0.333
+  }
+ ],
+ "France": [
+  {
+   "name": "Kylian Mbappé",
+   "goals": 10,
+   "share": 0.5
+  },
+  {
+   "name": "Ousmane Dembélé",
+   "goals": 6,
+   "share": 0.3
+  },
+  {
+   "name": "Bradley Barcola",
+   "goals": 3,
+   "share": 0.15
+  },
+  {
+   "name": "Désiré Doué",
+   "goals": 1,
+   "share": 0.05
+  }
+ ],
+ "Canada": [
+  {
+   "name": "Jonathan David",
+   "goals": 3,
+   "share": 0.333
+  },
+  {
+   "name": "Cyle Larin",
+   "goals": 2,
+   "share": 0.222
+  },
+  {
+   "name": "Nathan Saliba",
+   "goals": 1,
+   "share": 0.111
+  },
+  {
+   "name": "Mohamed Manai",
+   "goals": 1,
+   "share": 0.111
+  },
+  {
+   "name": "Promise David",
+   "goals": 1,
+   "share": 0.111
+  }
+ ],
+ "Morocco": [
+  {
+   "name": "Ismael Saibari",
+   "goals": 3,
+   "share": 0.3
+  },
+  {
+   "name": "Soufiane Rahimi",
+   "goals": 2,
+   "share": 0.2
+  },
+  {
+   "name": "Azzedine Ounahi",
+   "goals": 2,
+   "share": 0.2
+  },
+  {
+   "name": "Achraf Hakimi",
+   "goals": 1,
+   "share": 0.1
+  },
+  {
+   "name": "Gessime Yassine",
+   "goals": 1,
+   "share": 0.1
+  }
+ ],
+ "Brazil": [
+  {
+   "name": "Vinícius Júnior",
+   "goals": 4,
+   "share": 0.4
+  },
+  {
+   "name": "Matheus Cunha",
+   "goals": 3,
+   "share": 0.3
+  },
+  {
+   "name": "Casemiro",
+   "goals": 1,
+   "share": 0.1
+  },
+  {
+   "name": "Gabriel Martinelli",
+   "goals": 1,
+   "share": 0.1
+  },
+  {
+   "name": "Neymar",
+   "goals": 1,
+   "share": 0.1
+  }
+ ],
+ "Norway": [
+  {
+   "name": "Erling Haaland",
+   "goals": 7,
+   "share": 0.538
+  },
+  {
+   "name": "Leo Østigard",
+   "goals": 1,
+   "share": 0.077
+  },
+  {
+   "name": "Aymen Hussein",
+   "goals": 1,
+   "share": 0.077
+  },
+  {
+   "name": "Marcus Holmgren Pedersen",
+   "goals": 1,
+   "share": 0.077
+  },
+  {
+   "name": "Thelo Aasgaard",
+   "goals": 1,
+   "share": 0.077
+  }
+ ],
+ "Mexico": [
+  {
+   "name": "Julián Quiñones",
+   "goals": 4,
+   "share": 0.4
+  },
+  {
+   "name": "Raúl Jiménez",
+   "goals": 3,
+   "share": 0.3
+  },
+  {
+   "name": "Luis Romo",
+   "goals": 1,
+   "share": 0.1
+  },
+  {
+   "name": "Mateo Chávez",
+   "goals": 1,
+   "share": 0.1
+  },
+  {
+   "name": "Álvaro Fidalgo",
+   "goals": 1,
+   "share": 0.1
+  }
+ ],
+ "England": [
+  {
+   "name": "Jude Bellingham",
+   "goals": 7,
+   "share": 0.35
+  },
+  {
+   "name": "Harry Kane",
+   "goals": 6,
+   "share": 0.3
+  },
+  {
+   "name": "Bukayo Saka",
+   "goals": 3,
+   "share": 0.15
+  },
+  {
+   "name": "Marcus Rashford",
+   "goals": 1,
+   "share": 0.05
+  },
+  {
+   "name": "Anthony Gordon",
+   "goals": 1,
+   "share": 0.05
+  }
+ ],
+ "Portugal": [
+  {
+   "name": "Cristiano Ronaldo",
+   "goals": 3,
+   "share": 0.375
+  },
+  {
+   "name": "João Neves",
+   "goals": 1,
+   "share": 0.125
+  },
+  {
+   "name": "Nuno Mendes",
+   "goals": 1,
+   "share": 0.125
+  },
+  {
+   "name": "Abduvohid Nematov",
+   "goals": 1,
+   "share": 0.125
+  },
+  {
+   "name": "Rafael Leão",
+   "goals": 1,
+   "share": 0.125
+  }
+ ],
  "Spain": [
   {
    "name": "Mikel Oyarzabal",
    "goals": 5,
-   "share": 0.385
+   "share": 0.357
   },
   {
    "name": "Pedro Porro",
    "goals": 2,
-   "share": 0.154
+   "share": 0.143
   },
   {
    "name": "Mikel Merino",
    "goals": 2,
-   "share": 0.154
+   "share": 0.143
   },
   {
    "name": "Lamine Yamal",
    "goals": 1,
-   "share": 0.077
+   "share": 0.071
   },
   {
    "name": "Hassan Al-Tambakti",
    "goals": 1,
-   "share": 0.077
+   "share": 0.071
+  }
+ ],
+ "USA": [
+  {
+   "name": "Folarin Balogun",
+   "goals": 3,
+   "share": 0.273
+  },
+  {
+   "name": "Malik Tillman",
+   "goals": 2,
+   "share": 0.182
+  },
+  {
+   "name": "Damian Bobadilla",
+   "goals": 1,
+   "share": 0.091
+  },
+  {
+   "name": "Giovanni Reyna",
+   "goals": 1,
+   "share": 0.091
+  },
+  {
+   "name": "Cameron Burgess",
+   "goals": 1,
+   "share": 0.091
+  }
+ ],
+ "Belgium": [
+  {
+   "name": "Romelu Lukaku",
+   "goals": 3,
+   "share": 0.214
+  },
+  {
+   "name": "Charles De Ketelaere",
+   "goals": 3,
+   "share": 0.214
+  },
+  {
+   "name": "Leandro Trossard",
+   "goals": 2,
+   "share": 0.143
+  },
+  {
+   "name": "Youri Tielemans",
+   "goals": 2,
+   "share": 0.143
+  },
+  {
+   "name": "Mohamed Hany",
+   "goals": 1,
+   "share": 0.071
   }
  ],
  "Argentina": [
@@ -51,6 +333,82 @@
    "name": "Lisandro Martínez",
    "goals": 1,
    "share": 0.053
+  }
+ ],
+ "Egypt": [
+  {
+   "name": "Emam Ashour",
+   "goals": 2,
+   "share": 0.25
+  },
+  {
+   "name": "Mostafa Zico",
+   "goals": 2,
+   "share": 0.25
+  },
+  {
+   "name": "Mohamed Salah",
+   "goals": 1,
+   "share": 0.125
+  },
+  {
+   "name": "Trézéguet",
+   "goals": 1,
+   "share": 0.125
+  },
+  {
+   "name": "Mahmoud Saber",
+   "goals": 1,
+   "share": 0.125
+  }
+ ],
+ "Switzerland": [
+  {
+   "name": "Johan Manzambi",
+   "goals": 3,
+   "share": 0.3
+  },
+  {
+   "name": "Breel Embolo",
+   "goals": 2,
+   "share": 0.2
+  },
+  {
+   "name": "Rubén Vargas",
+   "goals": 2,
+   "share": 0.2
+  },
+  {
+   "name": "Dan Ndoye",
+   "goals": 2,
+   "share": 0.2
+  },
+  {
+   "name": "Granit Xhaka",
+   "goals": 1,
+   "share": 0.1
+  }
+ ],
+ "Colombia": [
+  {
+   "name": "Daniel Muñoz",
+   "goals": 2,
+   "share": 0.4
+  },
+  {
+   "name": "Luis Díaz",
+   "goals": 1,
+   "share": 0.2
+  },
+  {
+   "name": "Jáminton Campaz",
+   "goals": 1,
+   "share": 0.2
+  },
+  {
+   "name": "Jhon Arias",
+   "goals": 1,
+   "share": 0.2
   }
  ]
 }
