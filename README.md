@@ -52,7 +52,7 @@ win probability move as you go.
 **See the calibration.** A reliability curve pulled straight from the backtest,
 showing that when the model calls something close to a coin flip, it lands like one.
 
-## The one honest paragraph about accuracy
+## accuracy
 
 Here's the thing most prediction projects won't say out loud. Across the last
 five World Cups (2006–2022, 320 matches), this model gets about 56% of results
